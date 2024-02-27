@@ -1,0 +1,207 @@
+.big_box {
+    background: rgb(242, 242, 242);
+    margin: 30px auto;
+    width: 1200px;
+    /* margin: 0 auto; */
+    /* height: 3000px; */
+    /* border-top-left-radius: 25px;
+border-top-right-radius: 25px; */
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.picbook_box {
+    position: relative;
+    height: 475px;
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+    /* justify-content: space-around; */
+    align-items: center;
+    flex-wrap: wrap;
+    /* padding: 30px; */
+}
+
+.picbook_box .picbook_item {
+    cursor: pointer;
+    margin-top: 100px;
+    position: relative;
+    /* max-width: 300px; */
+    /* width: 20%; */
+    height: 300px;
+    /* height: 375px; */
+    background-image: radial-gradient( circle 588px at 31.7% 40.2%,  rgba(225,200,239,1) 21.4%, rgba(163,225,233,1) 57.1% );
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    margin: 30px 10px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    /* box-shadow: 0 5px 202px rgba(0, 0, 0, 0.5); */
+    transition: .3s ease-in-out;
+}
+
+.picbook_box .picbook_item:hover {
+    height: 375px;
+}
+
+/* .container .card:hover .imgBx {
+    height: 340px;
+} */
+
+.picbook_box .picbook_item .picbook_cover {
+    position: relative;
+    width: 250px;
+    /* height: 260px; */
+    top: -45px;
+    /* left: 20px; */
+    z-index: 1;
+    /* box-shadow: 20px rgba(0, 0, 0, 0.5); */
+    /* border: 1px #111 solid; */
+    /* border: rgb(139, 130, 221) 1px solid; */
+    box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.16);
+    border-radius: 15px;
+    /* overflow: hidden; */
+}
+
+.picbook_box .picbook_item .picbook_cover img {
+    /* max-width: 100%; */
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 20px rgba(0, 0, 0, 0.5); */
+}
+
+.picbook_box .picbook_item .picbook_info {
+    position: relative;
+    /* margin-top: -140px; */
+    margin-top: -40px;
+    padding: 0px 15px;
+    text-align: center;
+    color: #111;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s ease-in-out;
+}
+.picbook_info h2{
+    color: #333;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 25px;
+    font-weight: 700;
+}
+.picbook_box .picbook_item:hover .picbook_info {
+    visibility: visible;
+    opacity: 1;
+    margin-top: -40px;
+    transition-delay: .3s;
+}
+
+.picbook_info p{
+    color: #333;
+}
+
+.picbook_title {
+    /* height: 50px; */
+    color: #705df2;
+    /* color: rgb(1, 0, 0); */
+    padding-top: 20px;
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.picbook_title_left {
+    height: 45px;
+    float: left;
+    line-height: 45px;
+    /* margin-left: 15px; */
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.picbook_title_right {
+    height: 45px;
+    margin-right: 10px;
+    line-height: 60px;
+    float: right;
+    font-size: 15px;
+}
+
+.picbook_title_right span {
+    /* margin-right: 15px; */
+    font-weight: 700;
+    font-size: 16px;
+    padding: 5px 20px;
+    border: #705df2 1px solid;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.picbook_title_right span:hover {
+    background: #705df2;
+    color: white;
+}
+
+.location-wrapper .location:nth-of-type(1){
+    position: absolute;
+    left: 145px;
+    top: 110px;
+    width: 406px;
+    height: 225px;
+}
+
+.location-wrapper .location:nth-of-type(2){
+    position: absolute;
+    left: 358px;
+    top: 370px;
+    width: 145px;
+    height: 50px;
+}
+
+.location-wrapper .location:nth-of-type(3){
+    position: absolute;
+    left: 508px;
+    top: 340px;
+    width: 110px;
+    height: 80px;
+}
+
+.location-wrapper .location:nth-of-type(4){
+    position: absolute;
+    left: 555px;
+    top: 245px;
+    width: 95px;
+    height: 80px;
+}
+
+.location-wrapper .location:nth-of-type(5){
+    position: absolute;
+    left: 690px;
+    top: 10px;
+    width: 280px;
+    height: 250px;
+}
+
+.location-wrapper .location:nth-of-type(6){
+    position: absolute;
+    left: 320px;
+    top: 433px;
+    width: 340px;
+    height: 255px;
+}
+
+.location-wrapper .location:nth-of-type(7){
+    position: absolute;
+    left: 450px;
+    top: 750px;
+    width: 238px;
+    height: 170px;
+}
+
+.location-wrapper .location:nth-of-type(8){
+    position: absolute;
+    right: 450px;
+    top: 345px;
+    width: 330px;
+    height: 250px;
+}

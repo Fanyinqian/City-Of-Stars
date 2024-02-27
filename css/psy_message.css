@@ -1,0 +1,334 @@
+/* body,
+div,
+h1,
+h2,
+form,
+fieldset,
+input,
+textarea,
+footer,
+p {
+	/* 灰灰的背景和设置居中 */
+/* 灰灰的背景和设置居中 */
+.addbook_popup_notification_wrap {
+	width: 100%;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, .65);
+	-webkit-tap-highlight-color: transparent;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	z-index: 10000;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: none;
+}
+
+.addbook_submit_notification {
+	height: 300px;
+	width: 400px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* .addbook_submit_notification_wrap {
+    display: block;
+} */
+
+/* 白色那个框框 */
+
+
+/* * {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: none;
+} */
+
+/* body {
+	background: #F5F5F5;
+	color: gray;
+	font-family: tahoma;
+} */
+
+/* p {
+	font-family: tahoma;
+	font-size: 24px;
+	color: #757575;
+} */
+
+#message_wrap {
+	width: 530px;
+	margin: 120px auto 0;
+	height: 1000px;
+}
+
+/* h1 {
+	margin-bottom: 20px;
+	text-align: center;
+	font-size: 35px;
+	font-family: tahoma;
+	color: black;
+} */
+
+#form-wrap {
+	overflow: hidden;
+	height: 447px;
+	position: relative;
+	top: 0px;
+	transition: all 1s ease-in-out .3s;
+	/* animation: animation_form_wrap 1s; */
+	animation-fill-mode: forwards;
+}
+
+#form-wrap p {
+	font-family: tahoma;
+	font-size: 24px;
+	/* color: #757575; */
+}
+
+#form-wrap.hover {
+	animation: animation_form_wrap 1s forwards;
+}
+
+#form-wrap.unhover {
+	animation: animation_form_wrapun 1s forwards;
+}
+
+@keyframes animation_form_wrap {
+	from {
+		height: 447px;
+		top: 0;
+	}
+
+	to {
+		height: 777px;
+		top: -200px;
+	}
+}
+
+@keyframes animation_form_wrapun {
+	from {
+		height: 777px;
+		top: -200px;
+	}
+
+	to {
+		height: 447px;
+		top: 0;
+	}
+}
+
+#form-wrap:before {
+	content: "";
+	position: absolute;
+	bottom: 92px;
+	left: 0px;
+	background: url('../images/message_top.png');
+	background-size: contain;
+	width: 525px;
+	height: 317px;
+}
+
+#form-wrap:after {
+	content: "";
+	position: absolute;
+	bottom: 0px;
+	left: 0;
+	background: url('../images/message_bottom.png');
+	background-size: contain;
+	width: 526px;
+	height: 259px;
+}
+
+.message_from p {
+	color: #333;
+	font-weight: 700;
+}
+
+#form-wrap.hide:after,
+#form-wrap.hide:before {
+	display: none;
+}
+
+#form-wrap label {
+	font-weight: 700;
+	color: #333 !important;
+}
+
+/* #form-wrap:hover {
+	height: 777px;
+	top: -200px;
+} */
+
+
+.message_from {
+	background: url('../images/message_letter.jpg');
+	position: relative;
+	background-size: cover;
+	top: 200px;
+	overflow: hidden;
+	height: 200px;
+	width: 400px;
+	margin: 0px auto;
+	padding: 20px;
+	border: 1px solid white;
+	border-right: 3px;
+	transition: all 1s ease-in-out .3s;
+	animation-fill-mode: forwards;
+}
+
+.message_from.hover {
+	animation: animation_form 1s forwards;
+}
+
+.message_from.unhover {
+	animation: animation_formun 1s forwards;
+}
+
+/* #form-wrap:hover form {
+	height: 530px;
+} */
+@keyframes animation_form {
+	from {
+		height: 200px;
+	}
+
+	to {
+		height: 530px;
+	}
+}
+
+@keyframes animation_formun {
+	from {
+		height: 530px;
+	}
+
+	to {
+		height: 200px;
+	}
+}
+
+.message_from lable {
+	margin: 11px 20px 0 0;
+	font-size: 15px;
+	color: gray;
+	text-transform: uppercase;
+}
+
+.message_from input[type=text],
+.message_from textarea {
+	font: 14px normal uppercase, arial, serif;
+	/* color: dimgray; */
+	background: none;
+	width: 380px;
+	height: 37px;
+	padding: 0px 10px;
+	margin: 0 0 10px 0;
+	border: 1px solid #BDBDBD;
+	border-radius: 5px;
+	outline: none;
+}
+
+.message_from textarea {
+	height: 50px;
+	padding-top: 14px;
+	resize: none;
+	outline: none;
+	/* border: none;
+	 */
+}
+
+.message_from textarea:focus,
+input[type=text]:focus {
+	/* background: url('../img/mess.png'); */
+	background-color: rgb(250, 253, 252);
+}
+
+#form-wrap .submit {
+	margin-top: 25px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#form-wrap button {
+	/* position: relative; */
+	font-family: tahoma;
+	font-size: 24px;
+	color: gray;
+	width: 120px;
+	/* display: block; */
+	text-align: center;
+	cursor: pointer;
+	border-radius: 3px;
+	outline: none;
+	border: none;
+	background-color: rgb(179, 225, 241);
+	border-radius: 5px;
+	padding: 9px 30px;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bolder;
+	cursor: pointer;
+	z-index: 10;
+}
+
+#form-wrap button:hover {
+	/* z-index: 1;
+	opacity: 1;
+	transition: opacity 0.5s ease-in-out 1.3s; */
+	background: rgb(133, 206, 242);
+}
+
+.click_type {
+	/* display: flex; */
+	/* flex-wrap: nowrap; */
+	/* align-items: center; */
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 5px;
+}
+
+.click_type svg {
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+}
+
+.message_from p {
+	text-align: center;
+	/* color: black; */
+}
+
+.select_message {
+	position: absolute;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	background-color: white;
+	top: 330px;
+	left: 27px;
+	z-index: 10;
+	border-radius: 8px;
+	padding: 8px;
+}
+
+.select_message .item {
+	padding: 5px 20px;
+	text-align: center;
+	color: black;
+	cursor: pointer;
+	border-radius: 8px;
+}
+
+.select_message .item:hover {
+	color: black;
+	background-color: rgb(218, 238, 247);
+}

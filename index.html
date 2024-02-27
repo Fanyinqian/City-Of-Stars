@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City of Stars</title>
+    <!-- 引入重置样式表 -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <!-- 引入外联样式表 -->
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="css/psy_message.css">
+</head>
+
+<body>
+    <!-- 登录框 -->
+    <div class="top-navigation">
+        <a href="./newLogin.html" class="button">
+            <span class="hover"></span>
+            <span class="label">Login</span>
+        </a>
+
+        <i class="user">
+            <!-- <svg t="1665976883047" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12869" width="200" height="200"><path d="M512 0a512 512 0 1 0 512 512A512 512 0 0 0 512 0zM213.333 832A298.667 298.667 0 0 1 512 533.333a170.667 170.667 0 1 1 170.667-170.666A170.667 170.667 0 0 1 512 533.333 298.667 298.667 0 0 1 810.667 832z" p-id="12870" fill="#705df2"></path></svg> -->
+            <img src="./images/default-head.png" alt="用户">
+            <ul class="user-list">
+                <li>
+                    <a href="personalSpace.html">
+                        个人空间
+                    </a>
+                </li>
+                <li id="message_us">联系我们</li>
+                <li id="login_out">退出登录</li>
+            </ul>
+        </i>
+    </div>
+    <!-- 弹窗 -->
+    <div class="popup">
+        <div class="pop-inner">
+            请先登录账号
+        </div>
+        <!-- 叉 -->
+        <span class="bars">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+        </span>
+    </div>
+    <!-- 联系我们弹窗 -->
+    <div class="addbook_popup_notification_wrap" id="message_popup">
+        <!-- 里面白框 -->
+        <div class="addbook_popup_notification">
+            <div id="message_wrap">
+                <div id="form-wrap">
+                    <form class="message_from" id="message_from">
+                        <p>联系我们</p>
+                        <!-- <p>BEST</p> -->
+                        <label for="name">名字:</label>
+                        <input type="text" name="message_name" value="" id="message_name" />
+
+                        <label for="email">联系方式:</label>
+                        <input type="text" name="message_email" value="" id="message_email" />
+
+
+                        <label for="email">发送消息：</label>
+                        <textarea name="message" id="message_textarea" value="Your Message"></textarea>
+
+                        <label for="email">类型：</label>
+                        <span id="select_result">申请主播</span>
+                        <span class="click_type" id="click_type">
+                            <svg t="1668193889040" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="2625" width="128" height="128">
+                                <path
+                                    d="M787.2 380.8c-9.6-9.6-22.4-12.8-35.2-12.8l-480 3.2c-12.8 0-25.6 3.2-35.2 12.8-19.2 19.2-19.2 48 0 67.2l240 240c3.2 3.2 9.6 6.4 12.8 9.6l3.2 3.2c16 6.4 38.4 3.2 51.2-9.6l240-243.2c22.4-22.4 19.2-51.2 3.2-70.4z"
+                                    fill="#707070" p-id="2626"></path>
+                            </svg>
+                        </span>
+                        <div class="submit">
+                            <button type="button" name="submit" id="message_submit" href="javascript:void(0)">提交
+                        </div>
+                        <!-- <input type="text" name="message_email" value="" id="email" /> -->
+                        <div class="select_message" id="select_message" style="display: none;">
+                            <div class="item select_message_item">申请成为主播</div>
+                            <div class="item select_message_item">申请成为画手</div>
+                            <div class="item select_message_item">申请心理咨询师</div>
+                            <div class="item select_message_item">其他</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header>
+        <ul class="nav">
+            <li><a href="javascript:;" class="active">首页</a></li>
+            <li><a href="javascript:;">星星墙</a></li>
+            <li><a href="javascript:;">心灵治愈</a></li>
+            <li><a href="javascript:;">美好分享</a></li>
+        </ul>
+    </header>
+    <main>
+        <section class="is-not-interacting">
+            <!-- 遮盖层 -->
+            <div class="mask is-top"></div>
+            <div class="mask is-right"></div>
+            <div class="mask is-bottom"></div>
+            <div class="mask is-left"></div>
+            <div class="content">
+                <h1 class="element delay-0">
+                    City Of Stars
+                    <br>
+                    星光之城
+                </h1>
+                <div class="element delay-2 description">
+                    <p>你有听过<strong>星星小人</strong>的故事吗</p>
+                    <p>星星下，藏着你忘不了的<strong>人与瞬间</strong></p>
+                    <p>用画
+                        <strong>传递温暖</strong>，用爱
+                        <strong>点亮心灯</strong>，用声
+                        <strong>治愈心灵</strong>，
+                        开启“星星小人”计划
+                    </p>
+                </div>
+                <!-- 分隔线 -->
+                <span class="element delay-3 separator"></span>
+                <div class="element slogan delay-4">
+                    <img src="./images/illustration-student.webp" alt="">
+                    <span>打造治愈情绪、传递温暖、发现美好的
+                        <a href="javascript:;">新一代心理治愈平台</a>
+                    </span>
+                </div>
+
+                <div class="null"></div>
+
+            </div>
+            <div class="experience">
+                <div class="canvas">
+
+                </div>
+                <div class="navigation">
+                    <div class="sibling is-previous">
+                        <div class="arrow">
+                            <svg width="11" height="7" viewBox="0 0 11 7" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M5.5 7C5.10218 7 4.72064 6.84197 4.43934 6.56066L0.439339 2.56066C-0.146447 1.97487 -0.146447 1.02513 0.439339 0.43934C1.02513 -0.146446 1.97487 -0.146446 2.56066 0.43934L5.5 3.37868L8.43934 0.43934C9.02513 -0.146447 9.97487 -0.146447 10.5607 0.439339C11.1464 1.02513 11.1464 1.97487 10.5607 2.56066L6.56066 6.56066C6.27936 6.84197 5.89782 7 5.5 7Z"
+                                    fill="white"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- 标签 -->
+                    <div class="label">
+                        <div class="inner">
+                            Level
+                            <span class="value">
+                                <span class="placeholder">00</span>
+                                <span class="js-digits digit is-current">01</span>
+                                <span class="js-digits digit is-after">02</span>
+                                <span class="js-digits digit is-after">03</span>
+                                <span class="js-digits digit is-after">04</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="sibling is-next is-active">
+                        <div class="arrow">
+                            <svg width="11" height="7" viewBox="0 0 11 7" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M5.5 7C5.10218 7 4.72064 6.84197 4.43934 6.56066L0.439339 2.56066C-0.146447 1.97487 -0.146447 1.02513 0.439339 0.43934C1.02513 -0.146446 1.97487 -0.146446 2.56066 0.43934L5.5 3.37868L8.43934 0.43934C9.02513 -0.146447 9.97487 -0.146447 10.5607 0.439339C11.1464 1.02513 11.1464 1.97487 10.5607 2.56066L6.56066 6.56066C6.27936 6.84197 5.89782 7 5.5 7Z"
+                                    fill="white"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <button class="click">
+                    <span class="icon">
+                        <span class="left-button"></span>
+                    </span>
+                    <span class="label">Click to explore</span>
+                </button>
+            </div>
+            <!-- 关闭按钮 -->
+            <button class="close">
+                <!-- 按钮背景 -->
+                <span class="background"></span>
+                <!-- 叉 -->
+                <span class="bars">
+                    <span class="bar bar-1"></span>
+                    <span class="bar bar-2"></span>
+                </span>
+            </button>
+            <!-- 功能介绍内容 -->
+            <div class="chapters">
+                <div class="container">
+                    <!-- 第一层 -->
+                    <div class="chapter chapter-01">
+                        <div class="number element delay-0">01</div>
+                        <h3 class="section-title element delay-1">星星墙</h3>
+                        <div class="description element delay-2">
+                            <p>
+                                每一个小人背后都有一个既暖心又感人的故事,讲述一个故事，点亮一颗心灵，是一种人世间的温暖与美好
+                                <br>
+                                听说把愿望写下来，挂在许愿树上，愿望就能实现~
+                            </p>
+                        </div>
+                        <div class="information element delay-3">
+                            <span class="format-icon">
+                                <svg t="1665837848548" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="6199" width="200" height="200">
+                                    <path
+                                        d="M602.24 246.72a17.28 17.28 0 0 0-11.84-16.32l-42.88-14.4A90.56 90.56 0 0 1 490.24 160l-14.4-42.88a17.28 17.28 0 0 0-32 0L428.8 160a90.56 90.56 0 0 1-57.28 57.28l-42.88 14.4a17.28 17.28 0 0 0 0 32l42.88 14.4a90.56 90.56 0 0 1 57.28 57.28l14.4 42.88a17.28 17.28 0 0 0 32 0l14.4-42.88a90.56 90.56 0 0 1 57.28-57.28l42.88-14.4a17.28 17.28 0 0 0 12.48-16.96z m301.12 221.76l-48.32-16a101.44 101.44 0 0 1-64-64l-16-48.32a19.2 19.2 0 0 0-36.8 0l-16 48.32a101.44 101.44 0 0 1-64 64l-48.32 16a19.2 19.2 0 0 0 0 36.8l48.32 16a101.44 101.44 0 0 1 64 64l16 48.32a19.2 19.2 0 0 0 36.8 0l16-48.32a101.44 101.44 0 0 1 64-64l48.32-16a19.2 19.2 0 0 0 0-36.8z m-376.64 195.52l-64-20.8a131.84 131.84 0 0 1-83.52-83.52l-20.8-64a25.28 25.28 0 0 0-47.68 0l-20.8 64a131.84 131.84 0 0 1-82.24 83.52l-64 20.8a25.28 25.28 0 0 0 0 47.68l64 20.8a131.84 131.84 0 0 1 83.52 83.84l20.8 64a25.28 25.28 0 0 0 47.68 0l20.8-64a131.84 131.84 0 0 1 83.52-83.52l64-20.8a25.28 25.28 0 0 0 0-47.68z"
+                                        fill="#ff6651" p-id="6200"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <ul class="functions">
+                            <li class="element delay-4">
+                                <span class="function-number">01</span>
+                                <span>星星小人的故事</span>
+                            </li>
+                            <li class="element delay-5">
+                                <span class="function-number">02</span>
+                                <span>EMO云</span>
+                            </li>
+                            <li class="element delay-6">
+                                <span class="function-number">02</span>
+                                <span>词云星球</span>
+                            </li>
+                            <li class="element delay-7">
+                                <span class="function-number">02</span>
+                                <span>许愿树</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第二层 -->
+                    <div class="chapter chapter-02">
+                        <div class="number element delay-0">02</div>
+                        <h3 class="section-title element delay-1">心灵治愈基地</h3>
+                        <div class="description element delay-2">
+                            <p>
+                                这里的一切可以治愈你生活中的焦灼、彷徨、悲伤等等
+                                <br>
+                                绘本、测试、游戏、电台等多种形式治愈你的美好心灵
+                            </p>
+                        </div>
+                        <div class="information element delay-3">
+                            <span class="format-icon">
+                                <svg t="1665837848548" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="6199" width="200" height="200">
+                                    <path
+                                        d="M602.24 246.72a17.28 17.28 0 0 0-11.84-16.32l-42.88-14.4A90.56 90.56 0 0 1 490.24 160l-14.4-42.88a17.28 17.28 0 0 0-32 0L428.8 160a90.56 90.56 0 0 1-57.28 57.28l-42.88 14.4a17.28 17.28 0 0 0 0 32l42.88 14.4a90.56 90.56 0 0 1 57.28 57.28l14.4 42.88a17.28 17.28 0 0 0 32 0l14.4-42.88a90.56 90.56 0 0 1 57.28-57.28l42.88-14.4a17.28 17.28 0 0 0 12.48-16.96z m301.12 221.76l-48.32-16a101.44 101.44 0 0 1-64-64l-16-48.32a19.2 19.2 0 0 0-36.8 0l-16 48.32a101.44 101.44 0 0 1-64 64l-48.32 16a19.2 19.2 0 0 0 0 36.8l48.32 16a101.44 101.44 0 0 1 64 64l16 48.32a19.2 19.2 0 0 0 36.8 0l16-48.32a101.44 101.44 0 0 1 64-64l48.32-16a19.2 19.2 0 0 0 0-36.8z m-376.64 195.52l-64-20.8a131.84 131.84 0 0 1-83.52-83.52l-20.8-64a25.28 25.28 0 0 0-47.68 0l-20.8 64a131.84 131.84 0 0 1-82.24 83.52l-64 20.8a25.28 25.28 0 0 0 0 47.68l64 20.8a131.84 131.84 0 0 1 83.52 83.84l20.8 64a25.28 25.28 0 0 0 47.68 0l20.8-64a131.84 131.84 0 0 1 83.52-83.52l64-20.8a25.28 25.28 0 0 0 0-47.68z"
+                                        fill="#54baf3" p-id="6200"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <ul class="functions">
+                            <li class="element delay-4">
+                                <span class="function-number">01</span>
+                                <span>专属绘本</span>
+                            </li>
+                            <li class="element delay-5">
+                                <span class="function-number">02</span>
+                                <span>心理测试</span>
+                            </li>
+                            <li class="element delay-6">
+                                <span class="function-number">03</span>
+                                <span>趣味游戏</span>
+                            </li>
+                            <li class="element delay-7">
+                                <span class="function-number">04</span>
+                                <span>情绪电台</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第三层 -->
+                    <div class="chapter chapter-03">
+                        <div class="number element delay-0">03</div>
+                        <h3 class="section-title element delay-1">美好分享站</h3>
+                        <div class="description element delay-2">
+                            <p>
+                                分享你心目中的小美好，用语言、用画、用声音传递爱与温暖
+                                <br>
+                                世间烦恼千千万，情绪宣泄一尽收
+                            </p>
+                        </div>
+                        <div class="information element delay-3">
+                            <span class="format-icon">
+                                <svg t="1665837848548" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="6199" width="200" height="200">
+                                    <path
+                                        d="M602.24 246.72a17.28 17.28 0 0 0-11.84-16.32l-42.88-14.4A90.56 90.56 0 0 1 490.24 160l-14.4-42.88a17.28 17.28 0 0 0-32 0L428.8 160a90.56 90.56 0 0 1-57.28 57.28l-42.88 14.4a17.28 17.28 0 0 0 0 32l42.88 14.4a90.56 90.56 0 0 1 57.28 57.28l14.4 42.88a17.28 17.28 0 0 0 32 0l14.4-42.88a90.56 90.56 0 0 1 57.28-57.28l42.88-14.4a17.28 17.28 0 0 0 12.48-16.96z m301.12 221.76l-48.32-16a101.44 101.44 0 0 1-64-64l-16-48.32a19.2 19.2 0 0 0-36.8 0l-16 48.32a101.44 101.44 0 0 1-64 64l-48.32 16a19.2 19.2 0 0 0 0 36.8l48.32 16a101.44 101.44 0 0 1 64 64l16 48.32a19.2 19.2 0 0 0 36.8 0l16-48.32a101.44 101.44 0 0 1 64-64l48.32-16a19.2 19.2 0 0 0 0-36.8z m-376.64 195.52l-64-20.8a131.84 131.84 0 0 1-83.52-83.52l-20.8-64a25.28 25.28 0 0 0-47.68 0l-20.8 64a131.84 131.84 0 0 1-82.24 83.52l-64 20.8a25.28 25.28 0 0 0 0 47.68l64 20.8a131.84 131.84 0 0 1 83.52 83.84l20.8 64a25.28 25.28 0 0 0 47.68 0l20.8-64a131.84 131.84 0 0 1 83.52-83.52l64-20.8a25.28 25.28 0 0 0 0-47.68z"
+                                        fill="#ffb905" p-id="6200"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <ul class="functions">
+                            <li class="element delay-4">
+                                <span class="function-number">01</span>
+                                <span>发布动态</span>
+                            </li>
+                            <li class="element delay-5">
+                                <span class="function-number">02</span>
+                                <span>交流论坛</span>
+                            </li>
+                            <li class="element delay-6">
+                                <span class="function-number">03</span>
+                                <span>星星征集</span>
+                            </li>
+                            <li class="element delay-7">
+                                <span class="function-number">04</span>
+                                <span>发起聊天</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 第四层 -->
+                    <div class="chapter chapter-04">
+                        <div class="number element delay-0">04</div>
+                        <h3 class="section-title element delay-1">个人空间</h3>
+                        <div class="description element delay-2">
+                            <p>
+                                释放独特自我，解锁个人专属空间
+                                <br>
+                                DIY专属个性化的IP小人，了解个人情绪数据
+                            </p>
+                        </div>
+                        <div class="information element delay-3">
+                            <span class="format-icon">
+                                <svg t="1665837848548" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="6199" width="200" height="200">
+                                    <path
+                                        d="M602.24 246.72a17.28 17.28 0 0 0-11.84-16.32l-42.88-14.4A90.56 90.56 0 0 1 490.24 160l-14.4-42.88a17.28 17.28 0 0 0-32 0L428.8 160a90.56 90.56 0 0 1-57.28 57.28l-42.88 14.4a17.28 17.28 0 0 0 0 32l42.88 14.4a90.56 90.56 0 0 1 57.28 57.28l14.4 42.88a17.28 17.28 0 0 0 32 0l14.4-42.88a90.56 90.56 0 0 1 57.28-57.28l42.88-14.4a17.28 17.28 0 0 0 12.48-16.96z m301.12 221.76l-48.32-16a101.44 101.44 0 0 1-64-64l-16-48.32a19.2 19.2 0 0 0-36.8 0l-16 48.32a101.44 101.44 0 0 1-64 64l-48.32 16a19.2 19.2 0 0 0 0 36.8l48.32 16a101.44 101.44 0 0 1 64 64l16 48.32a19.2 19.2 0 0 0 36.8 0l16-48.32a101.44 101.44 0 0 1 64-64l48.32-16a19.2 19.2 0 0 0 0-36.8z m-376.64 195.52l-64-20.8a131.84 131.84 0 0 1-83.52-83.52l-20.8-64a25.28 25.28 0 0 0-47.68 0l-20.8 64a131.84 131.84 0 0 1-82.24 83.52l-64 20.8a25.28 25.28 0 0 0 0 47.68l64 20.8a131.84 131.84 0 0 1 83.52 83.84l20.8 64a25.28 25.28 0 0 0 47.68 0l20.8-64a131.84 131.84 0 0 1 83.52-83.52l64-20.8a25.28 25.28 0 0 0 0-47.68z"
+                                        fill="#705df2" p-id="6200"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <ul class="functions">
+                            <li class="element delay-4">
+                                <span class="function-number">01</span>
+                                <span>个人动态</span>
+                            </li>
+                            <li class="element delay-5">
+                                <span class="function-number">02</span>
+                                <span>我的绘本</span>
+                            </li>
+                            <li class="element delay-6">
+                                <span class="function-number">03</span>
+                                <span>IP小人</span>
+                            </li>
+                            <li class="element delay-7">
+                                <span class="function-number">04</span>
+                                <span>修改信息</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="./JavaScript/cookie.js"></script>
+    <script src="./JavaScript/global.js"></script>
+    <script src="./JavaScript/ajax.js"></script>
+    <script src="./JavaScript/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,401 @@
+body,
+html {
+    font-family: system-ui, "Open Sans", calibri, Roboto,
+        verdana, "PingFang SC", "Hiragino Sans GB",
+        "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    background-color: #f6f6f6;
+    /* background-image: linear-gradient(170deg, #9ea7f7, #95caff, #a1cbf3, #7fd8d4); */
+    /* background-repeat: no-repeat; */
+    /* height: 100vh; */
+}
+
+header {
+    background-color: #9ea7f7;
+    background-color: rgb(186, 180, 248);
+    /* background-color: #9ea7f7; */
+    position: fixed;
+    top: 0;
+    z-index: 999;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+
+}
+
+.person_wrapper {
+    /* background: rgb(239, 27, 27); */
+    width: 1250px;
+    height: 80vh;
+    margin: 0 auto;
+    margin-top: 100px;
+    position: relative;
+}
+
+.person_container {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+}
+
+.person_box_left {
+    /* width: 200px; */
+    display: inline-block;
+    width: 300px;
+    height: 100%;
+    /* background-color: rgba(255, 252, 252, 0.8); */
+    overflow: hidden;
+    margin-right: 10px;
+    /* border-radius: 10px; */
+    border-radius: .06rem;
+}
+
+.person_box_right {
+    float: left;
+    width: 900px;
+    height: 100%;
+    /* background-color: rgba(255, 252, 252, 0.8); */
+    /* border-radius: 10px; */
+    border-radius: .06rem;
+    /* overflow-y: scroll; */
+    /* overflow-x: hidden; */
+    margin-left: 10px;
+}
+
+.preson_info {
+    /* background-color: rgb(239, 62, 62); */
+    background-color: rgba(255, 255, 255);
+    /* border: 1px solid rgb(165, 162, 162); */
+    box-shadow: 0 2px 0.04rem 0 rgb(156 176 184 / 16%);
+    overflow: hidden;
+    border-radius: 5px;
+    height: 250px;
+}
+
+.preson_info_bg {
+    background-color: rgb(69, 237, 117);
+    width: 100%;
+    height: 110px;
+}
+
+.preson_info_bg img {
+    object-fit: cover;
+}
+
+.person_info_name {
+    height: 90px;
+    display: flex;
+    margin-left: 30px;
+    margin-top: -30px;
+    align-items: center;
+    /* background-color: rgb(111, 40, 209); */
+}
+
+.person_logo {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #9ea7f7;
+}
+
+.person_id {
+    font-size: 25px;
+    font-weight: 700;
+    margin-left: 15px;
+}
+
+.person_info_name .page {
+    width: 30px;
+    height: 30px;
+}
+
+.person_info_set {
+    /* background-color: rgb(236, 63, 63); */
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    position: relative;
+}
+
+.person_right_img_show_box {
+    height: 200px;
+    display: flex;
+    padding-left: 15px;
+    margin-bottom: 10px;
+    transition: all 1s;
+    /* background-color: rgb(170, 38, 38); */
+}
+
+.person_right_img_show_box .image {
+    height: 200px;
+    /* border-radius: 15px; */
+    overflow: hidden;
+}
+
+.person_right_img_show_box .image img {
+    width: auto;
+}
+
+.person_info_set .icon {
+    width: 40px;
+    margin: 0 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.person_info_set .icon .image {
+    width: 30px;
+    height: 30px;
+}
+
+.person_info_set .icon span {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.person_href_picbook {
+    /* background-color: rgb(239, 62, 62); */
+    /* background-color: rgba(255, 252, 252, 0.8); */
+    border: 1.5px solid #798ac2;
+    overflow: hidden;
+    border-radius: 10px;
+    height: 250px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+}
+
+.person_href_picbook .left {
+    font-size: 25px;
+    width: 30px;
+    line-height: 50px;
+    font-weight: 700;
+    margin-top: 20px;
+    text-shadow: 12px 8px 4px #3f3e3e6e;
+}
+
+.person_href_picbook .right {
+    height: 100%;
+    margin-top: 8px;
+}
+
+.person_href_textandgame {
+    /* border: 1.5px solid #798ac2; */
+    overflow: hidden;
+    height: 120px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+}
+
+.person_href_textandgame .text,
+.person_href_textandgame .game {
+    flex: 1;
+    border: 1.5px solid #798ac2;
+    border-radius: 10px;
+}
+
+.person_href_textandgame .text {
+    margin-right: 10px;
+    position: relative;
+}
+
+.person_href_textandgame .text .left {
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 20px;
+    margin-top: 25px;
+    text-shadow: 12px 8px 4px #3f3e3e6e;
+}
+
+.person_href_textandgame .text .right {
+    height: 70px;
+    position: relative;
+    margin-right: auto;
+    width: 93.88px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.person_href_textandgame .game {
+    position: relative;
+    display: flex;
+}
+
+.person_href_textandgame .game .left {
+    width: 80px;
+    height: 100%;
+}
+
+.person_href_textandgame .game .right {
+    width: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 20px;
+    margin-top: 6px;
+    text-shadow: 12px 8px 4px #3f3e3e6e;
+}
+
+.person_href_radio {
+    background-color: rgba(255, 252, 252, 0.8);
+    border: 1.5px solid #798ac2;
+    overflow: hidden;
+    border-radius: 10px;
+    height: 141px;
+    margin-top: 10px;
+    background-image: url(./images/radio_bg.png);
+    background-size: cover;
+    position: relative;
+}
+
+/* .person_href_radio img {
+            object-fit: cover;
+        } */
+.person_href_radio .name {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 700;
+    position: absolute;
+    right: 65px;
+    bottom: 50px;
+    text-shadow: 12px 8px 4px #dbdbdb6e;
+}
+
+.person_right_send {
+    /* background-color: rgb(235, 35, 35); */
+    background-color: #fff;
+    /* height: 150px; */
+    padding: 10px 40px;
+    border-radius: 5px;
+    position: relative;
+
+}
+
+.person_right_textarea_box {
+    /* background-color: rgb(50, 225, 27); */
+    /* height: 130px; */
+    border: 1.5px solid #9ea7f7;
+    background-color: rgba(255, 255, 255, 0.769);
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.person_right_send textarea {
+    width: 800px;
+    height: 80px;
+    resize: none;
+    outline: none;
+    font-size: 20px;
+    font-weight: 700;
+    border: none;
+    margin-top: 5px;
+    margin-left: 13px;
+    background-color: rgba(255, 255, 255, 0.769);
+    padding: 0;
+    overflow-y: hidden;
+    transition: all .4s;
+}
+
+.person_right_textarea_set {
+    /* background-color: rgb(181, 45, 45); */
+    height: 40px;
+    width: 800px;
+    margin-left: 15px;
+    background-color: rgba(255, 255, 255, 0.769);
+}
+
+.person_right_textarea_set .icon {
+    height: 35px;
+    width: 35px;
+    margin-right: 10px;
+    display: inline-block;
+    transition: 1s;
+    border-radius: 5px;
+
+    /* padding: 5px; */
+    /* background-color: rgb(212, 34, 34); */
+}
+
+.person_right_textarea_set .icon img {
+    cursor: pointer;
+}
+
+/* 158, 167, 247 */
+.person_right_textarea_set .icon:hover {
+    background-color: rgba(158, 167, 247, 0.473);
+}
+
+.person_right_textarea_set .left {
+    float: left;
+    cursor: pointer;
+}
+
+.person_right_textarea_set .right {
+    float: right;
+    /* margin-right: 15px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.person_right_textarea_set .right .sendbutton {
+    background-color: rgb(158, 167, 247);
+    display: inline-block;
+    height: 100%;
+    padding: 5px 20px;
+    margin-right: 10px;
+    border-radius: 15px;
+    /* font-weight: 700; */
+    color: white;
+    cursor: pointer;
+    letter-spacing: 1.5px;
+}
+
+.person_right_textarea_set .right .sendbutton:hover {
+    color: white;
+    font-weight: 600;
+    background-color: #705df2;
+}
+
+/* * {
+    cursor: pointer;
+} */
+
+.person_info_set .icon .image img {
+    position: relative;
+    /* top: -6px; */
+    top: 0;
+    transition: .3s;
+}
+
+.person_info_set .icon .image:hover img {
+    top: -6px;
+}
+
+.like_all_number {
+    position: absolute;
+    top: -22px;
+    left: 70px;
+    text-align: center;
+    width: 50px;
+    /* background-color: rgb(211, 49, 49); */
+    color: #9ea7f7;
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.person_info_set .belike:hover+.like_all_number {
+    opacity: 1;
+}

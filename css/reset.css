@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    font: inherit;
+    vertical-align: baseline;
+    user-select: none;
+}
+
+ul,ol{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}

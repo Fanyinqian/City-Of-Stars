@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Of Stars</title>
+    <!-- 导航条 -->
+    <link rel="stylesheet" href="css/psy_resetheader.css">
+    <link rel="stylesheet" href="css/share.css">
+    <!-- 动态 -->
+    <link rel="stylesheet" href="css/dynamic.css">
+    <!-- 弹窗 -->
+    <link rel="stylesheet" href="css/share_popup.css">
+    <link rel="stylesheet" href="css/psy_message.css">
+    <style>
+        .report_popup_wrap {
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .65);
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            box-sizing: border-box;
+            z-index: 10000;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .8s;
+        }
+
+        .report_popup {
+            /* box-shadow: 0 1px 3px 0 rgb(0 0 0 / 23%); */
+            margin: auto;
+            width: 400px;
+            height: 280px;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            /* opacity: 0;
+            transition: opacity .5s; */
+        }
+
+        .report_input {
+            height: 150px;
+            width: 380px;
+            margin-top: 2px;
+            margin-left: -6px;
+        }
+
+        .report_input textarea {
+            resize: none;
+            outline: none;
+            width: 100%;
+            height: 150px;
+            font-size: 18px;
+            padding: 4px;
+            /* border: #9ea7f7 1px solid; */
+        }
+
+        .report_popup h1 {
+            margin-bottom: 20px;
+        }
+
+        .report_popup .button {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+        .report_popup .button button {
+            flex: 0 0 auto;
+            width: 92px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 36px;
+            background: #9ea7f7;
+            border-radius: 4px;
+            color: #fff;
+            padding: 0;
+            cursor: pointer;
+            border: none;
+        }
+
+        .report_popup button:hover {
+            background: #7778b0;
+        }
+
+        /* <!-- 修改成功弹窗 --> */
+        .change_seccess_box {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            z-index: 10000;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: none;
+        }
+
+        .change_success {
+            background-color: rgba(48, 48, 48, 0.708);
+            /* width: 100px; */
+            padding: 0 10px;
+            height: 45px;
+            position: relative;
+            margin: auto;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+        }
+
+        .change_success.change {
+            animation: ani_change_success 1s ease-out;
+
+        }
+
+        @keyframes ani_change_success {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        .join_active {
+            float: right;
+            transition: 0.5s ease-in-out;
+        }
+
+        .join_a {
+            position: relative;
+            font-size: 14px;
+            width: 85px;
+            height: 35px;
+            background-color: rgb(246, 246, 246);
+            border-radius: 60px;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            color: rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            /* border-top: 0.5px solid rgba(255, 255, 255, .35);
+            border-left: 0.5px solid rgba(255, 255, 255, .35); */
+            padding-left: 37px;
+            transition: 0.5s;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .join_a span {
+            position: absolute;
+            left: 3px;
+            width: 28px;
+            height: 28px;
+            background: rgb(158, 167, 247);
+            border-radius: 50%;
+            transition: 0.5s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* .join_a ::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 100%;
+            z-index: 1;
+            background: rgba(255, 255, 255, .25);
+            transform: translateX(-136px) skew(30deg);
+            transition: 0.55s ease-in-out;
+        } */
+        .join_a svg {
+            width: 15px !important;
+            height: 15px !important;
+            /* margin-left: 2px; */
+            left: 4px;
+            position: relative;
+        }
+
+        /* .join_a:hover span {
+            left: calc(100% - 33px);
+        }
+
+        .join_a:hover {
+            padding-left: 20px;
+            padding-right: 20px;
+        } */
+        i {
+            font-style: normal;
+        }
+
+        .status_a {
+            width: 50px;
+        }
+
+        .status_join {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 顶部导航条 -->
+    <header>
+        <div class="logo">
+            <h1>City Of Stars</h1>
+        </div>
+        <ul class="nav">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="stars.html">星星墙</a></li>
+            <li><a href="psychology3.html">心灵治愈</a></li>
+            <li><a href="javascript:;" class="active">美好分享</a></li>
+        </ul>
+        <div class="search-box">
+            <div class="search-con">
+                <input type="text" autocomplete="off" id="search_story_input">
+                <div class="search-icon" id="search_story_button">
+                    <svg t="1664642060980" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="1044" width="200" height="200">
+                        <path d="M525.6 465m-194.7 0a194.7 194.7 0 1 0 389.4 0 194.7 194.7 0 1 0-389.4 0Z"
+                            fill="#ffffff" p-id="1045" data-spm-anchor-id="a313x.7781069.0.i1" class="selected"></path>
+                        <path
+                            d="M492.4 695.7c-139.6 0-253.1-113.5-253.1-253.1s113.5-253.1 253.1-253.1S745.5 303 745.5 442.6 632 695.7 492.4 695.7z m0-461.4c-114.9 0-208.4 93.5-208.4 208.4C284 557.5 377.5 651 492.4 651s208.4-93.5 208.4-208.4-93.5-208.3-208.4-208.3z"
+                            fill="#ffffff" p-id="1046" data-spm-anchor-id="a313x.7781069.0.i0" class=""></path>
+                        <path
+                            d="M835.2 794.7c-13 13-34.1 13-47.1 0L619.9 626.4l47.1-47.1 168.3 168.3c13 13 13 34.1-0.1 47.1z"
+                            fill="#ffffff" p-id="1047" data-spm-anchor-id="a313x.7781069.0.i2" class="selected"></path>
+                    </svg>
+                </div>
+                <div class="search-data">
+                </div>
+            </div>
+        </div>
+        <div class="menu">
+            <!-- 地图 -->
+            <i class="map">
+                <svg t="1668439728831" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="7371" data-spm-anchor-id="a313x.7781069.0.i13" width="200"
+                    height="200">
+                    <path d="M650.24 670.72m-281.6 0a281.6 281.6 0 1 0 563.2 0 281.6 281.6 0 1 0-563.2 0Z"
+                        fill="#FED847" p-id="7372"></path>
+                    <path
+                        d="M820.31616 788.2752c-0.6144-0.37888-67.88096-38.33856-122.0608-67.46112-37.98016-20.48-134.7584 5.39648-208.5888 38.17472-40.8576 18.08384-102.1952 9.15456-128.6144-18.81088a50.176 50.176 0 0 1-7.68-60.74368c13.7216-26.23488 45.7728-44.51328 79.7696-63.87712 30.6176-17.408 68.7104-39.14752 66.7648-57.26208a183.808 183.808 0 0 0-16.9984-51.70176c-13.42464-30.464-33.6896-76.50304 15.36-98.23232 24.8832-11.07968 62.2592-2.048 98.39616 6.57408 15.96416 4.33152 32.21504 7.44448 48.64 9.29792a91.51488 91.51488 0 0 0-5.632-12.57472c-23.552-44.17536-43.9296-48.65024-67.4816-53.82144-19.6608-4.31104-44.1344-9.65632-63.6928-38.27712-27.5456-40.25344-41.984-96.70656-51.5072-134.07232-3.3792-13.13792-6.2464-24.48384-8.6016-30.59712-9.8304-25.89696-29.2864-75.53024-29.2864-75.53024l38.4-14.83776s19.5584 49.84832 29.3888 75.85792c3.95264 11.48928 7.30112 23.17312 10.0352 35.01056 8.9088 34.58048 22.2208 86.8352 45.6704 121.1392 10.3424 15.14496 20.87936 17.4592 38.4 21.2992 26.4192 5.79584 62.65856 13.7216 95.01696 74.68032 5.64224 10.56768 20.5824 38.656 4.9152 58.73664-17.2032 21.9136-50.9952 13.80352-93.9008 3.52256-25.30304-6.07232-59.904-14.336-71.9872-8.99072-8.4992 3.75808-11.6736 5.1712 5.5296 44.42112a216.53504 216.53504 0 0 1 20.2752 63.76448c4.8128 44.70784-41.99424 71.38304-87.25504 97.14688-26.0096 14.848-55.6032 31.66208-63.6928 47.2064a9.9328 9.9328 0 0 0 1.1264 13.75232c13.312 14.11072 55.3984 21.22752 81.8176 9.51296 28.672-12.73856 175.3088-74.35264 245.0432-36.79232 54.4768 29.30688 122.0608 67.49184 122.7776 67.87072l-20.34688 35.61472zM508.416 911.36a437.02272 437.02272 0 0 1-128-19.29216C162.64192 826.08128 34.05824 601.77408 87.1424 380.49792l40.0384 9.5744c-49.24416 210.35008 81.36704 420.79232 291.71712 470.02624A391.15776 391.15776 0 0 0 690.8928 825.0368a394.19904 394.19904 0 0 0 62.47424-40.82688l25.8048 31.9488A436.2752 436.2752 0 0 1 508.416 911.36z m357.376-188.50816l-34.08896-23.00928a386.94912 386.94912 0 0 0 22.2208-400.85504c-102.2976-191.17056-340.18304-263.2192-531.3536-160.93184A392.64256 392.64256 0 0 0 172.6464 279.73632l-35.2256-21.1456C260.02432 53.90336 525.3632-12.6464 730.0608 109.95712s271.23712 387.93216 148.64384 592.64c-4.12672 6.8608-8.42752 13.60896-12.91264 20.25472z m-496.9472-269.312c-18.1248 0-34.816-13.68064-52.1216-27.98592-18.7392-15.36-39.8336-32.68608-64.7168-37.38624a686.52032 686.52032 0 0 1-122.4704-35.38944 239.08352 239.08352 0 0 0-35.5328-11.65312l7.68-40.27392c14.51008 3.35872 28.7232 7.90528 42.496 13.58848a645.60128 645.60128 0 0 0 115.6096 33.47456c35.2256 6.68672 61.7472 28.50816 83.1488 46.08a152.27904 152.27904 0 0 0 24.576 17.99168c3.2768-4.096 11.1616-19.10784 19.2512-71.9872 5.7344-37.376-13.9264-48.98816-63.6928-68.39296a387.00032 387.00032 0 0 1-36.2496-15.63648c-22.4256-11.5712-24.4736-27.15648-23.6544-35.42016 2.7648-28.672 48.2304-47.81056 85.8112-58.80832l11.6736 39.31136a230.18496 230.18496 0 0 0-50.176 20.87936c8.4992 4.096 17.8176 7.70048 27.648 11.53024 42.496 16.57856 100.6592 39.28064 89.3952 112.71168-10.4448 67.84-22.8352 96.256-45.6704 104.93952a36.18816 36.18816 0 0 1-13.0048 2.44736v-0.02048z"
+                        fill="#ffffff" p-id="7373" data-spm-anchor-id="a313x.7781069.0.i14" class="selected"></path>
+                </svg>
+            </i>
+            <i class="info">
+                <a href="chat.html">
+                    <svg t="1664620666804" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="1488">
+                        <path d="M703.68768 793.8304a189.952 189.952 0 0 0-379.83744 0h379.83744z" fill="#F4CA1C"
+                            p-id="1489"></path>
+                        <path
+                            d="M875.17184 663.35232a49.152 49.152 0 0 1-30.2336-40.89344V449.024c0-164.1216-148.54144-272.96256-212.38272-307.11808-3.5072-20.36736-12.66176-51.14368-36.55168-74.84416A110.80704 110.80704 0 0 0 515.93728 35.84h-2.76992a110.81728 110.81728 0 0 0-80.07168 31.232c-23.88992 23.70048-33.04448 54.48192-36.55168 74.84928-63.8208 34.16064-212.36736 143.0016-212.36736 307.10272v172.86144a49.1008 49.1008 0 0 1-30.23872 41.472c-58.48064 26.624-64.3328 76.99456-50.30912 115.2768 6.84032 18.67264 22.3232 36.89984 127.54432 36.89984h89.41568C326.144 911.60576 410.38848 988.16 513.16736 988.16s187.02848-76.55424 192.58368-172.63104h92.19072c105.216 0 120.704-18.2272 127.5392-36.89984 14.03904-38.27712 8.17664-88.66816-50.30912-115.2768z m-361.984 259.00032c-66.29376 0-120.80128-47.07328-126.3872-106.82368h252.77952c-5.6064 59.7504-60.11392 106.82368-126.4128 106.82368z m284.7744-172.63104h-566.784a396.71808 396.71808 0 0 1-68.12672-4.608c-0.512-9.60512 5.12-15.9232 18.2528-21.90336a114.58048 114.58048 0 0 0 68.81792-100.76672V449.024c0-145.54112 160.128-243.06176 189.5936-254.976l20.61312-8.10496v-22.14912c0.13312-6.36928 2.7904-62.1312 52.89472-62.1312H515.49184c50.31936-0.33792 53.15072 55.73632 53.28384 61.92128v22.18496l20.61312 8.31488c29.4656 11.88864 189.59872 109.4144 189.59872 254.976v173.41952a114.58048 114.58048 0 0 0 68.8128 100.76672c13.14304 5.98016 18.75456 12.288 18.2528 21.90336a396.72832 396.72832 0 0 1-68.11136 4.57216z"
+                            fill="#ffffff" p-id="1490" data-spm-anchor-id="a313x.7781069.0.i1" class="selected"></path>
+                    </svg>
+                </a>
+            </i>
+            <!-- 背景音乐 -->
+            <i class="music">
+                <!-- 开启 -->
+                <svg t="1664632106643" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2139" width="200" height="200">
+                    <path
+                        d="M974.54592 764.5952a215.07072 215.07072 0 1 0-215.07072 215.07072 215.07072 215.07072 0 0 0 215.07072-215.07072z"
+                        fill="#f4ea2a" p-id="2140" data-spm-anchor-id="a313x.7781069.0.i9" class="selected"></path>
+                    <path
+                        d="M514.56 952.32a437.76 437.76 0 1 1 437.76-437.76 438.272 438.272 0 0 1-437.76 437.76z m0-804.91008a367.1552 367.1552 0 1 0 367.1552 367.15008 367.56992 367.56992 0 0 0-367.1552-367.15008zM445.37344 685.37344a75.61216 75.61216 0 0 1-75.33056-75.45344V417.96096a75.33056 75.33056 0 0 1 113.00864-65.23392l166.24128 95.9744a75.34592 75.34592 0 0 1 0 130.4832l-166.25152 95.96928a75.09504 75.09504 0 0 1-37.66784 10.21952z m0.03072-272.18944a4.6592 4.6592 0 0 0-2.38592 0.6912 4.38784 4.38784 0 0 0-2.36544 4.096v191.95904a4.72576 4.72576 0 0 0 7.08096 4.096l166.2464-95.9744a4.73088 4.73088 0 0 0 0-8.192L447.73888 413.87008a4.53632 4.53632 0 0 0-2.33472-0.68608z"
+                        fill="#ffffff" p-id="2141" data-spm-anchor-id="a313x.7781069.0.i8" class="selected"></path>
+                </svg>
+                <!-- 暂停 -->
+                <!-- <svg t="1664632250573" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2464" width="200" height="200">
+                    <path
+                        d="M970.624 756.89984a218.84416 218.84416 0 1 0-218.84416 218.84416 218.84416 218.84416 0 0 0 218.84416-218.84416z"
+                        fill="#F4CA1C" p-id="2465"></path>
+                    <path
+                        d="M512 957.44a445.44 445.44 0 1 1 445.44-445.44 445.952 445.952 0 0 1-445.44 445.44z m0-819.03104A373.59616 373.59616 0 1 0 885.59616 512 374.016 374.016 0 0 0 512 138.40896z m-102.62016 576.512a35.92192 35.92192 0 0 1-35.92192-35.92192V372.46976a35.92192 35.92192 0 1 1 71.84384 0v306.5344a35.92192 35.92192 0 0 1-35.92192 35.92192z m205.952 0a35.92192 35.92192 0 0 1-35.92192-35.92192V372.46976a35.92192 35.92192 0 1 1 71.84384 0v306.5344a35.92192 35.92192 0 0 1-35.92192 35.92192z"
+                        fill="#ffffff" p-id="2466" data-spm-anchor-id="a313x.7781069.0.i11" class="selected"></path>
+                </svg> -->
+            </i>
+            <i class="user">
+                <img src="images/user.png" alt="用户">
+                <ul class="user-list">
+                    <li><a href="personalSpace.html">个人空间</a></li>
+                    <li id="message_us">联系我们</li>
+                    <li id="login_out">退出登录</li>
+                </ul>
+            </i>
+        </div>
+    </header>
+    <div class="person_wrapper">
+        <div class="person_container">
+            <!-- 左部分个人信息 -->
+            <div class="person_box_left">
+                <!-- 个人 -->
+                <div class="preson_info">
+                    <div class="preson_info_bg">
+                        <img src="./images/person_info_bg.jpg" alt="">
+                    </div>
+                    <div class="person_info_name">
+                        <div class="person_logo">
+                            <a href="personalSpace.html">
+                                <img src="./images/ip/going.png" alt="" id="per_logo">
+                            </a>
+                        </div>
+                        <div class="person_id" id="per_username">
+
+                        </div>
+                        <div class="page" id="per_userstatus">
+                        </div>
+                    </div>
+                    <!-- 获赞 消息 设置 -->
+                    <div class="person_info_set">
+                        <div class="belike icon">
+                            <div class="image">
+                                <img src="./images/personalSpace/belike.png" alt="">
+                            </div>
+                            <span>获赞</span>
+                            <!-- <div class="show_like_count">
+                                <span itemref="like_count">123</span>
+                            </div> -->
+                        </div>
+                        <div class="like_all_number">
+                            <span id="like_all_number">
+                                0
+                            </span>
+                        </div>
+                        <div class="news icon">
+                            <a href="chat.html">
+                                <div class="image">
+                                    <img src="./images/personalSpace/news.png" alt="">
+                                </div>
+                            </a>
+
+                            <span>消息</span>
+                        </div>
+                        <div class="set icon">
+                            <div class="image">
+                                <img src="./images/personalSpace/set.png" alt="">
+                            </div>
+                            <span>设置</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 绘本 -->
+                <!-- <div class="person_href_picbook"> -->
+                <!-- <div class="left">
+                        <span>绘本</span>
+                    </div>
+                    <div class="right">
+                        <img src="./images/news/person_href_picbook.png" alt="">
+                    </div> -->
+                <!-- </div> -->
+                <!-- 心理测试和游戏 -->
+                <!-- <div class="person_href_textandgame">
+                    <div class="text">
+                        <div class="left">
+                            <span>心理测试</span>
+                        </div>
+                        <div class="right">
+                            <img src="./images/news/person_href_text.png" alt="">
+                        </div>
+                    </div>
+                    <div class="game">
+
+                        <div class="left">
+                            <img src="./images/game_contain_bg1.jpg" alt="">
+                        </div>
+                        <div class="right">
+                            <span>趣味游戏</span>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- 电台 -->
+                <!-- <div class="person_href_radio">
+                    <div class="name">
+                        情绪电台
+                    </div>
+                </div> -->
+            </div>
+            <!-- 右边的发布和查看动态 -->
+            <div class="person_box_right" id="person_box_right2">
+                <!-- 发送框 -->
+                <div class="person_right_send" id="person_right_send2">
+                    <div class="person_right_textarea_box" id="person_right_textarea_box">
+                        <textarea id="person_right_textarea2" placeholder="分享生活中的小美好" maxlength="2000"></textarea>
+                        <div class="person_right_img_show_box" id="person_right_img_show_box2" style="display: none;">
+                            <div class="image">
+                                <img src="./images/75606a92e633bdef86108fcb747d692.jpg" alt=""
+                                    id="person_right_img_show_src2">
+                            </div>
+                        </div>
+                        <div class="person_right_textarea_set">
+                            <div class="left">
+                                <div class="icon">
+                                    <label class="image" for="textarea_img2">
+                                        <img src="./images/news/photo.png" alt="">
+                                    </label>
+                                    <input type="file" id="textarea_img2" style="display: none;">
+                                </div>
+                                <!-- <div class="icon">
+                                    <div class="image">
+                                        <img src="./images/news/music.png" alt="">
+                                    </div>
+                                </div> -->
+                                <div class="icon">
+                                    <div class="image" id="status_story">
+                                        <svg t="1668403211132" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg" p-id="2292" width="128" height="128">
+                                            <path
+                                                d="M735.19616 570.8288a156.48256 156.48256 0 1 0-156.48256 156.52864 156.50304 156.50304 0 0 0 156.48256-156.52864z"
+                                                fill="#F4CA1C" p-id="2293"></path>
+                                            <path
+                                                d="M515.47136 865.28c-336.06656 0-450.7392-275.62496-470.31808-330.88a73.15968 73.15968 0 0 1 0.47104-50.07872c19.968-53.08416 135.7056-318.464 454.85568-330.36288 320.5632-11.99104 453.50912 265.52832 476.89216 321.27488a73.10848 73.10848 0 0 1 2.10944 50.85696C961.06496 582.72768 852.14208 865.28 515.47136 865.28zM109.78304 511.40608c23.70048 66.8928 122.99776 285.14816 405.68832 285.14816 282.02496 0 376.5504-223.31392 398.80704-291.75296a4.15744 4.15744 0 0 0-0.13312-2.93888c-28.53376-68.03968-142.45888-289.24416-411.136-279.23456-268.86656 10.0352-368.95744 221.38368-393.216 285.92128a4.17792 4.17792 0 0 0 0 2.85184z m402.25792 178.62144A182.12352 182.12352 0 1 1 693.76 507.904a182.13376 182.13376 0 0 1-181.71904 182.12352z m0-295.52128a113.39776 113.39776 0 1 0 113.152 113.39776 113.408 113.408 0 0 0-113.152-113.39776z"
+                                                fill="#595BB3" p-id="2294"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span class="join_active" id="join_active">
+                                    <a href="javascript:void(0);" class="join_a" id="join_a">
+                                        <i id="join_text">星星征集</i>
+                                        <span id="join_active_span">
+                                            <svg t="1664806765622" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                                xmlns="http://www.w3.org/2000/svg" p-id="2309" width="200" height="200">
+                                                <path
+                                                    d="M950.670222 471.608889l-341.333333-341.105778a57.059556 57.059556 0 0 0-80.611556 80.611556l244.224 244.053333H113.607111a56.888889 56.888889 0 1 0 0 113.777778h659.342222l-244.167111 244.053333a57.002667 57.002667 0 1 0 80.668445 80.611556l341.333333-341.162667a56.945778 56.945778 0 0 0 0-80.782222z"
+                                                    fill="white" p-id="2310"></path>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </span>
+                                <!-- <span class="join_active status_join" id="status_active">
+                                    <a href="javascript:void(0);" class="join_a status_a" id="status_a">
+                                        <i id="status_text">公开</i>
+                                        <span id="status_active_span">
+                                            <svg t="1664806765622" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                                xmlns="http://www.w3.org/2000/svg" p-id="2309" width="200" height="200">
+                                                <path
+                                                    d="M950.670222 471.608889l-341.333333-341.105778a57.059556 57.059556 0 0 0-80.611556 80.611556l244.224 244.053333H113.607111a56.888889 56.888889 0 1 0 0 113.777778h659.342222l-244.167111 244.053333a57.002667 57.002667 0 1 0 80.668445 80.611556l341.333333-341.162667a56.945778 56.945778 0 0 0 0-80.782222z"
+                                                    fill="white" p-id="2310"></path>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </span> -->
+                            </div>
+                            <div class="right">
+                                <div class="already_input_count">已经输入<span id="already_input_number2">0</span>/2000个字符
+                                </div>
+                                <div class="icon">
+                                    <div class="image">
+                                        <img src="./images/news/send.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="sendbutton" id="sendbutton2">发送</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 预览图片 -->
+                    <div class="photo_box">
+                        <img src="" alt="" id="photo_box_img2">
+                    </div>
+                </div>
+
+                <div class="person_right_show" id="person_right_show">
+                    <!-- 每条动态//循环遍历 -->
+                    <!-- <div class="r_newsbox"> -->
+                    <!-- 个人信息 -->
+                    <!-- <div class="r_newsbox_personalinfo">
+                            <div class="logo">
+                                <img src="./images/user.png" alt="">
+                            </div>
+                            <div class="name_box">
+                                <div class="name">
+                                    我的名字123
+                                </div>
+                            </div>
+                            <div class="time">
+                                2022年10月13日 18:30
+                            </div> -->
+                    <!-- <div class="more">
+                                <img src="./images/personalSpace/more.png" alt="">
+                            </div> -->
+                    <!-- </div> -->
+                    <!-- 动态内容 -->
+                    <!-- <div class="r_newsbox_contain">
+                            <div class="r_newsbox_text">123</div> -->
+                    <!-- 判断是否有图片 -->
+                    <!-- <div class="r_newsbox_pic"> -->
+                    <!-- 循环遍历image -->
+                    <!-- <div class="image">
+                                    <img src="./images/75606a92e633bdef86108fcb747d692.jpg" alt="">
+                                </div>
+                            </div>
+                        </div> -->
+                    <!-- 点赞评论和权限不用渲染 -->
+                    <!-- <div class="r_newsbox_set">
+                            <span class="r_comment_button" id="r_comment_button">展开评论</span> -->
+                    <!-- <div class="belike icon">
+                                <div class="image">
+                                    <img src="./images/personalSpace/cansee.png" alt="">
+                                </div>
+                            </div> -->
+                    <!-- <div class="news icon">
+                                <div class="image news_click">
+                                    <svg t="1667541610970" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" p-id="3019" width="200" height="200">
+                                        <path
+                                            d="M820.8896 807.9872H487.46496a39.64928 39.64928 0 0 0-22.58944 7.07072l-135.75168 94.13632a39.7056 39.7056 0 0 1-61.39392-24.19712l-10.10176-45.74208a39.7824 39.7824 0 0 0-38.80448-31.26784l0.19968-148.992a146.5344 146.5344 0 0 1 146.24256-146.62656h535.1168a39.82848 39.82848 0 0 1 39.74656 39.90528v136.00768a119.4752 119.4752 0 0 1-119.23968 119.7056z"
+                                            fill="#8a8a8a" p-id="3020"></path>
+                                        <path
+                                            d="M815.39072 112.64H198.3744A157.83936 157.83936 0 0 0 40.96 270.55104v379.78112a157.84448 157.84448 0 0 0 157.4144 157.91104h14.79168a1.62816 1.62816 0 0 1 1.57696 1.27488l10.10688 45.71648a77.77792 77.77792 0 0 0 120.32 47.3856l135.78752-94.08512a1.62816 1.62816 0 0 1 0.9216-0.29184h333.5168A157.83936 157.83936 0 0 0 972.8 650.33216V270.55104A157.83936 157.83936 0 0 0 815.39072 112.64zM896.512 650.33216a81.35168 81.35168 0 0 1-81.13152 81.408H481.87904a77.42464 77.42464 0 0 0-44.27264 13.824L301.81888 839.68a1.61792 1.61792 0 0 1-2.50368-0.98816l-10.10688-45.71648a77.47584 77.47584 0 0 0-76.04736-61.23008h-14.78656a81.3568 81.3568 0 0 1-81.13664-81.408V270.55104a81.3568 81.3568 0 0 1 81.13664-81.408h617.01632a81.35168 81.35168 0 0 1 81.13152 81.408v379.78112zM337.98656 424.68352a49.24416 49.24416 0 1 0 49.08544 49.24416 49.152 49.152 0 0 0-49.08544-49.24416z m184.0896 0a49.24416 49.24416 0 1 0 49.09056 49.24416 49.152 49.152 0 0 0-49.09056-49.24416z m177.07008 0a49.24416 49.24416 0 1 0 49.09056 49.24416 49.152 49.152 0 0 0-49.09056-49.24416z"
+                                            fill="#8a8a8a" p-id="3021"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="set icon">
+                                <div class="image">
+                                    <svg t="1667540980035" class="icon changeColor" viewBox="0 0 1024 1024"
+                                        version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2292" width="200"
+                                        height="200">
+                                        <path
+                                            d="M705.30048 510.208a281.12896 281.12896 0 0 0-267.83744 367.64672c121.04704-0.45056 234.8544-0.82944 275.12832-0.82944 99.28704 0 138.54208-131.45088 138.54208-131.45088s17.36192-45.77792 41.64096-163.88096a280.576 280.576 0 0 0-187.47392-71.48544z"
+                                            fill="#8a8a8a" p-id="2293"></path>
+                                        <path
+                                            d="M929.87904 366.208c-42.30144-45.22496-104.12544-43.43296-117.248-42.496l-167.21408 0.87552a4.23424 4.23424 0 0 1-3.82976-1.8432 4.55168 4.55168 0 0 1-0.87552-4.096c3.82464-15.36 8.66816-35.06688 14.76096-60.09344 15.90272-65.3568-2.14016-107.5712-20.07552-131.47648a127.6672 127.6672 0 0 0-97.3568-50.176C469.38112 73.88672 423.936 109.056 402.944 181.21216l-0.54784 2.11456C359.06048 374.48704 202.59328 376.7808 195.42528 376.7808h-69.12A75.20768 75.20768 0 0 0 51.2 451.93728v414.99136A75.07968 75.07968 0 0 0 126.2336 942.08h0.32768c85.70368-0.35328 517.632-2.14016 604.672-2.14016 119.936 0 167.31648-140.0576 172.288-155.89376 3.7376-10.29632 28.39552-81.77152 58.9312-253.16352 12.90752-72.38656 1.92512-127.7952-32.57344-164.67456z m-38.1184 152.064c-31.00672 174.03392-55.61856 240.95232-55.808 241.53088l-0.83968 2.47296c-0.31232 1.05984-33.49504 105.82016-103.87456 105.82016-87.1424 0-519.2192 1.78176-604.9536 2.14016a3.28704 3.28704 0 0 1-2.304-0.94208 3.2256 3.2256 0 0 1-0.9728-2.36032V451.93728a3.30752 3.30752 0 0 1 3.3024-3.3024h68.66432c76.07808 1.23392 231.63904-49.83808 277.15584-248.28928 13.37344-45.056 32.42496-52.93568 62.78656-51.6096a56.22272 56.22272 0 0 1 43.07456 21.5296c12.39552 16.512 15.06304 41.17504 7.72608 71.3216a13144.1152 13144.1152 0 0 1-14.6688 59.75552 76.61056 76.61056 0 0 0 74.32704 95.11424h0.40448l168.58112-0.88064 3.48672-0.18944c0.37376-0.03072 38.26688-3.30752 59.904 20.2496 22.36928 24.2944 19.96288 69.22752 14.00832 102.6304zM232.27904 505.94816a35.91168 35.91168 0 0 0-35.8912 35.92704v236.42624a35.8912 35.8912 0 1 0 71.78752 0v-236.42624a35.91168 35.91168 0 0 0-35.89632-35.92704z"
+                                            fill="#8a8a8a" p-id="2294"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div> -->
+                    <!-- 用户评论 -->
+                    <!-- <div class="r_newsbox_comm_contain" id="r_newsbox_comm_contain"> -->
+                    <!-- 每个评论//循环遍历 -->
+                    <!-- <div class="comment_box2"> -->
+                    <!-- 头像 -->
+                    <!-- <div class="user_popover"> -->
+                    <!-- <img src="./images/user.png" alt=""> -->
+                    <!-- </div> -->
+                    <!-- 内容 -->
+                    <!-- <div class="content_box"> -->
+                    <!-- <div class="comment_main"> -->
+                    <!-- 用户名： -->
+                    <!-- <div class="user_box">
+                                            <div class="name">竹子爱熊猫</div>
+                                            <time class="time">1小时前</time>
+                                        </div> -->
+                    <!-- 评论内容 -->
+                    <!-- <div class="content">
+                                            测试换评论内容
+                                        </div> -->
+                    <!-- 回复评论 -->
+                    <!-- <div class="action_box">
+                                            <div class="item action_box_item_click">
+                                                回复
+                                            </div>
+                                        </div> -->
+                    <!-- 展开收起 //待定-->
+                    <!-- 二级评论和评论回复 -->
+                    <!-- <div class="subcomment_wrapper"> -->
+                    <!-- 发送评论的评论 -->
+                    <!-- <div class="comment_form"> -->
+                    <!-- <div class="input_box"> -->
+                    <!-- <div class="comment_form_label"></div>
+                                                <textarea name="" id="comment_form_textarea"></textarea> -->
+                    <!-- </div> -->
+                    <!-- 点击发送按钮 -->
+                    <!-- <div class="action_box">
+                                                    <div class="submit">
+                                                        <button>发布</button>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                    <!-- 评论的评论 -->
+                    <!-- <div class="sub_comment_list"> -->
+                    <!-- 单个评论 //循环遍历-->
+                    <!-- <div class="sub_comment">
+                                                    <div class="user_popover">
+                                                        <img src="./images/user.png" alt="">
+                                                    </div>
+                                                    <div class="content_box">
+                                                        <div class="content_wrapper"> -->
+                    <!-- 用户名： -->
+                    <!-- <div class="user_box">
+                                                                <div class="name">
+                                                                    無名路人
+                                                                </div>
+                                                                <time class="time">1月前</time>
+                                                            </div>
+                                                            <div class="content">
+                                                                评论的评论内容
+                                                            </div> -->
+                    <!-- </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    <!-- 发表评论 -->
+                    <!-- <div class="r_newsboe_form">
+                            <div class="r_newsboe_area">
+                                <textarea></textarea>
+                            </div>
+
+                            <div class="r_newsboe_send_box">
+                                <div class="submit">
+                                    <button class="r_newsboe_send">发布</button>
+                                </div>
+                            </div>
+
+                        </div> -->
+                    <!-- 分割线 -->
+                    <!-- <div class="r_newsbox_line"></div> -->
+                    <!-- </div> -->
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 举报动态弹窗 -->
+    <div class="report_popup_wrap" id="report_popup_wrap">
+        <div class="report_popup" id="report_popup">
+            <h1>举报原因</h1>
+            <div class="report_input">
+                <textarea name="" id="report_textarea" value="举报原因"></textarea>
+            </div>
+            <div class="button">
+                <button id="report_popup_sure">
+                    确定
+                </button>
+                <button id="report_popup_cancel">
+                    取消
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <!-- 联系我们弹窗 -->
+    <div class="addbook_popup_notification_wrap" id="message_popup">
+        <!-- 里面白框 -->
+        <div class="addbook_popup_notification">
+            <div id="message_wrap">
+                <div id="form-wrap">
+                    <form class="message_from" id="message_from">
+                        <p>联系我们</p>
+                        <!-- <p>BEST</p> -->
+                        <label for="name">名字:</label>
+                        <input type="text" name="message_name" value="" id="message_name" />
+
+                        <label for="email">联系方式:</label>
+                        <input type="text" name="message_email" value="" id="message_email" />
+
+
+                        <label for="email">发送消息：</label>
+                        <textarea name="message" id="message_textarea" value="Your Message"></textarea>
+
+                        <label for="email">类型：</label>
+                        <span id="select_result">申请主播</span>
+                        <span class="click_type" id="click_type">
+                            <svg t="1668193889040" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="2625" width="128" height="128">
+                                <path
+                                    d="M787.2 380.8c-9.6-9.6-22.4-12.8-35.2-12.8l-480 3.2c-12.8 0-25.6 3.2-35.2 12.8-19.2 19.2-19.2 48 0 67.2l240 240c3.2 3.2 9.6 6.4 12.8 9.6l3.2 3.2c16 6.4 38.4 3.2 51.2-9.6l240-243.2c22.4-22.4 19.2-51.2 3.2-70.4z"
+                                    fill="#707070" p-id="2626"></path>
+                            </svg>
+                        </span>
+                        <div class="submit">
+                            <button type="button" name="submit" id="message_submit" href="javascript:void(0)">提交
+                        </div>
+                        <!-- <input type="text" name="message_email" value="" id="email" /> -->
+                        <div class="select_message" id="select_message" style="display: none;">
+                            <div class="item select_message_item">申请成为主播</div>
+                            <div class="item select_message_item">申请成为画手</div>
+                            <div class="item select_message_item">申请心理咨询师</div>
+                            <div class="item select_message_item">其他</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 修改成功弹窗 -->
+    <div class="change_seccess_box" id="change_seccess_box">
+        <div class="change_success" id="change_success">
+            保存成功11111
+        </div>
+    </div>
+    <!-- 回到顶部 -->
+    <a href="javascript:;" class="back-top">
+        <svg t="1668494470190" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="7801" width="200" height="200">
+            <path
+                d="M517.97504 563.59936m-339.79904 0a339.79904 339.79904 0 1 0 679.59808 0 339.79904 339.79904 0 1 0-679.59808 0Z"
+                fill="#00DFD5" p-id="7802"></path>
+            <path
+                d="M517.71392 910.50496c-159.80032 0-298.17344-108.5184-336.4864-263.88992-22.17472-89.94816-7.9872-183.1424 39.936-262.4256s123.84768-135.16288 213.79584-157.33248a348.3392 348.3392 0 0 1 83.29728-10.15808c159.79008 0 298.1632 108.50816 336.47616 263.87456 45.76256 185.6768-68.04992 373.98528-253.72672 419.76832a348.94848 348.94848 0 0 1-83.29216 10.1632z m0.5376-679.76192c-26.78784 0-53.6832 3.28192-79.93344 9.75872-86.30272 21.26848-159.15008 74.88512-205.14304 150.95808-45.9776 76.07296-59.58144 165.49376-38.2976 251.79648 36.75648 149.08416 169.51808 253.19936 322.8416 253.19936 26.7776 0 53.67296-3.28192 79.9232-9.75872 178.15552-43.92448 287.36512-224.60416 243.44064-402.7648-36.7616-149.0688-169.50784-253.18912-322.83136-253.18912z"
+                fill="#6C0000" p-id="7803"></path>
+            <path
+                d="M513.8432 375.43936c-235.5712-8.37632-487.89504 37.4272-491.49952 138.8288-3.60448 101.38112 244.82816 164.98688 480.39936 173.3632 235.5712 8.37632 487.89504-37.4272 491.49952-138.81344 3.60448-101.39648-244.82816-165.00224-480.39936-173.37856z m460.38016 172.66688c-2.31424 65.08032-204.16 130.78528-470.83008 121.30304-266.6752-9.48224-463.34464-89.34912-461.0304-154.43456 2.31424-65.08032 204.16-130.80576 470.8352-121.32352 266.67008 9.48224 463.33952 89.37472 461.02528 154.45504z"
+                fill="#6B0306" p-id="7804"></path>
+            <path
+                d="M238.34112 388.61312c-8.21248 10.04544-16.42496 26.32704-20.25472 34.39104 80.68608-18.41152 175.9744-24.2944 293.04832-20.13184 129.52064 4.60288 236.83072 21.36064 318.54592 49.41824-3.15904-8.7296-14.0032-31.38048-17.80736-39.71072-88.87296-26.496-188.37504-50.304-299.02336-54.23616-100.7104-3.57376-188.416 13.93152-274.5088 30.26944z"
+                fill="#00DFD5" p-id="7805"></path>
+            <path
+                d="M626.87232 659.15904m-87.51104 0a87.51104 87.51104 0 1 0 175.02208 0 87.51104 87.51104 0 1 0-175.02208 0Z"
+                fill="#FFC700" p-id="7806"></path>
+            <path
+                d="M626.95424 752.51712h-0.01024a92.75392 92.75392 0 0 1-68.39296-29.73696 92.7744 92.7744 0 0 1-24.9856-66.93888c1.82784-51.61472 44.45696-91.43296 96.62464-89.984 51.44064 1.82784 91.81184 45.16864 89.99424 96.62464a92.99456 92.99456 0 0 1-93.23008 90.0352z m-0.14848-175.01184a81.32608 81.32608 0 0 0-81.536 78.7456 81.1264 81.1264 0 0 0 21.85216 58.56256 81.07008 81.07008 0 0 0 56.84736 25.94304l2.9696 0.05632a81.32608 81.32608 0 0 0 81.536-78.7456c1.60256-45.00992-33.70496-82.9184-78.69952-84.5056l-2.9696-0.05632z"
+                fill="#6C0000" p-id="7807"></path>
+            <path d="M805.81632 274.75968m-18.6112 0a18.6112 18.6112 0 1 0 37.2224 0 18.6112 18.6112 0 1 0-37.2224 0Z"
+                fill="#FFC700" p-id="7808"></path>
+            <path
+                d="M805.8112 299.22816l-0.85504-0.01024a24.4992 24.4992 0 0 1-23.58784-25.32864 24.3712 24.3712 0 0 1 24.43776-23.58784c14.36672 0.49152 24.94976 11.8528 24.46848 25.32864a24.3968 24.3968 0 0 1-24.46336 23.59808z m0.43008-37.21728c-7.3472 0-12.93824 5.39648-13.17888 12.288a12.7744 12.7744 0 0 0 12.29824 13.2096l0.44544 5.8624v-5.85216a12.70784 12.70784 0 0 0 12.75392-12.30848 12.76928 12.76928 0 0 0-12.29824-13.19936h-0.02048z"
+                fill="#6C0000" p-id="7809"></path>
+            <path
+                d="M116.06016 418.21184m-46.14144 0a46.14144 46.14144 0 1 0 92.28288 0 46.14144 46.14144 0 1 0-92.28288 0Z"
+                fill="#FFC700" p-id="7810"></path>
+            <path
+                d="M116.10624 470.20544h-0.01024l-1.88416-0.03584c-28.65152-1.01888-51.13344-25.15456-50.11456-53.80608a51.82464 51.82464 0 0 1 51.93216-50.1504l1.87392 0.03584a51.72736 51.72736 0 0 1 36.20864 16.5376 51.64032 51.64032 0 0 1 13.91104 37.26848 51.80416 51.80416 0 0 1-51.9168 50.1504z m-0.08192-92.288a40.14592 40.14592 0 0 0-40.23296 38.8608c-0.78848 22.20544 16.62976 40.90368 38.82496 41.69216l1.47456 0.03584a40.11008 40.11008 0 0 0 40.2176-38.8608 40.01792 40.01792 0 0 0-10.76736-28.89216 40.07424 40.07424 0 0 0-28.0576-12.8l-1.4592-0.03584z"
+                fill="#6C0000" p-id="7811"></path>
+            <path d="M382.47936 368.95232s-35.01056 51.00544 40.39168 150.60992l45.47072-89.51808-85.8624-61.09184z"
+                fill="#BED5E9" p-id="7812"></path>
+            <path
+                d="M424.05376 532.74624l-6.77888-8.94976c-77.568-102.46144-42.12736-156.5696-40.576-158.81728l4.03456-5.888 96.6144 68.736-53.29408 104.91904z m-38.74816-153.15968c-5.39648 15.51872-12.14976 58.11712 36.48 126.61248l37.54496-73.9328-74.02496-52.67968z"
+                fill="#6C0000" p-id="7813"></path>
+            <path d="M536.63232 263.63392s60.24704-14.07488 125.6192 92.38016l-99.92192 9.81504-25.69728-102.1952z"
+                fill="#BED5E9" p-id="7814"></path>
+            <path
+                d="M556.99456 373.4016l-28.91776-114.97984 6.94784-1.62304c0.57856-0.13312 3.70688-0.79872 9.0112-0.79872 19.55328 0 70.81472 9.38496 124.2112 96.32256l5.87264 9.56416-117.12512 11.51488z m-11.50976-103.34208l22.18496 88.18688 82.53952-8.1152c-45.94176-70.02624-87.29088-79.5904-104.72448-80.07168z"
+                fill="#6C0000" p-id="7815"></path>
+            <path
+                d="M519.51616 238.99648C459.2128 150.72768 375.90528 102.68672 333.44 131.69664s-27.99616 124.0832 32.3072 212.352c39.27552 57.48736 88.30464 97.88416 129.45408 111.07328l0.00512-0.02048c0.24576 0.12288 0.512 0.2304 0.82944 0.27136 1.41824 0.1792 21.20192-51.49696 76.73344-52.15744a3.29728 3.29728 0 0 0 1.80736-0.59392 3.1744 3.1744 0 0 0 1.35168-1.9456 2.11456 2.11456 0 0 0-0.01024-0.76288c2.66752-43.12576-17.14176-103.45472-56.40192-160.91648z"
+                fill="#BED5E9" p-id="7816"></path>
+            <path
+                d="M496.05632 462.3872h-0.03584l-1.97632-0.16896-1.97632-0.8448c-43.38688-13.78304-93.14816-56.32512-132.11136-113.3568-29.75232-43.5456-49.58208-90.17856-55.84384-131.30752-6.528-42.92608 2.47808-75.17184 25.35936-90.8032 9.40544-6.4256 20.65408-9.68192 33.41824-9.68192 48.59904 0 113.8688 47.73888 162.42176 118.80448 38.74304 56.70912 60.26752 118.16448 57.67168 164.59264l0.08192 0.54784-0.27648 1.98656c-0.44544 2.39104-2.00192 4.73088-4.23936 6.26176-1.78176 1.1776-3.70176 1.78176-5.64736 1.8176-28.94848 0.34304-52.14208 15.74912-68.96128 45.78304-1.82784 3.28704-3.56352 6.36928-7.8848 6.36928zM362.89536 130.26816c-9.88672 0-18.46784 2.432-25.48736 7.22432-18.19648 12.42112-25.07776 39.808-19.4048 77.10208 5.94432 39.08608 24.96 83.6608 53.54496 125.4912 35.39456 51.81952 81.48992 92.27776 121.42592 106.83904 18.65216-32.05632 44.24192-49.0752 76.1088-50.62144 1.43872-42.60864-19.56864-100.9664-55.35232-153.344-45.34272-66.3552-107.37152-112.6912-150.8352-112.6912z"
+                fill="#6C0000" p-id="7817"></path>
+            <path
+                d="M542.6176 283.89888L396.19584 382.84288a336.19968 336.19968 0 0 0 18.07872 17.77664L552.51968 307.2a335.616 335.616 0 0 0-9.90208-23.30112z"
+                fill="#FFFFFF" p-id="7818"></path>
+            <path
+                d="M413.62944 409.51808l-4.08064-3.70176a340.10624 340.10624 0 0 1-18.4576-18.1504l-5.66784-6.01088 160.06656-108.16512 3.48672 7.42912a334.28992 334.28992 0 0 1 10.10176 23.79776l1.97632 5.20192-147.42528 99.59936z m-6.57408-25.54368a316.34944 316.34944 0 0 0 7.89504 7.7056l128.97792-87.14752a316.28288 316.28288 0 0 0-4.26496-10.15808l-132.608 89.6z"
+                fill="#6C0000" p-id="7819"></path>
+            <path
+                d="M565.84704 332.26752l-130.048 88.84736a84.11136 84.11136 0 0 0 18.2272 12.30848l117.08928-79.04256c-0.47616-6.13376-3.10784-16.31744-5.26848-22.11328z"
+                fill="#FFFFFF" p-id="7820"></path>
+            <path
+                d="M454.6048 441.50784l-3.64544-1.78176a90.51136 90.51136 0 0 1-19.82976-13.37344l-6.69696-5.97504 144.86528-98.96448 3.13344 8.40192c2.37568 6.4 5.15584 17.13152 5.69344 24.02304l0.3072 4.0704L454.6048 441.50784z m-6.9376-19.98848c1.93024 1.34656 3.93216 2.60608 5.91872 3.72736l110.0032-74.2656c-0.4096-2.34496-0.99328-4.97152-1.65888-7.53152L447.6672 421.51936z"
+                fill="#6C0000" p-id="7821"></path>
+            <path
+                d="M412.01664 246.88128m-39.89504 0a39.89504 39.89504 0 1 0 79.79008 0 39.89504 39.89504 0 1 0-79.79008 0Z"
+                fill="#ECF3FE" p-id="7822"></path>
+            <path
+                d="M412.06272 293.79584c-0.8704 0-1.73568-0.02048-2.61632-0.08192a46.60224 46.60224 0 0 1-32.36864-15.51872 46.57664 46.57664 0 0 1-11.89888-33.88928c1.39264-25.728 23.35232-45.95712 49.408-44.26752a46.60224 46.60224 0 0 1 32.36864 15.53408 46.57664 46.57664 0 0 1 11.89888 33.88928 46.8736 46.8736 0 0 1-46.79168 44.33408z m-0.09216-79.78496a32.84992 32.84992 0 0 0-32.77824 31.06304 32.60416 32.60416 0 0 0 8.3456 23.73632 32.60416 32.60416 0 0 0 22.67648 10.89024l1.85344 0.04608a32.84992 32.84992 0 0 0 32.77824-31.0528 32.6656 32.6656 0 0 0-8.3456-23.75168 32.72704 32.72704 0 0 0-22.68672-10.89024l-1.8432-0.04096z"
+                fill="#6C0000" p-id="7823"></path>
+            <path
+                d="M381.3632 233.20064c6.20032-10.61888 19.54304-14.52544 32.50688-12.35456 28.28288 4.74112 29.50656 38.58432 28.1856 41.89696a33.8432 33.8432 0 0 0-60.69248-29.5424z"
+                fill="#BED5E9" p-id="7824"></path>
+        </svg>
+    </a>
+    <div class="map-wrapper">
+        <img src="./images/map.png" alt="">
+        <a href="javascript:;" class="cancel-map">
+            <img src="./images/cancel-map.png" alt="">
+        </a>
+        <!-- 建筑物链接容器 -->
+        <div class="location-wrapper">
+            <a href="psychology3.html" class="location"></a>
+            <a href="station.html" class="location"></a>
+            <a href="picbook.html" class="location"></a>
+            <a href="card.html" class="location"></a>
+            <a href="share.html" class="location"></a>
+            <a href="stars.html" class="location"></a>
+            <a href="newLogin.html" class="location"></a>
+            <a href="personalSpace.html" class="location"></a>
+        </div>
+    </div>
+    <script src="./JavaScript/global.js"></script>
+    <script src="./JavaScript/map.js"></script>
+    <!-- 联系我们弹窗 -->
+    <script src="./JavaScript/global.js"></script>
+    <script src="./JavaScript/ajax.js"></script>
+    <script src="./JavaScript/cookie.js"></script>
+    <!-- 修改时间表达方式函数 -->
+    <script src="./JavaScript/time.js"></script>
+    <!-- 搜索动态 -->
+    <script src="./JavaScript/searchStory.js"></script>
+
+    <script>
+        // 设置前面的路径
+        let head = "http://106.55.197.233:666/upload/";
+        // 给哪个动态评论
+        let sendComment = null;
+        //给哪个评论评论
+        let commendcommend = null;
+        // 第几页动态
+        let share_page = 1;
+        let last_page = share_page;
+        let per_username = document.getElementById('per_username');
+        let per_userstatus = document.getElementById('per_userstatus');
+        let per_logo = document.getElementById('per_logo');
+        let userHead1 = document.querySelector('.user img');
+        let userName;
+        // 举报弹窗
+        let report_popup_wrap = document.getElementById('report_popup_wrap');
+        let report_popup = document.getElementById('report_popup');
+        let report_popup_sure = document.getElementById('report_popup_sure');
+        let report_popup_cancel = document.getElementById('report_popup_cancel');
+        let report_textarea = document.getElementById('report_textarea');
+        // 个人信息渲染
+        showUserInfo();
+
+        function showUserInfo() {
+            sealAjax({
+                url: 'http://106.55.197.233:666/cityofstar/user/getUserInfo',
+                data: {
+                    userId: getCookie('userId')
+                }
+            }).then(res => {
+                var per_info = res.data;
+                // console.log(per_info);
+                per_username.innerHTML = per_info.username;
+                userName = per_info.username;
+                per_logo.src = head + per_info.headPortrait;
+                userHead1.src = head + per_info.headPortrait;
+                if (per_info.userStatus != undefined) {
+                    per_userstatus.innerHTML = `<img src="./images/emotion-${per_info.userStatus}.png" alt="">`;
+                }
+                // <img src="./images/emotion-${person_story[index].queryStory.userStatus}.png" alt="">
+            })
+        }
+
+        let person_right_show = document.getElementById('person_right_show');
+        // 查看用户动态
+        show_per_text_fun2();
+
+        let story_id = {};
+        let user_id = {};
+        let comment_id = {};
+        let report_sure_id = -1;
+        // 评论的评论的ul
+        let sub_comment_list = document.getElementsByClassName('sub_comment_list');
+
+        // 查看动态and绑定事件
+        function show_per_text_fun2() {
+            // 获取动态总数
+            // http://106.55.197.233:666/cityofstar/story/getStoryCount
+
+
+            sealAjax({
+                url: 'http://106.55.197.233:666/cityofstar/story/getStoryCount'
+            }).then(res => {
+                console.log(res.data);
+                if (share_page * 10 > res.data) {
+                    share_page = res.data / 10;
+                    return;
+                }
+            })
+
+            console.log(share_page);
+
+            sealAjax({
+                url: 'http://106.55.197.233:666/cityofstar/story/getStory',
+                data: {
+                    size: share_page * 10,
+                    page: 1,
+                    status: 0,
+                    userId: getCookie('userId')
+                }
+            }).then(res => {
+                console.log("调用渲染动态");
+                var person_box_right_str = "";
+                console.log(res.data);
+                var person_story = res.data;
+                // 绑定渲染动态事件
+                showPerson_show(person_story);
+                // 绑定回复事件
+                eventblock();
+            }).then(res => {
+                // 发送动态
+                shareSomething();
+            }).then(res => {
+                // 点击头像进入个人空间
+                gotootherSpace();
+            }).then(res => {
+                // 发送评论函数
+                send_comm_fun()
+            })
+        }
+
+        let userHead = document.querySelector('.user img');
+        userHead.src = head + getCookie('headPortrait');
+
+        let towhichperSpace = document.getElementsByClassName('towhichperSpace');
+        // 是否参与星星征集
+        let join_active_span = document.getElementById('join_active_span');
+        let join_a = document.getElementById('join_a');
+        let join_flag = true;
+        let join_text = document.getElementById('join_text');
+        // 是否私密
+        let status_active = document.getElementById('status_active');
+        let status_flag = true;
+        let status_story = document.getElementById('status_story');
+        status_story.addEventListener('click', () => {
+            if (status_flag) {
+                status_story.innerHTML =
+                    `<svg t="1668403976869" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4087" width="128" height="128"><path d="M740.31616 580.9408a156.48256 156.48256 0 1 0-156.48256 156.58496 156.53376 156.53376 0 0 0 156.48256-156.58496z" fill="#F4CA1C" p-id="4088"></path><path d="M179.44064 730.112a34.18112 34.18112 0 0 1-25.8048-11.71968l-6.144-7.04512a539.4176 539.4176 0 0 1-102.33856-171.80672 73.1648 73.1648 0 0 1 0.47616-50.06848c19.968-53.07904 135.7056-318.464 454.84544-330.35264a478.27968 478.27968 0 0 1 177.2544 25.6 34.3552 34.3552 0 0 1-22.65088 64.8704 411.55072 411.55072 0 0 0-152.064-21.8112c-268.86656 10.0352-368.95744 221.37856-393.216 285.91104a4.18816 4.18816 0 0 0 0 2.85696 468.32128 468.32128 0 0 0 89.05216 149.24288l6.37952 7.296a34.3552 34.3552 0 0 1-25.78944 57.02656z m336.03072 140.288a532.21888 532.21888 0 0 1-157.74208-22.84544 34.3552 34.3552 0 0 1 20.26496-65.65376 464.0512 464.0512 0 0 0 137.47712 19.77344c282.01984 0 376.5504-223.30368 398.80704-291.7376a4.17792 4.17792 0 0 0-0.128-2.92864 527.42656 527.42656 0 0 0-93.73184-145.77152 34.304 34.304 0 1 1 50.56-46.42816 599.23456 599.23456 0 0 1 106.38848 165.5552 73.1648 73.1648 0 0 1 2.1248 50.85184C961.06496 587.85792 852.14208 870.4 515.47136 870.4zM364.5952 547.39968a34.304 34.304 0 0 1-34.304-34.36544 182.13376 182.13376 0 0 1 181.76-182.1184 34.36032 34.36032 0 0 1 0 68.72576 113.408 113.408 0 0 0-113.152 113.39264 34.304 34.304 0 0 1-34.304 34.36544z m147.456 147.75296a34.36032 34.36032 0 0 1 0-68.72064 113.408 113.408 0 0 0 113.152-113.39776 34.304 34.304 0 1 1 68.57728 0 182.12864 182.12864 0 0 1-181.73952 182.1184z m-297.472 153.76896a34.36032 34.36032 0 0 1-24.2432-58.65472L799.83616 179.4816a34.304 34.304 0 0 1 48.4864 48.5888L238.81728 838.85568a34.1248 34.1248 0 0 1-24.2432 10.06592z" fill="#595BB3" p-id="4089"></path></svg>`;
+                status_flag = false;
+            } else {
+                status_story.innerHTML =
+                    `<svg t="1668404003247" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4256" width="128" height="128"><path d="M735.19616 570.8288a156.48256 156.48256 0 1 0-156.48256 156.52864 156.50304 156.50304 0 0 0 156.48256-156.52864z" fill="#F4CA1C" p-id="4257"></path><path d="M515.47136 865.28c-336.06656 0-450.7392-275.62496-470.31808-330.88a73.15968 73.15968 0 0 1 0.47104-50.07872c19.968-53.08416 135.7056-318.464 454.85568-330.36288 320.5632-11.99104 453.50912 265.52832 476.89216 321.27488a73.10848 73.10848 0 0 1 2.10944 50.85696C961.06496 582.72768 852.14208 865.28 515.47136 865.28zM109.78304 511.40608c23.70048 66.8928 122.99776 285.14816 405.68832 285.14816 282.02496 0 376.5504-223.31392 398.80704-291.75296a4.15744 4.15744 0 0 0-0.13312-2.93888c-28.53376-68.03968-142.45888-289.24416-411.136-279.23456-268.86656 10.0352-368.95744 221.38368-393.216 285.92128a4.17792 4.17792 0 0 0 0 2.85184z m402.25792 178.62144A182.12352 182.12352 0 1 1 693.76 507.904a182.13376 182.13376 0 0 1-181.71904 182.12352z m0-295.52128a113.39776 113.39776 0 1 0 113.152 113.39776 113.408 113.408 0 0 0-113.152-113.39776z" fill="#595BB3" p-id="4258"></path></svg>`;
+                status_flag = true;
+            }
+        })
+        // 点赞 评论 评论得评论 删除 举报
+
+        function eventblock() {
+            // 举报成功弹窗
+            let change_seccess_box = document.getElementById('change_seccess_box');
+            let change_success = document.getElementById('change_success');
+            let comment_form = document.getElementsByClassName('comment_form');
+            let action_box_item_click = document.getElementsByClassName('action_box_item_click');
+            let r_newsbox_comm_contain = document.getElementsByClassName('r_newsbox_comm_contain');
+            let r_comment_button = document.getElementsByClassName('r_comment_button');
+            let news_click = document.getElementsByClassName('news_click');
+            let r_newsboe_form = document.getElementsByClassName('r_newsboe_form');
+            let belike_delete = document.getElementsByClassName('belike_delete');
+            let r_newsbox = document.getElementsByClassName('r_newsbox');
+            let like_num = document.getElementsByClassName('like_num');
+            let like_number = document.getElementsByClassName('like_number');
+            // r_newsbox_comm_contain
+            // 绑定点击出现事件
+            for (let i = 0; i < comment_form.length; i++) {
+                action_box_item_click[i].onclick = null;
+                action_box_item_click[i].removeEventListener('click', () => {
+                    action_fun(i)
+                });
+                action_box_item_click[i].addEventListener('click', () => {
+                    action_fun(i)
+                })
+            }
+            // 评论得回复
+            function action_fun(i) {
+                if (comment_form[i].style.display == 'flex') {
+                    comment_form[i].style.display = 'none';
+                    action_box_item_click[i].style.color = '#e4e6eb';
+                } else {
+                    comment_form[i].style.display = 'flex';
+                    action_box_item_click[i].style.color = '#9ea7f7';
+                }
+            }
+            // 用户发表评论
+            for (let i = 0; i < r_comment_button.length; i++) {
+                r_comment_button[i].onclick = null;
+                r_comment_button[i].addEventListener('click', () => {
+                    if (r_newsbox_comm_contain[i].style.display == 'block') {
+                        r_newsbox_comm_contain[i].style.display = 'none';
+                        r_comment_button[i].style.color = '#e4e6eb';
+                    } else {
+                        r_newsbox_comm_contain[i].style.display = 'block';
+                        r_comment_button[i].style.color = '#9ea7f7';
+                    }
+                })
+            }
+            // 展开评论
+            for (let i = 0; i < news_click.length; i++) {
+                news_click[i].onclick = null;
+                news_click[i].addEventListener('click', () => {
+                    if (r_newsboe_form[i].style.display == 'flex') {
+                        r_newsboe_form[i].style.display = 'none';
+                        news_click[i].classList.remove('block');
+                    } else {
+                        r_newsboe_form[i].style.display = 'flex';
+                        news_click[i].classList.add('block');
+                    }
+                })
+            }
+            var report_popup_sure_id = null;
+            // 删除动态--举报动态
+            for (let i = 0; i < belike_delete.length; i++) {
+                let delete_fun = function () {
+                    delete_action(event, i);
+                }
+                belike_delete[i].addEventListener('click', (event) => {
+                    delete_fun(event);
+                })
+            }
+            // 绑定点击事件
+            function delete_action(event, i) {
+                if (event.target.id == 'delete') {
+                    sealAjax({
+                        url: "http://106.55.197.233:666/cityofstar/story/delete",
+                        type: "get",
+                        data: {
+                            storyId: story_id["person_story" + i],
+                        }
+                    }).then(res => {
+                        if (res.code == 200) {
+                            console.log("删除成功");
+                            popup_something("删除成功")
+                            r_newsbox[i].remove();
+                            show_per_text_fun2();
+                            // sealAjax({
+                            //     url: "http://106.55.197.233:666/cityofstar/backstage/passReport",
+                            //     data: {
+                            //         // reportedUserId: reportId["reportId" + i],
+                            //         storyId: reportStoryId["reportStoryId" + i]
+                            //     }
+                            // }).then(res => {
+                            //     if (res.code == 200) {
+                            //         // 删除被举报用户的对应的动态// 删除对应动态
+                            //         console.log("删除举报框里面的信息");
+                            //     }
+                            // })
+                        }
+                    })
+                }
+                // 举报
+                if (event.target.id == 'explore') {
+                    report_popup_wrap.style.visibility = 'visible';
+                    report_popup_wrap.style.opacity = '1';
+                    // 绑定点击确定函数
+                    // report_popup_sure_fun(i);
+                    report_sure_id = i;
+                }
+            }
+            // 给动态点赞
+            for (let i = 0; i < like_number.length; i++) {
+                let like_fun = function (event) {
+                    like_action(event);
+                }
+
+                function like_action(event) {
+                    sealAjax({
+                        url: "http://106.55.197.233:666/cityofstar/story/like",
+                        type: "get",
+                        data: {
+                            storyId: story_id["person_story" + i],
+                            userId: getCookie('userId'),
+                            likeNum: Number(like_number[i].innerHTML)
+                        }
+                    }).then(res => {
+                        console.log("点赞成功");
+                        show_like_number_fun();
+                        like_number[i].innerHTML = Number(like_number[i].innerHTML) + 1
+                        like_num[i].classList.add('block');
+                        console.log(like_number[i].innerHTML)
+                    })
+                }
+
+                like_num[i].addEventListener('click', () => {
+                    // console.log(like_num[i].classList.contains('block'));
+                    // 判断是否点过赞
+                    if (!like_num[i].classList.contains('block')) {
+                        like_fun();
+                    }
+                })
+            }
+        }
+
+        window.addEventListener('scroll', function () {
+            // 滚动视口高度(也就是当前元素的真实高度)
+            let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            // 可见区域高度
+            let clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body
+                .clientHeight;
+            // 滚动条顶部到浏览器顶部高度
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            let scrollFlag = 0;
+            // console.log(clientHeight + scrollTop);
+            // console.log(scrollHeight);
+            if (Math.round(clientHeight + scrollTop) == scrollHeight) {
+
+                share_page++;
+                // 搜索则不绑定滚动函数
+                if (!search_flag) {
+                    show_per_text_fun2();
+                    console.log('滚动条触底了')
+                }
+            }
+        })
+
+        // 渲染用户动态
+        function showPerson_show(person_story) {
+            console.log("渲染用户动态");
+            let person_box_right_str = '';
+            let comment_number = 0;
+            // 循环遍历n个用户动态
+            for (let index = 0; index < person_story.length; index++) {
+                // 存储故事的id
+                setVariable('person_story' + index, person_story[index].queryStory.storyId);
+
+                // story_id['person_story' + (((share_page - 1) * 10) + index)] = person_story[index]
+                //     .queryStory.storyId;
+                story_id['person_story' + index] = person_story[index]
+                    .queryStory.storyId;
+                // 存储用户的id
+                // user_id['user_id' + (((share_page - 1) * 10) + index)] = person_story[index].queryStory
+                //     .userId;
+                user_id['user_id' + index] = person_story[index].queryStory
+                    .userId;
+                // console.log('user_id' + index, user_id['user_id' + index]);
+                person_box_right_str += `
+                    <!-- 每个动态 -->
+                    <div class="r_newsbox">
+                        <!-- 个人信息 -->
+                        <div class="r_newsbox_personalinfo">
+                            <div class="logo">
+                                <img src="${head+person_story[index].queryStory.userHead}" alt="" class='towhichperSpace'>
+                            </div>
+                            <div class="name_box">
+                                <div class="name">
+                                    ${person_story[index].queryStory.userName}
+                                </div>
+                            </div>
+                            <div class="page">`
+                if (person_story[index].queryStory.userStatus != undefined) {
+                    person_box_right_str += `
+                                <img src="./images/emotion-${person_story[index].queryStory.userStatus}.png" alt="">
+                           `
+                }
+
+
+                person_box_right_str += `
+                    </div>
+                            <div class="time">`
+                if (changeTime(getDateTimeStamp(person_story[index].queryStory.publishTime)) == undefined) {
+                    person_box_right_str += `刚刚`
+                } else {
+                    person_box_right_str += `
+                                ${changeTime(getDateTimeStamp(person_story[index].queryStory.publishTime))}`
+                }
+                person_box_right_str +=
+                    `</div>
+                            <!-- <div class="more">
+                                <img src="./images/personalSpace/more.png" alt="">
+                            </div> -->
+                        </div>
+                        <!-- 动态内容 -->
+                        <div class="r_newsbox_contain">
+                            <pre class="r_newsbox_text">${person_story[index].queryStory.storyContext}</pre>
+                            <!-- 判断是否有图片 -->
+                            `
+                if (person_story[index].storyImgs.length != 0) {
+                    person_box_right_str += `
+                            <div class="r_newsbox_pic">
+                                <!-- 循环遍历image -->
+                                <div class="image">
+                                    <img src="${head+person_story[index].storyImgs[0].imgUrl}" alt="">
+                                </div>
+                            </div>
+                        `
+                }
+
+                person_box_right_str += `
+                        </div>
+                        <!-- 点赞评论和权限不用渲染 -->
+                        <div class="r_newsbox_set">
+`
+                // if (person_story[index].fatherComments.length != 0) {
+                person_box_right_str += `
+                            <span class="r_comment_button" id="r_comment_button">展开评论(${person_story[index].fatherComments.length})</span>
+                        `
+                // }
+                person_box_right_str += `
+                            <div class="belike icon belike_delete">
+                                <div class="image">`
+                // 判断这条动态是不是本人得
+                if (person_story[index].queryStory.userId == getCookie('userId')) {
+                    person_box_right_str += `
+                                    <svg id="delete" t="1667617492887" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2292" width="200" height="200">
+                                        <path id="delete" d="M200.60672 729.216s108.23168-61.79328 295.97184 0c75.10016 22.07232 159.03232 57.38496 326.89664-15.44704 6.62528 59.59168-2.20672 150.07744-2.20672 150.07744l-50.80064 75.04384-485.92896 2.20672L216.064 888.12544z" fill="#8a8a8a" p-id="2293"></path>
+                                        <path id="delete" d="M702.17216 967.68H313.69728c-80.384 0-145.7664-60.928-145.7664-135.79776V355.95776a33.11616 33.11616 0 1 1 66.23744 0v475.92448c0 38.3488 35.67616 69.54496 79.53408 69.54496h388.48c43.8528 0 79.53408-31.19616 79.53408-69.54496V355.95776a33.11616 33.11616 0 1 1 66.23232 0v475.92448C847.93856 906.752 782.54592 967.68 702.17216 967.68z m-366.44864-309.17632a33.12128 33.12128 0 0 1-33.11616-33.1264V411.16672a33.11616 33.11616 0 1 1 66.23232 0v214.21056a33.12128 33.12128 0 0 1-33.11616 33.1264z m168.89856 0a33.12128 33.12128 0 0 1-33.11616-33.1264V411.16672a33.11616 33.11616 0 1 1 66.23744 0v214.21056a33.12128 33.12128 0 0 1-33.11616 33.1264z m168.90368 0a33.1264 33.1264 0 0 1-33.12128-33.1264V411.16672a33.12128 33.12128 0 1 1 66.23744 0v214.21056a33.12128 33.12128 0 0 1-33.11616 33.1264z m225.19808-379.83744H130.39616a33.1264 33.1264 0 0 1 0-66.2528h768.32768a33.1264 33.1264 0 0 1 0 66.2528z m-225.19808-86.09792a33.12128 33.12128 0 0 1-33.12128-33.1264 42.0352 42.0352 0 0 0-41.984-41.984h-187.5968a42.03008 42.03008 0 0 0-41.984 41.984 33.11616 33.11616 0 1 1-66.23232 0A108.35456 108.35456 0 0 1 410.82368 51.2h187.5968a108.35456 108.35456 0 0 1 108.22144 108.24704 33.12128 33.12128 0 0 1-33.11616 33.12128z" fill="#8a8a8a" p-id="2294"></path></svg>
+                                        `
+                } else {
+                    person_box_right_str += `
+                                        <svg id="explore" t="1667929565223" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6026" width="200" height="200"><path id="explore" d="M951.751111 832.284444l-194.56-364.657777-175.217778-328.817778c-30.151111-56.888889-109.795556-56.888889-140.515555 0L266.24 467.626667l-194.56 364.657777c-22.755556 42.666667 5.688889 95.573333 51.2 95.573334h778.24c44.942222 0 73.386667-52.906667 50.631111-95.573334zM512 752.071111c-17.635556 0-31.857778-14.222222-31.857778-31.857778 0-17.635556 14.222222-31.857778 31.857778-31.857777s31.857778 14.222222 31.857778 31.857777c0 17.635556-14.222222 31.857778-31.857778 31.857778z m31.857778-128c0 17.635556-14.222222 31.857778-31.857778 31.857778-17.635556 0-31.857778-14.222222-31.857778-31.857778V387.982222c0-17.635556 14.222222-31.857778 31.857778-31.857778 17.635556 0 31.857778 14.222222 31.857778 31.857778v236.088889z" fill="#8a8a8a" p-id="6027"></path></svg>
+                                        `
+                }
+                person_box_right_str += `</div>
+                            </div>
+                            <div class="news icon">
+                                <div class="image news_click">
+                                    <svg t="1667541610970" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                        xmlns="http://www.w3.org/2000/svg" p-id="3019" width="200" height="200">
+                                        <path
+                                            d="M820.8896 807.9872H487.46496a39.64928 39.64928 0 0 0-22.58944 7.07072l-135.75168 94.13632a39.7056 39.7056 0 0 1-61.39392-24.19712l-10.10176-45.74208a39.7824 39.7824 0 0 0-38.80448-31.26784l0.19968-148.992a146.5344 146.5344 0 0 1 146.24256-146.62656h535.1168a39.82848 39.82848 0 0 1 39.74656 39.90528v136.00768a119.4752 119.4752 0 0 1-119.23968 119.7056z"
+                                            fill="#8a8a8a" p-id="3020"></path>
+                                        <path
+                                            d="M815.39072 112.64H198.3744A157.83936 157.83936 0 0 0 40.96 270.55104v379.78112a157.84448 157.84448 0 0 0 157.4144 157.91104h14.79168a1.62816 1.62816 0 0 1 1.57696 1.27488l10.10688 45.71648a77.77792 77.77792 0 0 0 120.32 47.3856l135.78752-94.08512a1.62816 1.62816 0 0 1 0.9216-0.29184h333.5168A157.83936 157.83936 0 0 0 972.8 650.33216V270.55104A157.83936 157.83936 0 0 0 815.39072 112.64zM896.512 650.33216a81.35168 81.35168 0 0 1-81.13152 81.408H481.87904a77.42464 77.42464 0 0 0-44.27264 13.824L301.81888 839.68a1.61792 1.61792 0 0 1-2.50368-0.98816l-10.10688-45.71648a77.47584 77.47584 0 0 0-76.04736-61.23008h-14.78656a81.3568 81.3568 0 0 1-81.13664-81.408V270.55104a81.3568 81.3568 0 0 1 81.13664-81.408h617.01632a81.35168 81.35168 0 0 1 81.13152 81.408v379.78112zM337.98656 424.68352a49.24416 49.24416 0 1 0 49.08544 49.24416 49.152 49.152 0 0 0-49.08544-49.24416z m184.0896 0a49.24416 49.24416 0 1 0 49.09056 49.24416 49.152 49.152 0 0 0-49.09056-49.24416z m177.07008 0a49.24416 49.24416 0 1 0 49.09056 49.24416 49.152 49.152 0 0 0-49.09056-49.24416z"
+                                            fill="#8a8a8a" p-id="3021"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="set icon">
+                                <div class="image like_num`
+                if (person_story[index].like) {
+                    person_box_right_str += ` block`
+                }
+                person_box_right_str += `">
+                                    <svg t="1667540980035" class="icon changeColor" viewBox="0 0 1024 1024"
+                                        version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2292" width="200"
+                                        height="200">
+                                        <path
+                                            d="M705.30048 510.208a281.12896 281.12896 0 0 0-267.83744 367.64672c121.04704-0.45056 234.8544-0.82944 275.12832-0.82944 99.28704 0 138.54208-131.45088 138.54208-131.45088s17.36192-45.77792 41.64096-163.88096a280.576 280.576 0 0 0-187.47392-71.48544z"
+                                            fill="#8a8a8a" p-id="2293"></path>
+                                        <path
+                                            d="M929.87904 366.208c-42.30144-45.22496-104.12544-43.43296-117.248-42.496l-167.21408 0.87552a4.23424 4.23424 0 0 1-3.82976-1.8432 4.55168 4.55168 0 0 1-0.87552-4.096c3.82464-15.36 8.66816-35.06688 14.76096-60.09344 15.90272-65.3568-2.14016-107.5712-20.07552-131.47648a127.6672 127.6672 0 0 0-97.3568-50.176C469.38112 73.88672 423.936 109.056 402.944 181.21216l-0.54784 2.11456C359.06048 374.48704 202.59328 376.7808 195.42528 376.7808h-69.12A75.20768 75.20768 0 0 0 51.2 451.93728v414.99136A75.07968 75.07968 0 0 0 126.2336 942.08h0.32768c85.70368-0.35328 517.632-2.14016 604.672-2.14016 119.936 0 167.31648-140.0576 172.288-155.89376 3.7376-10.29632 28.39552-81.77152 58.9312-253.16352 12.90752-72.38656 1.92512-127.7952-32.57344-164.67456z m-38.1184 152.064c-31.00672 174.03392-55.61856 240.95232-55.808 241.53088l-0.83968 2.47296c-0.31232 1.05984-33.49504 105.82016-103.87456 105.82016-87.1424 0-519.2192 1.78176-604.9536 2.14016a3.28704 3.28704 0 0 1-2.304-0.94208 3.2256 3.2256 0 0 1-0.9728-2.36032V451.93728a3.30752 3.30752 0 0 1 3.3024-3.3024h68.66432c76.07808 1.23392 231.63904-49.83808 277.15584-248.28928 13.37344-45.056 32.42496-52.93568 62.78656-51.6096a56.22272 56.22272 0 0 1 43.07456 21.5296c12.39552 16.512 15.06304 41.17504 7.72608 71.3216a13144.1152 13144.1152 0 0 1-14.6688 59.75552 76.61056 76.61056 0 0 0 74.32704 95.11424h0.40448l168.58112-0.88064 3.48672-0.18944c0.37376-0.03072 38.26688-3.30752 59.904 20.2496 22.36928 24.2944 19.96288 69.22752 14.00832 102.6304zM232.27904 505.94816a35.91168 35.91168 0 0 0-35.8912 35.92704v236.42624a35.8912 35.8912 0 1 0 71.78752 0v-236.42624a35.91168 35.91168 0 0 0-35.89632-35.92704z"
+                                            fill="#8a8a8a" p-id="2294"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class='icon like_number'>${person_story[index].queryStory.likeNum}</div>
+                        </div>
+                            <!-- 用户评论 -->
+                        <div class="r_newsbox_comm_contain" id="r_newsbox_comm_contain">
+                            `
+                if (person_story[index].fatherComments.length != 0) {
+
+                    // 循环遍历n个评论
+                    for (var fac = 0; fac < person_story[index].fatherComments.length; fac++) {
+                        comment_id['commid' + comment_number] = person_story[index].fatherComments[fac]
+                            .commentId;
+                        comment_number++;
+                        person_box_right_str += `
+                            <!-- 每个评论//循环遍历 -->
+                            <div class="comment_box2">
+                                <!-- 头像 -->
+                                <div class="user_popover">
+                                    <img src="${head + person_story[index].fatherComments[fac].headUrl}" alt="">
+                                </div>
+                                <!-- 内容 -->
+                                <div class="content_box">
+                                    <div class="comment_main">
+                                        <!-- 用户名： -->
+                                        <div class="user_box">
+                                            <div class="name">${person_story[index].fatherComments[fac].userName}</div>
+                                            <time class="time">`
+                        if (changeTime(getDateTimeStamp(person_story[index].fatherComments[fac].publishTime)) ==
+                            undefined) {
+                            person_box_right_str += `刚刚`
+                        } else {
+                            person_box_right_str += `
+                                                ${changeTime(getDateTimeStamp(person_story[index].fatherComments[fac].publishTime))}
+                                                `
+                        }
+
+                        person_box_right_str += `</time>
+                                        </div>
+                                        <!-- 评论内容 -->
+                                        <div class="content">
+                                            ${person_story[index].fatherComments[fac].commentText}
+                                        </div>
+                                        <!-- 回复评论 -->
+                                        <div class="action_box">
+                                            <div class="item action_box_item_click">
+                                                回复
+                                            </div>
+                                        </div>
+                                        <!-- 展开收起 //待定-->
+                                        <!-- 二级评论和评论回复 -->
+                                        <div class="subcomment_wrapper">
+                                            <!-- 发送评论的评论 -->
+                                            <div class="comment_form">
+                                                <!-- <div class="input_box"> -->
+                                                <div class="comment_form_label"></div>
+                                                <textarea name="" class="comment_form_textarea"></textarea>
+                                                <!-- </div> -->
+                                                <!-- 点击发送按钮 -->
+                                                <div class="action_box">
+                                                    <div class="submit">
+                                                        <button class='comment_form_send'>发布</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 评论的评论 -->
+                                            <div class="sub_comment_list">`
+                        if (person_story[index].fatherComments[fac].childComments.length != 0) {
+                            person_box_right_str += `
+                                                
+                                                `
+                            for (var chc = 0; chc < person_story[index].fatherComments[fac]
+                                .childComments
+                                .length; chc++) {
+                                person_box_right_str += `
+                                                    <!-- 单个评论 //循环遍历-->
+                                                <div class="sub_comment">
+                                                    <div class="user_popover">
+                                                        <img src="${head + person_story[index].fatherComments[fac].childComments[chc].headUrl}" alt="">
+                                                    </div>
+                                                    <div class="content_box">
+                                                        <div class="content_wrapper">
+                                                            <!-- 用户名： -->
+                                                            <div class="user_box">
+                                                                <div class="name">
+                                                                    ${person_story[index].fatherComments[fac].childComments[chc].userName}
+                                                                </div>
+                                                                <time class="time">`
+                                if (changeTime(getDateTimeStamp(person_story[index].fatherComments[fac].childComments[
+                                        chc].publishTime)) == undefined) {
+                                    person_box_right_str += `刚刚`
+                                } else {
+                                    person_box_right_str +=
+                                        ` ${changeTime(getDateTimeStamp(person_story[index].fatherComments[fac].childComments[chc].publishTime))}`
+                                }
+                                person_box_right_str += `</time>
+                                                            </div>
+                                                            <div class="content">
+                                                                ${person_story[index].fatherComments[fac].childComments[chc].commentText}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    `
+                            }
+                            person_box_right_str += `
+                                                `
+                        }
+                        person_box_right_str += `</div>                                                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }
+
+                }
+
+                person_box_right_str += `
+                    </div>
+                        <!-- 发表评论 -->
+                        <div class="r_newsboe_form">
+                            <div class="r_newsboe_area">
+                                <textarea class='r_newsboe_textarea'></textarea>
+                            </div>
+
+                            <div class="r_newsboe_send_box">
+                                <div class="submit">
+                                    <button class="r_newsboe_send">发布</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- 分割线 -->
+                        <div class="r_newsbox_line"></div>
+                    </div>
+                    `;
+
+            }
+            // if (last_page == share_page || share_page == 1) {
+            //     person_right_show.innerHTML = person_box_right_str;
+            // } else {
+            person_right_show.innerHTML = person_box_right_str;
+            //     last_page = share_page;
+            // }
+            console.log("当前的page", share_page);
+
+        }
+
+        // 发送动态
+        function shareSomething() {
+            judge_join_star_story_fun();
+            let person_right_textarea2 = document.getElementById('person_right_textarea2');
+            let already_input_number2 = document.getElementById('already_input_number2');
+            // 获取当前的文本长度
+            var currentLength;
+            person_right_textarea2.addEventListener('input', (e) => {
+                person_right_textarea2.style.height = '100px';
+                person_right_textarea2.style.height = e.target.scrollHeight + 'px';
+                currentLength = person_right_textarea2.value.length;
+                already_input_number2.innerHTML = currentLength;
+            })
+
+            // 图片上传
+            let textarea_img2 = document.getElementById('textarea_img2');
+            let person_right_img_show_box2 = document.getElementById('person_right_img_show_box2');
+            let person_right_img_show_src2 = document.getElementById('person_right_img_show_src2');
+            let photo_box_img2 = document.getElementById('photo_box_img2');
+            let textarea_img_src2, textarea_img_file;
+            textarea_img2.onchange = (e) => {
+                if (typeof (textarea_img2.files) != 'undefined') {
+                    textarea_img_file = e.target.files[0];
+                    photo_box_img2.src = URL.createObjectURL(e.target.files[0]);
+                    textarea_img_src2 = URL.createObjectURL(e.target.files[0]);
+                    console.log(e.target.files[0]);
+                    person_right_img_show_box2.style.display = 'block';
+                    person_right_img_show_src2.src = textarea_img_src2;
+                }
+            }
+
+            // 点击发送
+            let sendbutton2 = document.getElementById('sendbutton2');
+
+            // 点击发送
+            sendbutton2.onclick = () => {
+                currentLength2 = person_right_textarea2.value.length;
+                var value = person_right_textarea2.value;
+
+                var textarea_str2 = new FormData;
+                if (value == ''||value.trim()=='') {
+                    popup_something('不能发送空白信息')
+                    return;
+                }
+                textarea_str2.append('storyContext', value)
+                console.log(textarea_img2.files[0]);
+                textarea_str2.append('imgs', textarea_img2.files[0])
+                textarea_str2.append('userId', getCookie('userId'));
+                let status_send = 0;
+                if (status_flag) {
+                    status_send = 0
+                } else {
+                    status_send = 1
+                }
+                textarea_str2.append('status', status_send)
+                var add_str = ''
+                const ajax = new XMLHttpRequest();
+                ajax.open("post", "http://106.55.197.233:666/cityofstar/story/add", true);
+                ajax.send(textarea_str2);
+                ajax.onreadystatechange = () => {
+                    if (ajax.readyState === 4) {
+                        if (ajax.status === 200) {
+                            const {
+                                code,
+                                data,
+                                msg
+                            } = JSON.parse(ajax.responseText);
+                            if (code == 200) {
+                                console.log("success");
+                                // 文本框内容消失
+                                person_right_textarea2.value = '';
+                                already_input_number2.innerHTML=0;
+                                person_right_img_show_box2.style.display = 'none';
+                                person_right_textarea2.style.height = '80px';
+
+                                share_page = 1;
+                                show_per_text_fun2();
+                                let resData = ajax.responseText;
+                                let resStr = JSON.parse(resData);
+                                console.log(resStr);
+                                let resStoryId = resStr.data;
+                                console.log(resStoryId);
+                                if (join_flag) {
+                                    // 如果是星星征集则调用星星征集
+                                    console.log(resStoryId);
+                                    sealAjax({
+                                        // http://localhost:8080/cityofstar/backstage/submitStar?storyId=11
+                                        url: "http://106.55.197.233:666/cityofstar/backstage/submitStar",
+                                        type: "get",
+                                        data: {
+                                            storyId: resStoryId
+                                        }
+                                    }).then(res => {
+                                        if (res.code == 200) {
+                                            console.log("调用添加星星征集");
+                                        }
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 点击头像进入个人空间
+        function gotootherSpace() {
+            towhichperSpace = document.getElementsByClassName('towhichperSpace');
+            for (let i = 0; i < towhichperSpace.length; i++) {
+
+                towhichperSpace[i].addEventListener('click', () => {
+                    // 赋值进入谁得个人空间
+                    console.log(i);
+                    console.log(user_id['user_id' + i]);
+                    setCookie('togowhichper', user_id['user_id' + i], 3)
+                    console.log(getCookie('togowhichper'));
+                    // 新增一个聊天窗口
+                    sealAjax({
+                        url: 'http://106.55.197.233:666/cityofstar/chatItem/addChatItem',
+                        type: 'post',
+                        data: {
+                            currUserId: getCookie('userId'),
+                            receiveUserId: user_id['user_id' + i]
+                        }
+                    }).then(res => {
+                        if (res.code == 200) {
+                            if (getCookie('togowhichper') == getCookie('userId')) {
+                                window.location.href = "personalSpace.html"
+                            } else {
+                                window.location.href = "otherPersonalSpace.html";
+                            }
+                        }
+                    })
+
+                })
+            }
+        }
+
+        // 发送评论函数
+        function send_comm_fun() {
+            // 发送框
+            let r_newsboe_input = document.getElementsByClassName('r_newsboe_textarea');
+            // 发送按钮
+            let r_newsboe_send = document.getElementsByClassName('r_newsboe_send');
+            // 绑定监听input
+            for (let index = 0; index < r_newsboe_input.length; index++) {
+                inputfun(index)
+            }
+            // 控制评论的评论盒子
+            for (let i = 0; i < sub_comment_list.length; i++) {
+                // 如果孩子长度为0则不显示
+                if (sub_comment_list[i].children.length == 0) {
+                    sub_comment_list[i].style.display = 'none';
+                }
+            }
+            // 发送动态的评论
+            function inputfun(i) {
+                // 焦点事件
+                r_newsboe_input[i].onfocus = () => {
+                    if (r_newsboe_input[i].value == '评论') {
+                        r_newsboe_input[i].value = '';
+                        r_newsboe_input[i].style.color = '#000';
+                    }
+                    //监听是否点击发送事件
+                    sendComment = r_newsboe_input[i];
+                    sendbutton(i)
+                }
+                r_newsboe_input[i].onblur = () => {
+                    if (r_newsboe_input[i].value == '') {
+                        r_newsboe_input[i].value = '评论';
+                        r_newsboe_input[i].style.color = '#ccc';
+                    } else {
+                        r_newsboe_input[i].style.color = '#000';
+                    }
+                }
+            }
+
+            //发布评论//监听是否点击发送事件
+            function sendbutton(i) {
+                r_newsboe_send[i].onclick = () => {
+                    let text = r_newsboe_input[i].value;
+                    if (r_newsboe_input[i].value == '') {
+                        return;
+                    }
+                    sealAjax({
+                        url: "http://106.55.197.233:666/cityofstar/comment/add",
+                        type: "post",
+                        data: {
+                            userId: getCookie('userId'),
+                            storyId: story_id["person_story" + i],
+                            commentText: text
+                        }
+                    }).then(res => {
+                        // r_comment_button[i].click();
+
+                        r_newsboe_input[i].value = '';
+                        var r_newsbox_comm_str = '';
+                        // 追加评论
+                        var r_newsbox_comm_str = `
+                                    <!-- 每个评论//循环遍历 -->
+                                    <div class="comment_box2">
+                                        <!-- 头像 -->
+                                        <div class="user_popover">
+                                            <img src="${head+getCookie('headPortrait')}" alt="">
+                                        </div>
+                                        <!-- 内容 -->
+                                        <div class="content_box">
+                                            <div class="comment_main">
+                                                <!-- 用户名： -->
+                                                <div class="user_box">
+                                                    <div class="name">${getCookie('user')}</div>
+                                                    <time class="time">刚刚</time>
+                                                </div>
+                                                <!-- 评论内容 -->
+                                                <div class="content">
+                                                    ${text}
+                                                </div>
+                                                <!-- 回复评论 -->
+                                                <div class="action_box">
+                                                    <div class="item action_box_item_click">
+                                                        回复
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                        r_newsbox_comm_contain[i].innerHTML =
+                            r_newsbox_comm_str + r_newsbox_comm_contain[i].innerHTML;
+
+                        // 绑定回复事件
+                        show_per_text_fun2();
+                        // r_newsbox_comm_contain[i].style.display = 'block';
+                        // send_comm_fun();
+                        // eventblock();
+                    })
+                }
+            }
+            // 发送框
+            let comment_form_textarea = document.getElementsByClassName('comment_form_textarea');
+            // 发送按钮
+            let comment_form_send = document.getElementsByClassName('comment_form_send');
+
+            // 绑定监听input
+            for (let index = 0; index < comment_form_textarea.length; index++) {
+                comment_form_fun(index)
+            }
+
+            function comment_form_fun(i) {
+                // 焦点事件
+                comment_form_textarea[i].onfocus = () => {
+                    if (comment_form_textarea[i].value == '评论') {
+                        comment_form_textarea[i].value = '';
+                        comment_form_textarea[i].style.color = '#000';
+                    }
+                    //监听是否点击发送事件
+                    commendcommend = comment_form_textarea[i];
+                    comment_form_sendbutton(i)
+                }
+            }
+            //发布评论的评论//监听是否点击发送事件
+            function comment_form_sendbutton(i) {
+                comment_form_send[i].onclick = () => {
+                    let text = comment_form_textarea[i].value;
+                    if (comment_form_textarea[i].value == '') {
+                        return;
+                    }
+                    sealAjax({
+                        url: "http://106.55.197.233:666/cityofstar/comment/addChild",
+                        type: "post",
+                        data: {
+                            userId: getCookie('userId'),
+                            commentId: comment_id['commid' + i],
+                            commentText: text
+                        }
+                    }).then(res => {
+
+                        comment_form_textarea[i].value = '';
+                        // 追加评论
+                        var comment_form_str = `
+                                                <div class="sub_comment">
+                                                    <div class="user_popover">
+                                                        <img src="${head+getCookie('headPortrait')}" alt="">
+                                                    </div>
+                                                    <div class="content_box">
+                                                        <div class="content_wrapper">
+                                                            <!-- 用户名： -->
+                                                            <div class="user_box">
+                                                                <div class="name">
+                                                                    ${userName}
+                                                                </div>
+                                                                <time class="time">刚刚</time>
+                                                            </div>
+                                                            <div class="content">
+                                                                ${text}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                            `;
+                        sub_comment_list[i].innerHTML = comment_form_str + sub_comment_list[
+                                i]
+                            .innerHTML;
+                        sub_comment_list[i].style.display = 'block';
+                        // 绑定回复事件
+                        // send_comm_fun();
+                        // eventblock();
+                    })
+                }
+            }
+        }
+
+        // 举报弹窗取消
+        report_popup_cancel.addEventListener('click', () => {
+            setTimeout(() => {
+                report_popup_wrap.style.visibility = 'hidden'
+            }, 800)
+            report_popup_wrap.style.opacity = '0';
+        })
+        // 举报确定
+        // function report_popup_sure_fun(i) {
+        report_popup_sure.addEventListener('click', () => {
+            // report_popup_sure_click(i);
+            // console.log(i);
+            let text = report_textarea.value;
+            console.log("确定提交举报");
+            console.log(text);
+            if (text != "") {
+                sealAjax({
+                    url: "http://106.55.197.233:666/cityofstar/backstage/reportStory",
+                    type: "post",
+                    data: {
+                        storyId: story_id["person_story" + report_sure_id],
+                        reportReason: text,
+                        reportUserId: getCookie('userId')
+                    }
+                }).then(res => {
+                    if (res.code == 200) {
+                        console.log("举报成功");
+                        change_success.innerHTML = '举报成功';
+                        change_seccess_box.style.display = 'flex';
+                        change_success.classList.add('change')
+                        report_textarea.value = '';
+                        report_popup_cancel.click();
+                        setTimeout(() => {
+                            change_success.classList.remove('change')
+                            change_seccess_box.style.display = 'none';
+                        }, 2000)
+                    }
+                    if (res.code == 500) {
+                        console.log("举报失败,该动态正在审核，请勿重复提交");
+                        change_success.innerHTML = '举报失败';
+                        change_seccess_box.style.display = 'flex';
+                        change_success.classList.add('change')
+                        report_textarea.value = '';
+                        report_popup_cancel.click();
+                        setTimeout(() => {
+                            change_success.classList.remove('change')
+                            change_seccess_box.style.display = 'none';
+                        }, 2000)
+                    }
+                })
+            }
+        });
+        // }
+        let join_active_click = null;
+        // let join_active = document.getElementById('join_active');
+        function judge_join_star_story_fun() {
+            if (join_active_click != null) {
+                join_active.removeEventListener('click', join_active_click)
+            }
+            join_active.addEventListener('click', join_active_click)
+        }
+        // status_active.addEventListener('click', () => {
+        //     if (status_flag) {
+        //         // status_active_span.style.left = "calc(100% - 33px)";
+        //         status_a.style.width = "97px";
+        //         status_a.style.paddingLeft = "16px";
+        //     }
+
+        // })
+        join_active_click = function join_active_click() {
+            console.log("join_active_click");
+            if (join_flag) {
+                join_text.innerHTML = '日常分享';
+                join_active_span.style.left = "calc(100% - 33px)";
+                join_active.style.paddingRight = "20px";
+                join_a.style.width = '97px';
+                join_a.style.paddingLeft = '18px';
+                console.log(123);
+                join_flag = false;
+            } else {
+                join_text.innerHTML = '星星征集';
+                join_flag = true;
+                join_active_span.style.left = "3px";
+                join_a.style.width = '85px';
+                join_active.style.paddingLeft = "0px";
+                join_active.style.paddingRight = "0px";
+                join_a.style.paddingLeft = '37px';
+            }
+        }
+        show_like_number_fun();
+
+        function show_like_number_fun() {
+            sealAjax({
+                url: "http://106.55.197.233:666/cityofstar/story/likeNum",
+                data: {
+                    userId: getCookie('userId'),
+                }
+            }).then(res => {
+                document.getElementById('like_all_number').innerHTML = res.data;
+            })
+        }
+
+        // 退出登录
+        document.getElementById('login_out').addEventListener('click', () => {
+            sealAjax({
+                // http://localhost:8080/cityofstar/user/logout?userId=15
+                url: 'http://106.55.197.233:666/cityofstar/user/logout',
+                data: {
+                    userId: getCookie('userId')
+                }
+            }).then(res => {
+                window.location.href = 'index.html';
+            })
+        })
+
+        // 提示信息
+        function popup_something(text) {
+            change_success.innerHTML = text;
+            change_seccess_box.style.display = 'flex';
+            change_success.classList.add('change')
+            setTimeout(() => {
+                change_success.classList.remove('change')
+                change_seccess_box.style.display = 'none';
+            }, 1000)
+        }
+    </script>
+
+</body>
+
+</html>

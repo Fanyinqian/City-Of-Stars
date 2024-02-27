@@ -1,0 +1,352 @@
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* body {
+    min-height: 300vh;
+    overflow-x: hidden;
+    background-image: linear-gradient(170deg, #8867df 20vh, #8c8edc 30vh, #89b3d9 40vh, #7fd8d4 50vh, #F2F4FF 200vh);
+} */
+
+/* 顶部导航条 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 70px;
+}
+
+header ul.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header ul.nav a.active {
+    background-color: rgba(255, 255, 255, 0.884);
+    color: #2b1065;
+    font-weight: 700;
+}
+
+.logo {
+    padding-left: 80px;
+    cursor: pointer;
+}
+
+/* 引入LOGO的字体 */
+@font-face {
+    /* 指定字体的名字 */
+    font-family: 'DeadStock';
+    /* 服务器中字体的路径 */
+    src: url('../font/DeadStock-Demo.ttf') format("truetype");
+}
+
+.logo h1 {
+    font-size: 2em;
+    /* 增加字符间的空白 */
+    letter-spacing: 2px;
+    font-family: DeadStock;
+    color: gold;
+}
+
+ul.nav>li {
+    margin-left: 35px;
+    letter-spacing: 1px;
+}
+
+ul.nav>li:hover a {
+    background-color: rgba(255, 255, 255, 0.884);
+    color: #2b1065;
+    font-weight: 700;
+
+}
+
+header ul.nav a {
+    color: rgba(255, 255, 255, 0.909);
+    padding: 6px 25px;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+/* 搜索框 */
+.search-box {
+    /* position: absolute; */
+    /* right: 400px; */
+    height: 70px;
+    width: 400px;
+}
+
+.search-con {
+    position: relative;
+    display: flex;
+    margin-top: 15px;
+    width: 380px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50px;
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, .2);
+}
+
+.search-box input {
+    width: 360px;
+    height: 100%;
+    border: none;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    background: #fff;
+    outline: none;
+    padding: 0 60px 0 20px;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+.search-icon {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    background: #664AFF;
+    color: #fff;
+    text-align: center;
+    line-height: 36px;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.search-icon:hover path:first-of-type {
+    fill: #f4ea2a;
+}
+
+.search-icon svg {
+    position: relative;
+    top: 4.3px;
+    width: 28px;
+    height: 28px;
+}
+
+
+/* 菜单栏 */
+.menu {
+    width: 280px;
+    height: 70px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* background-color: #7fd8d4; */
+}
+
+.menu i {
+    position: relative;
+    padding-top: 15px;
+    height: 55px;
+    line-height: 55px;
+    width: 70px;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+}
+
+.menu svg {
+    width: 30px;
+    height: 30px;
+}
+
+.menu i:hover path {
+    fill: #f4ea2a;
+}
+
+i.user:hover ul.user-list {
+    height: 129px;
+    transition: height .3s;
+}
+
+/* 用户 */
+.user img {
+    margin-top: -8px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+ul.user-list {
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70px;
+    width: 100px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #F2F4FF;
+    opacity: .8;
+    z-index: 1000;
+}
+
+header ul.user-list>li {
+    font-style: italic;
+    height: 43px;
+    line-height: 43px;
+    color: rgba(43, 36, 6, 1);
+}
+
+header ul.user-list>li a{
+    color: rgba(43, 36, 6, 1);
+    -moz-user-focus: none;
+}
+
+header ul.user-list>li:hover a{
+    font-weight: 800;
+    color: #2b1065;
+}
+
+ul.user-list>li:hover {
+    font-weight: 800;
+    color: #2b1065;
+}
+
+.map-wrapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 5000;
+    background-color: rgb(250, 237, 220);
+    animation: 3s cubic-bezier(.25, 1, .30, 1) circle-in-center both;
+}
+
+.map-wrapper img {
+    display: block;
+    width: 97%;
+    height:auto;
+    margin: 0 auto;
+}
+
+.cancel-map{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 117px;
+    height: 100px;
+}
+
+.cancel-map img{
+    width: 100%;
+    height: 100%;
+}
+
+
+/* 地图出现动画 */
+@keyframes circle-in-center {
+    from {
+        clip-path: circle(0%);
+    }
+
+    to {
+        clip-path: circle(125%);
+    }
+}
+
+
+/* 地图消失动画 */
+@keyframes circle-out-top-right {
+    from {
+        clip-path: circle(125%);
+    }
+
+    to {
+        clip-path: circle(0% at top right);
+    }
+}
+
+/* 回到顶部 */
+.back-top {
+    display: none;
+    position: fixed;
+    bottom: 43px;
+    right: -10px;
+    width: 100px;
+    height: 100px;
+    /* background-color: #705df2; */
+    z-index: 500;
+}
+
+.back-top svg {
+    width: 80px;
+    height: 100px;
+}
+
+.location-wrapper .location:nth-of-type(1){
+    position: absolute;
+    left: 145px;
+    top: 110px;
+    width: 406px;
+    height: 225px;
+}
+
+.location-wrapper .location:nth-of-type(2){
+    position: absolute;
+    left: 358px;
+    top: 370px;
+    width: 145px;
+    height: 50px;
+}
+
+.location-wrapper .location:nth-of-type(3){
+    position: absolute;
+    left: 508px;
+    top: 340px;
+    width: 110px;
+    height: 80px;
+}
+
+.location-wrapper .location:nth-of-type(4){
+    position: absolute;
+    left: 555px;
+    top: 245px;
+    width: 95px;
+    height: 80px;
+}
+
+.location-wrapper .location:nth-of-type(5){
+    position: absolute;
+    left: 690px;
+    top: 10px;
+    width: 280px;
+    height: 250px;
+}
+
+.location-wrapper .location:nth-of-type(6){
+    position: absolute;
+    left: 320px;
+    top: 433px;
+    width: 340px;
+    height: 255px;
+}
+
+.location-wrapper .location:nth-of-type(7){
+    position: absolute;
+    left: 450px;
+    top: 750px;
+    width: 238px;
+    height: 170px;
+}
+
+.location-wrapper .location:nth-of-type(8){
+    position: absolute;
+    right: 450px;
+    top: 345px;
+    width: 330px;
+    height: 250px;
+}
+

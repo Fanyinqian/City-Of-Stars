@@ -1,0 +1,676 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-size: 16px;
+    color: #333;
+    font-family: "Microsoft YaHei";
+}
+
+body {
+    width: 100%;
+    max-width: 1920px;
+    min-width: 1200px;
+    background-color: #ccc;
+}
+
+#knowledge {
+    display: flex;
+    padding-top: 40px;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    height: 90vh;
+
+    /* padding: 40px 0; */
+}
+
+.bookBox {
+    width: 1000px;
+    height: 640px;
+    position: relative;
+    margin: 30px auto;
+    -webkit-perspective-origin: 50% 60%;
+    perspective-origin: 50% 60%;
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+    background: url(../images/bookBg.png) no-repeat 0 0;
+    background-size: 100% 100%;
+}
+
+.bookBox:hover .lastBtn {
+    display: block;
+}
+
+.bookBox:hover .nextBtn {
+    display: block;
+}
+
+.bookPage {
+    position: absolute;
+    width: 500px;
+    height: 630px;
+    top: 0;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all linear 2s;
+    -moz-transition: all linear 2s;
+    -ms-transition: all linear 2s;
+    -o-transition: all linear 2s;
+    transition: all linear 2s;
+    background: url(../images/bookLeft.png) no-repeat;
+    background-size: 484.26px 620px;
+    background-position: 20.74px 8.3px;
+}
+
+.bookPage img {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    display: inline-block;
+    width: 400px;
+    height: 550px;
+}
+
+.bookWord {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 400px;
+    height: 550px;
+}
+
+.bookWord img {
+    top: 0;
+    left: 0;
+}
+
+.bookWord span {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 40px;
+}
+
+.frist {
+    left: 0;
+    z-index: 1;
+}
+
+.frist img {
+    z-index: 1;
+}
+
+.last {
+    right: 0;
+    z-index: 1;
+}
+
+.last p {
+    z-index: 1;
+}
+
+.runPage {
+    right: 0;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.runPage,
+.bookPage:last-child {
+    background: url(../images/bookRight.png) no-repeat;
+    background-size: 479.26px 624px;
+    background-position: 0 8.3px;
+}
+
+.runClass {
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+}
+
+.lastBtn,
+.nextBtn {
+    display: none;
+    position: absolute;
+    top: 280px;
+    cursor: pointer;
+    z-index: 999;
+    font-size: 50px;
+    line-height: 100px;
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+img {
+    object-fit: cover;
+}
+
+.lastBtn {
+    left: 0;
+}
+
+.nextBtn {
+    right: 0;
+}
+
+.canvasBox {
+    display: block;
+    width: 158px;
+    height: 158px;
+}
+
+.pageNumber {
+    position: absolute;
+    bottom: -40px;
+    right: 0;
+    font-size: 20px !important;
+    line-height: 30px;
+}
+
+.two_box {
+    width: 400px;
+    height: 550px;
+    overflow: hidden;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+
+.two_box img {
+    top: 0;
+    left: 0;
+}
+
+img {
+    width: 400px;
+    height: 550px;
+}
+
+.bookBox_dec {
+    position: absolute;
+    width: 120px;
+    height: 100px;
+    z-index: 2100;
+    top: -28px;
+    right: -25px;
+}
+
+.bookBox_dec img {
+    width: 100%;
+    height: 100%;
+}
+
+.last_html {
+    position: absolute;
+    left: 50px;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.last_html svg {
+    width: 60px;
+    height: 60px;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.last_html svg:hover {
+    transform: translateX(5%);
+    box-shadow: 0 0 10px 0 rgba(81, 80, 80, 0.406);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    /* background-image: linear-gradient(170deg, #8867df, #8c8edc, #89b3d9, #7fd8d4); */
+    background-image: radial-gradient(circle 3000px at 31.7% 40.2%, rgba(225, 200, 239, 1) 33.4%, rgba(163, 225, 233, 1) 57.1%);
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.book_dec {
+    position: absolute;
+    height: 300px;
+    bottom: 0;
+    right: 0;
+}
+
+.book_dec img {
+    height: 100%;
+}
+
+/* ///////////////////////////////////////////// /////////////////////////////////////////////////*/
+.big_shelf {
+    width: 1200px;
+    /* background-image: linear-gradient(170deg, #7fd8d4, #89b3d9, #8c8edc, #8867df); */
+    /* background-color: rgba(116, 86, 41, 0.989); */
+    background-color: rgb(199, 120, 77);
+    height: 735px;
+    position: absolute;
+    top: 0;
+    left: 16%;
+    transition: all 1s;
+    /* opacity: .5; */
+    border: rgb(66, 11, 14) 3px solid;
+    border-top: 0px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.big_shelf .image {
+    width: 1000px;
+    margin: 0 auto;
+    /* margin-top: -75px; */
+}
+
+.big_shelf .image img {
+    width: 100%;
+    height: 100%;
+}
+
+.book_line1 {
+    margin-left: 150px;
+}
+
+.book_line {
+    position: absolute;
+
+    /* padding: auto 30px; */
+
+}
+
+.book_line1 {
+    margin-top: 61px;
+    top: 0;
+}
+
+.book_line2 {
+    bottom: 0;
+    margin-bottom: 75px;
+    /*padding: 0 auto;*/
+    margin-left: 150px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.book_line {
+    height: 255px;
+    width: 883px;
+}
+
+.book_line .card {
+    width: 200px;
+    height: 250px;
+    background: rgb(245, 225, 225);
+    /* background: url(../images/dataImg1.png); */
+    transform-style: preserve-3d;
+    /* 开启3D空间 */
+    /* transform: translate(-50%, -50%) perspective(2000px); */
+    /* 移动X,Y */
+    box-shadow: inset 300px 0 50px rgba(0, 0, 0, 0.5), 0 20px 100px rgba(0, 0, 0, 0.5);
+    /*阴影*/
+    transition: 1s;
+    display: inline-block;
+    margin-left: 17px;
+}
+
+
+.book_line2 .card {
+    /* margin-top: 200px; */
+    /* float: right; */
+    width: 200px;
+    height: 250px;
+    /* margin-left: 0px; */
+}
+
+/* img {
+    width: 100%;
+    height: 100%;
+} */
+
+.card .details {
+    /*文本效果*/
+    position: absolute;
+    top: 50%;
+    left: 0;
+    box-sizing: border-box;
+    padding: 20px;
+    z-index: -1;
+    font-weight: 700;
+    font-size: 20px;
+    transform: translateY(-50%);
+}
+
+.card:hover {
+    /* transform: translate(-50%, -50%) perspective(2000px) rotate(-10deg); */
+    /* box-shadow: inset 20px 0 50px rgba(0, 0, 0, 0.5), 0 10px 100px rgba(0, 0, 0, 0.5); */
+    box-shadow: none;
+}
+
+.card::after {
+    /*右边框*/
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 5px;
+    height: 100%;
+    background-color: #5e6669;
+}
+
+.card .imgBox {
+    /*图片*/
+    user-select: none;
+    /*不可选取*/
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-origin: left;
+    /*更改元素变形位置*/
+    transition: 2s cubic-bezier(.15, 1.7, .84, .58);
+
+}
+
+.card:hover .imgBox {
+    transform: rotateY(-155deg);
+    /*Y轴转动*/
+}
+
+.bookshelf_button svg {
+    text-align: center;
+}
+
+.bookshelf_button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(118, 174, 241, 1);
+    position: absolute;
+    right: 50%;
+    bottom: 0;
+    border-radius: 50%;
+    transform: translateX(50%);
+    transform: translateY(50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.ani {
+    top: -700px;
+}
+
+.bookshelf_box {
+    /* height: 0; */
+    position: relative;
+    height: 730px;
+    overflow: hidden;
+}
+
+.book_line_dec {
+    position: absolute;
+    /* width: 400px; */
+    left: -12px;
+    height: 300px;
+    bottom: -22px;
+}
+
+.book_line_dec img {
+    height: 100%;
+}
+
+.bookshelf_button:hover {
+    background-color: rgb(234, 117, 117);
+}
+
+/* #last_html {
+  
+} */
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+img[src=""],
+img:not([src]) {
+    opacity: 0;
+}
+
+.addbook_inputPic {
+    position: absolute;
+    /* background-color: rgb(232, 69, 69); */
+    width: 100%;
+    height: 100%;
+    /* z-index: 999; */
+}
+
+
+/* 消息提示框 */
+.change_seccess_box {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    z-index: 10000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+.change_success {
+    background-color: rgba(48, 48, 48, 0.708);
+    width: 100px;
+    height: 45px;
+    position: relative;
+    margin: auto;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.change_success.change {
+    animation: ani_change_success 2s;
+}
+
+@keyframes ani_change_success {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.show_all_picbook_wrap {
+    position: absolute;
+    width: 1130px;
+    height: 800px;
+    right: 50px;
+    top: 50px;
+    /* display: flex; */
+    border-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* display: none; */
+    background-color: rgb(255, 255, 255);
+}
+
+.show_all_picbook_wrap::-webkit-scrollbar {
+    width: 8px;
+    /* border-radius: 10px; */
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    left: -5px;
+    background-color: rgb(255, 255, 255);
+}
+
+/* 滚动条滑块 */
+.show_all_picbook_wrap::-webkit-scrollbar-thumb {
+    /* border: 2px solid rgb(76, 77, 152); */
+    border-radius: 10px;
+    /* background: rgb(76, 77, 152); */
+    background: rgb(176, 176, 179);
+}
+
+.show_all_picbook_wrap h1 {
+    height: 60px;
+    /* background-color: rgb(212, 94, 94); */
+    line-height: 60px;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+.nice_book_wrap {
+    /* height: 300px; */
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+
+    /* background-color: rgb(128, 237, 55); */
+}
+
+.new_book_item {
+    width: 200px;
+    margin-right: 20px;
+    /* background-color: rgb(236, 24, 24); */
+}
+
+.new_book_item .image {
+    height: 250px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.112);
+    transition: .5s;
+
+    /* background-color: rgb(148, 74, 240); */
+}
+
+.new_book_item .image:hover {
+    box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.324);
+    margin-top: -5px;
+}
+
+.new_book_item .name {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #333;
+}
+
+.show_click_wrap {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 3px;
+    top: 7px;
+}
+
+.show_click_wrap svg,
+.show_click_nice_wrap svg {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.show_click_nice_wrap {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 74px;
+    top: 7px;
+}
+
+i.map{
+    position: absolute;
+    right: 137px;
+    top: 11px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+
+i.map svg{
+    width: 30px;
+    height: 30px;
+}
+
+.map-wrapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 5000;
+    background-color: rgb(250, 237, 220);
+    animation: 3s cubic-bezier(.25, 1, .30, 1) circle-in-center both;
+}
+
+.map-wrapper img {
+    display: block;
+    width: 97%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.cancel-map{
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 117px;
+    height: 100px;
+}
+
+.cancel-map img{
+    width: 100%;
+    height: 100%;
+}
+
+
+/* 地图出现动画 */
+@keyframes circle-in-center {
+    from {
+        clip-path: circle(0%);
+    }
+
+    to {
+        clip-path: circle(125%);
+    }
+}
+
+
+/* 地图消失动画 */
+@keyframes circle-out-top-right {
+    from {
+        clip-path: circle(125%);
+    }
+
+    to {
+        clip-path: circle(0% at top right);
+    }
+}

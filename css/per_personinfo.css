@@ -1,0 +1,290 @@
+.change_popup_wrap {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .65);
+    -webkit-tap-highlight-color: transparent;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    z-index: 10000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.change_popup {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 23%);
+    margin: auto;
+    width: 520px;
+    height: 300px;
+    padding: 25px;
+    background-color: #fff;
+    /* background-image: linear-gradient(170deg, #a195df, #dbdbe7); */
+    border-radius: 4px;
+    position: relative;
+}
+
+.change_popup .title {
+    /* background-color: #fff; */
+    display: flex;
+    align-items: center;
+}
+
+.change_popup .title .image {
+    width: 30px;
+    height: 30px;
+}
+
+.change_popup .title span {
+    margin-left: 10px;
+    font-weight: 700;
+    color: #4c4d98;
+}
+
+.person_box_right {
+    padding: 10px 20px;
+}
+
+.person_box_right .container {
+    margin-top: 50px;
+    width: 100%;
+    /* background-color: rgb(243, 68, 68); */
+}
+
+.person_box_right .title {
+    height: 60px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #4c4d98;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.person_box_right .title .image {
+    height: 30px;
+    margin-right: 8px;
+}
+
+.person_box_right .title .image img {
+    width: auto;
+}
+
+.form_wrap {
+    padding: 20px 20px 0;
+    position: relative;
+}
+
+.form_wrap .el_form_item {
+    float: left;
+    width: 789px;
+    margin-bottom: 22px;
+    /* background-color: rgb(42, 183, 167); */
+}
+
+.form_wrap .el_form_item .el_form_item_label {
+    width: 95px;
+    text-align: right;
+    margin-right: 20px;
+    float: left;
+    line-height: 35px;
+    padding: 0;
+}
+
+.form_wrap .el_form_item .el_form_item_content {
+    line-height: 36px;
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_input {
+    float: left;
+    width: 225px;
+    height: 36px;
+    margin-right: 40px;
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_input input {
+    appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #bfcbd9;
+    box-sizing: border-box;
+    color: #1f2d3d;
+    font-size: inherit;
+    height: 36px;
+    line-height: 1;
+    outline: 0;
+    padding: 3px 10px;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    color: #ccc;
+}
+
+.form_wrap .el_form_item .el_form_item_content span {
+    color: rgb(158, 156, 156);
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_textarea {
+    resize: none;
+    float: left;
+    width: 618px;
+    height: 88px;
+    resize: none;
+}
+
+.form_wrap .el_form_item::before,
+.form_wrap .el_form_item .el_form_item_content::before,
+.el_form_textarea::before {
+    display: table;
+    content: "";
+}
+
+.form_wrap .el_form_item::after,
+.form_wrap .el_form_item .el_form_item_content::after,
+.el_form_textarea::after {
+    clear: both;
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_textarea textarea {
+    resize: none;
+    padding: 5px 7px;
+    line-height: 1.5;
+    border: 1px solid #bfcbd9;
+    width: 618px;
+    height: 88px;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    font-family: system-ui, "Open Sans", calibri, Roboto, verdana, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_textarea textarea:focus {
+    outline: none !important;
+    border-color: #4c4d988b;
+    box-shadow: 0 0 5px #4c4d9850;
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_input input:focus {
+    outline: none !important;
+    border-color: #4c4d988b;
+    box-shadow: 0 0 5px #4c4d9850;
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_item_sex_group {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+
+}
+
+.el_radio_button_radio {
+    opacity: 0;
+    outline: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.el_sex_button {
+    display: inline-block;
+    position: relative;
+}
+
+.el_sex_button.active span {
+    background-color: #4c4d98bd !important;
+    border-color: #4c4d98 !important;
+    box-shadow: -1px 0 0 0 #4c4d98ef;
+    color: #fff !important;
+}
+
+.el_sex_button span {
+    border-left: 1px solid #bfcbd9;
+    margin-right: 20px;
+    padding: 5px 8px;
+    border: 1px solid #bfcbd9;
+    border-radius: 5px !important;
+    background: #f4f4f4;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+}
+
+.el_form_item_sex {
+    margin-top: 10px;
+}
+
+.form_wrap .el_form_item .el_form_item_content .none_box {
+    width: 789px;
+    height: 100px;
+    border-bottom: 1px solid #e5e9ef;
+    margin-bottom: 40px;
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_button {
+    float: left;
+    width: 789px;
+    height: 36px;
+    position: relative;
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_button button {
+    width: 110px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #4c4d98ef !important;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #c4c4c4;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_button span {
+    color: white;
+}
+
+.form_wrap .el_form_item .el_form_item_content .el_form_button button:hover {
+    background: #7778b0 !important;
+}
+
+.change_seccess_box {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    z-index: 10000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+.change_success {
+    background-color: rgba(48, 48, 48, 0.708);
+    width: 100px;
+    height: 45px;
+    position: relative;
+    margin: auto;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.change_success.change {
+    animation: ani_change_success 2s;
+}
+
+@keyframes ani_change_success {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

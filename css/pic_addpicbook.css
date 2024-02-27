@@ -1,0 +1,34 @@
+.addbook_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -50px;
+    width: 90px;
+    height: 34px;
+    border-radius: 8px;
+    background: #fb7299;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: background-color .3s;
+    padding: 0 10px;
+}
+
+.addbook_submit {
+    right: 130px;
+}
+
+.addbook_button svg {
+    margin-right: 5px;
+    color: #fff;
+}
+
+.addbook_button span {
+    color: #fff;
+}
+
+.addbook_button:hover {
+    background-color: #fc8bab;
+}

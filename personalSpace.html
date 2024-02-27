@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            /* box-sizing: inherit; */
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <!-- 导航条 -->
+    <link rel="stylesheet" href="css/psy_resetheader.css">
+    <link rel="stylesheet" href="css/personalSpace.css">
+    <link rel="stylesheet" href="css/per_personinfo.css">
+    <!-- 动态 -->
+    <link rel="stylesheet" href="css/dynamic.css">
+    <link rel="stylesheet" href="css/personal/ip.css">
+    <link rel="stylesheet" href="css/psy_message.css">
+    <style>
+        .person_box_right2 {
+            padding: 0px 20px;
+        }
+
+        .person_box_right2 .line1 {
+            /* height: 250px; */
+            /* background-color: rgb(219, 68, 68); */
+            display: flex;
+            flex-wrap: wrap;
+            /* justify-content: space-between; */
+            padding: 10px 20px;
+            /* box-sizing: content-box !important; */
+        }
+
+        .person_box_right2 .line1 .book_box {
+            height: 100%;
+            margin-right: 10px;
+            margin-bottom: 20px;
+        }
+
+        .person_box_right2 .line1 .book_box .image {
+            height: 250px;
+            width: 200px;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            /* border: solid 1.5px #2b1065; */
+            transition: .4s;
+        }
+
+        .person_box_right2 .line1 .book_box .image:hover {
+            transform: translateY(-2%);
+            box-shadow: 2px 2px 20px 4px rgb(151, 149, 149);
+        }
+
+        /* .person_box_right2 .line1 .book_box ::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -5px;
+            width: 5px;
+            height: 100%;
+            background-color: #5e6669;
+        } */
+
+        .person_box_right2 .line1 .book_box .text {
+            height: 30px;
+            line-height: 30px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .hover_logo {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background-color: rgb(0, 0, 0, .6);
+            color: white;
+            /* opacity: .5; */
+            top: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity .3s;
+        }
+
+        .logo:hover+.hover_logo {
+            opacity: 1;
+        }
+
+        .hover_logo:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 顶部导航条 -->
+    <header>
+        <div class="logo">
+            <h1>City Of Stars</h1>
+        </div>
+        <ul class="nav">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="stars.html">星星墙</a></li>
+            <li><a href="psychology3.html">心灵治愈</a></li>
+            <li><a href="share.html">美好分享</a></li>
+        </ul>
+        <!-- <div class="search-box">
+                    <div class="search-con">
+                        <input type="text" autocomplete="off">
+                        <div class="search-icon">
+                            <svg t="1664642060980" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="1044" width="200" height="200">
+                                <path d="M525.6 465m-194.7 0a194.7 194.7 0 1 0 389.4 0 194.7 194.7 0 1 0-389.4 0Z"
+                                    fill="#ffffff" p-id="1045" data-spm-anchor-id="a313x.7781069.0.i1" class="selected"></path>
+                                <path
+                                    d="M492.4 695.7c-139.6 0-253.1-113.5-253.1-253.1s113.5-253.1 253.1-253.1S745.5 303 745.5 442.6 632 695.7 492.4 695.7z m0-461.4c-114.9 0-208.4 93.5-208.4 208.4C284 557.5 377.5 651 492.4 651s208.4-93.5 208.4-208.4-93.5-208.3-208.4-208.3z"
+                                    fill="#ffffff" p-id="1046" data-spm-anchor-id="a313x.7781069.0.i0" class=""></path>
+                                <path
+                                    d="M835.2 794.7c-13 13-34.1 13-47.1 0L619.9 626.4l47.1-47.1 168.3 168.3c13 13 13 34.1-0.1 47.1z"
+                                    fill="#ffffff" p-id="1047" data-spm-anchor-id="a313x.7781069.0.i2" class="selected"></path>
+                            </svg>
+                        </div>
+                        <div class="search-data">
+                        </div>
+                    </div>
+                </div> -->
+        <div class="menu">
+            <!-- 地图 -->
+            <i class="map">
+                <svg t="1668439728831" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7371" data-spm-anchor-id="a313x.7781069.0.i13" width="200" height="200"><path d="M650.24 670.72m-281.6 0a281.6 281.6 0 1 0 563.2 0 281.6 281.6 0 1 0-563.2 0Z" fill="#FED847" p-id="7372"></path><path d="M820.31616 788.2752c-0.6144-0.37888-67.88096-38.33856-122.0608-67.46112-37.98016-20.48-134.7584 5.39648-208.5888 38.17472-40.8576 18.08384-102.1952 9.15456-128.6144-18.81088a50.176 50.176 0 0 1-7.68-60.74368c13.7216-26.23488 45.7728-44.51328 79.7696-63.87712 30.6176-17.408 68.7104-39.14752 66.7648-57.26208a183.808 183.808 0 0 0-16.9984-51.70176c-13.42464-30.464-33.6896-76.50304 15.36-98.23232 24.8832-11.07968 62.2592-2.048 98.39616 6.57408 15.96416 4.33152 32.21504 7.44448 48.64 9.29792a91.51488 91.51488 0 0 0-5.632-12.57472c-23.552-44.17536-43.9296-48.65024-67.4816-53.82144-19.6608-4.31104-44.1344-9.65632-63.6928-38.27712-27.5456-40.25344-41.984-96.70656-51.5072-134.07232-3.3792-13.13792-6.2464-24.48384-8.6016-30.59712-9.8304-25.89696-29.2864-75.53024-29.2864-75.53024l38.4-14.83776s19.5584 49.84832 29.3888 75.85792c3.95264 11.48928 7.30112 23.17312 10.0352 35.01056 8.9088 34.58048 22.2208 86.8352 45.6704 121.1392 10.3424 15.14496 20.87936 17.4592 38.4 21.2992 26.4192 5.79584 62.65856 13.7216 95.01696 74.68032 5.64224 10.56768 20.5824 38.656 4.9152 58.73664-17.2032 21.9136-50.9952 13.80352-93.9008 3.52256-25.30304-6.07232-59.904-14.336-71.9872-8.99072-8.4992 3.75808-11.6736 5.1712 5.5296 44.42112a216.53504 216.53504 0 0 1 20.2752 63.76448c4.8128 44.70784-41.99424 71.38304-87.25504 97.14688-26.0096 14.848-55.6032 31.66208-63.6928 47.2064a9.9328 9.9328 0 0 0 1.1264 13.75232c13.312 14.11072 55.3984 21.22752 81.8176 9.51296 28.672-12.73856 175.3088-74.35264 245.0432-36.79232 54.4768 29.30688 122.0608 67.49184 122.7776 67.87072l-20.34688 35.61472zM508.416 911.36a437.02272 437.02272 0 0 1-128-19.29216C162.64192 826.08128 34.05824 601.77408 87.1424 380.49792l40.0384 9.5744c-49.24416 210.35008 81.36704 420.79232 291.71712 470.02624A391.15776 391.15776 0 0 0 690.8928 825.0368a394.19904 394.19904 0 0 0 62.47424-40.82688l25.8048 31.9488A436.2752 436.2752 0 0 1 508.416 911.36z m357.376-188.50816l-34.08896-23.00928a386.94912 386.94912 0 0 0 22.2208-400.85504c-102.2976-191.17056-340.18304-263.2192-531.3536-160.93184A392.64256 392.64256 0 0 0 172.6464 279.73632l-35.2256-21.1456C260.02432 53.90336 525.3632-12.6464 730.0608 109.95712s271.23712 387.93216 148.64384 592.64c-4.12672 6.8608-8.42752 13.60896-12.91264 20.25472z m-496.9472-269.312c-18.1248 0-34.816-13.68064-52.1216-27.98592-18.7392-15.36-39.8336-32.68608-64.7168-37.38624a686.52032 686.52032 0 0 1-122.4704-35.38944 239.08352 239.08352 0 0 0-35.5328-11.65312l7.68-40.27392c14.51008 3.35872 28.7232 7.90528 42.496 13.58848a645.60128 645.60128 0 0 0 115.6096 33.47456c35.2256 6.68672 61.7472 28.50816 83.1488 46.08a152.27904 152.27904 0 0 0 24.576 17.99168c3.2768-4.096 11.1616-19.10784 19.2512-71.9872 5.7344-37.376-13.9264-48.98816-63.6928-68.39296a387.00032 387.00032 0 0 1-36.2496-15.63648c-22.4256-11.5712-24.4736-27.15648-23.6544-35.42016 2.7648-28.672 48.2304-47.81056 85.8112-58.80832l11.6736 39.31136a230.18496 230.18496 0 0 0-50.176 20.87936c8.4992 4.096 17.8176 7.70048 27.648 11.53024 42.496 16.57856 100.6592 39.28064 89.3952 112.71168-10.4448 67.84-22.8352 96.256-45.6704 104.93952a36.18816 36.18816 0 0 1-13.0048 2.44736v-0.02048z" fill="#ffffff" p-id="7373" data-spm-anchor-id="a313x.7781069.0.i14" class="selected"></path></svg>
+            </i>
+            <i class="info">
+                <svg t="1664620666804" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="1488">
+                    <path d="M703.68768 793.8304a189.952 189.952 0 0 0-379.83744 0h379.83744z" fill="#F4CA1C"
+                        p-id="1489"></path>
+                    <path
+                        d="M875.17184 663.35232a49.152 49.152 0 0 1-30.2336-40.89344V449.024c0-164.1216-148.54144-272.96256-212.38272-307.11808-3.5072-20.36736-12.66176-51.14368-36.55168-74.84416A110.80704 110.80704 0 0 0 515.93728 35.84h-2.76992a110.81728 110.81728 0 0 0-80.07168 31.232c-23.88992 23.70048-33.04448 54.48192-36.55168 74.84928-63.8208 34.16064-212.36736 143.0016-212.36736 307.10272v172.86144a49.1008 49.1008 0 0 1-30.23872 41.472c-58.48064 26.624-64.3328 76.99456-50.30912 115.2768 6.84032 18.67264 22.3232 36.89984 127.54432 36.89984h89.41568C326.144 911.60576 410.38848 988.16 513.16736 988.16s187.02848-76.55424 192.58368-172.63104h92.19072c105.216 0 120.704-18.2272 127.5392-36.89984 14.03904-38.27712 8.17664-88.66816-50.30912-115.2768z m-361.984 259.00032c-66.29376 0-120.80128-47.07328-126.3872-106.82368h252.77952c-5.6064 59.7504-60.11392 106.82368-126.4128 106.82368z m284.7744-172.63104h-566.784a396.71808 396.71808 0 0 1-68.12672-4.608c-0.512-9.60512 5.12-15.9232 18.2528-21.90336a114.58048 114.58048 0 0 0 68.81792-100.76672V449.024c0-145.54112 160.128-243.06176 189.5936-254.976l20.61312-8.10496v-22.14912c0.13312-6.36928 2.7904-62.1312 52.89472-62.1312H515.49184c50.31936-0.33792 53.15072 55.73632 53.28384 61.92128v22.18496l20.61312 8.31488c29.4656 11.88864 189.59872 109.4144 189.59872 254.976v173.41952a114.58048 114.58048 0 0 0 68.8128 100.76672c13.14304 5.98016 18.75456 12.288 18.2528 21.90336a396.72832 396.72832 0 0 1-68.11136 4.57216z"
+                        fill="#ffffff" p-id="1490" data-spm-anchor-id="a313x.7781069.0.i1" class="selected"></path>
+                </svg>
+            </i>
+            <!-- 背景音乐 -->
+            <i class="music">
+                <!-- 开启 -->
+                <svg t="1664632106643" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2139" width="200" height="200"><path d="M974.54592 764.5952a215.07072 215.07072 0 1 0-215.07072 215.07072 215.07072 215.07072 0 0 0 215.07072-215.07072z" fill="#f4ea2a" p-id="2140" data-spm-anchor-id="a313x.7781069.0.i9" class="selected"></path><path d="M514.56 952.32a437.76 437.76 0 1 1 437.76-437.76 438.272 438.272 0 0 1-437.76 437.76z m0-804.91008a367.1552 367.1552 0 1 0 367.1552 367.15008 367.56992 367.56992 0 0 0-367.1552-367.15008zM445.37344 685.37344a75.61216 75.61216 0 0 1-75.33056-75.45344V417.96096a75.33056 75.33056 0 0 1 113.00864-65.23392l166.24128 95.9744a75.34592 75.34592 0 0 1 0 130.4832l-166.25152 95.96928a75.09504 75.09504 0 0 1-37.66784 10.21952z m0.03072-272.18944a4.6592 4.6592 0 0 0-2.38592 0.6912 4.38784 4.38784 0 0 0-2.36544 4.096v191.95904a4.72576 4.72576 0 0 0 7.08096 4.096l166.2464-95.9744a4.73088 4.73088 0 0 0 0-8.192L447.73888 413.87008a4.53632 4.53632 0 0 0-2.33472-0.68608z" fill="#ffffff" p-id="2141" data-spm-anchor-id="a313x.7781069.0.i8" class="selected"></path></svg>
+                <!-- 暂停 -->
+                <!-- <svg t="1664632250573" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2464" width="200" height="200">
+                    <path
+                        d="M970.624 756.89984a218.84416 218.84416 0 1 0-218.84416 218.84416 218.84416 218.84416 0 0 0 218.84416-218.84416z"
+                        fill="#F4CA1C" p-id="2465"></path>
+                    <path
+                        d="M512 957.44a445.44 445.44 0 1 1 445.44-445.44 445.952 445.952 0 0 1-445.44 445.44z m0-819.03104A373.59616 373.59616 0 1 0 885.59616 512 374.016 374.016 0 0 0 512 138.40896z m-102.62016 576.512a35.92192 35.92192 0 0 1-35.92192-35.92192V372.46976a35.92192 35.92192 0 1 1 71.84384 0v306.5344a35.92192 35.92192 0 0 1-35.92192 35.92192z m205.952 0a35.92192 35.92192 0 0 1-35.92192-35.92192V372.46976a35.92192 35.92192 0 1 1 71.84384 0v306.5344a35.92192 35.92192 0 0 1-35.92192 35.92192z"
+                        fill="#ffffff" p-id="2466" data-spm-anchor-id="a313x.7781069.0.i11" class="selected"></path>
+                </svg> -->
+            </i>
+            <i class="user">
+                <img src='./images/123.png' alt="用户">
+                <ul class="user-list">
+                    <li>
+                        <a href="personalSpace.html">
+                            个人空间
+                        </a>
+                    </li>
+                    <li id="message_us">联系我们</li>
+                    <li id="login_out">退出登录</li>
+                </ul>
+            </i>
+        </div>
+    </header>
+    <div class="person_wrapper">
+        <div class="person_container">
+            <div class="person_box_left">
+                <!-- 第一层基本个人信息 -->
+                <div class="person_info">
+                    <div class="left">
+                        <div class="logo">
+                            <img src="./images/user.png" alt="" id="user_img">
+                        </div>
+                        <label class="hover_logo">
+                            更换头像
+                            <input type="file" name="" id="change_logo_input" style="display: none;">
+                        </label>
+                    </div>
+                    <div class="right">
+                        <div class="change">
+                            <img src="./images/personalSpace/change.png" alt="" id="change">
+                        </div>
+                        <div class="right_info">
+                            <div class="person_name">
+                                <span id="left_person_name" class="left_person_name"></span>
+                                <span class="stauts_image" id="stauts_image">
+                                    <!-- <img src="./images/ip/going.png" alt="" > -->
+                                </span>
+                            </div>
+                            <!-- <div class="status_image">
+                                <img src="./images/emotion-1.png" alt="">
+                            </div> -->
+                            <!-- <div class="person_id" id="left_person_id">我的ID</div> -->
+                            <div class="person_sense" id="left_person_sense"></div>
+                            <div class="person_status">
+                                <div class="status_box" id="status_box">
+                                    <div class="image">
+                                        <img src="./images/personalSpace/status.png" alt="">
+                                    </div>
+                                    <span>状态</span>
+                                </div>
+                                <div class="person_sex">
+                                    <div class="image" id="person_sex">
+                                        <svg t="1668603551991" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg" p-id="2292" width="128" height="128">
+                                            <path
+                                                d="M869.888 512.90112a190.62272 190.62272 0 1 0-190.62272 190.22336 190.42304 190.42304 0 0 0 190.62272-190.22336z"
+                                                fill="#F4CA1C" p-id="2293"></path>
+                                            <path
+                                                d="M614.28736 76.8a342.22592 342.22592 0 0 0-267.43296 556.92288L252.16 728.2688 136.03328 612.352a34.66752 34.66752 0 0 0-49.06496 48.98304l116.12672 115.93728-116.12672 115.92192a34.6624 34.6624 0 0 0 49.06496 48.97792l116.12672-115.93728 116.1216 115.93728a34.6624 34.6624 0 1 0 49.06496-48.97792l-116.12672-115.9424 94.2848-94.1312A342.76864 342.76864 0 1 0 614.28736 76.8z m0 615.936a273.32096 273.32096 0 1 1 273.7664-273.32096 273.85344 273.85344 0 0 1-273.7664 273.32096z"
+                                                fill="#595BB3" p-id="2294"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="status_popup" id="status_popup">
+                        <div class="status_popup_contain" id="status_popup_contain">
+                        </div>
+                    </div>
+                </div>
+                <!-- 第二层点赞/消息/设置 -->
+                <div class="person_set">
+                    <div class="left">
+                        <div class="belike icon">
+                            <div class="image">
+                                <img src="./images/personalSpace/belike.png" alt="">
+                            </div>
+                            <span>获赞</span>
+                        </div>
+                        <div class="news icon">
+                            <div class="image">
+                                <a href="chat.html">
+                                    <img src="./images/personalSpace/news.png" alt="">
+                                </a>
+                            </div>
+                            <span>消息</span>
+                        </div>
+                        <div class="set icon">
+                            <div class="image">
+                                <img src="./images/personalSpace/set.png" alt="">
+                            </div>
+                            <span>设置</span>
+                        </div>
+                    </div>
+                    <!-- <div class="right">
+                        <div class="image">
+                            <img src="./images/personalSpace/personinfo.png" alt="">
+                        </div>
+                        <span>
+                            编辑信息
+                        </span>
+                    </div> -->
+                </div>
+                <!-- 第三层 -->
+                <div class="person_select">
+                    <div class="personal_updates select_item judge">
+                        个人动态
+                    </div>
+                    <div class="personal_picbook select_item">
+                        我的绘本
+                    </div>
+                    <!-- <div class="personal_datasee select_item">
+                        心理数据可视化
+                    </div> -->
+                    <div class="personal_ipperson select_item">
+                        我的IP小人
+                    </div>
+                    <div class="personal_radio select_item">
+                        我的信息
+                    </div>
+                </div>
+                <!-- 发送框 -->
+            </div>
+            <!-- 发送框 -->
+            <div class="person_right_send" id="person_right_send" style="display: none;">
+                <div class="person_right_textarea_box">
+                    <textarea id="person_right_textarea" placeholder="分享生活中的小美好" maxlength="2000"></textarea>
+                    <div class="person_right_img_show_box" id="person_right_img_show_box" style="display: none;">
+                        <div class="image">
+                            <img src="./images/75606a92e633bdef86108fcb747d692.jpg" alt=""
+                                id="person_right_img_show_src">
+                        </div>
+                    </div>
+                    <div class="person_right_textarea_set">
+                        <div class="left">
+                            <div class="icon">
+                                <label class="image" for="textarea_img">
+                                    <img src="./images/news/photo.png" alt="">
+                                </label>
+                                <input type="file" id="textarea_img" style="display: none;">
+                            </div>
+                            <div class="icon">
+                                <div class="image">
+                                    <img src="./images/news/music.png" alt="">
+                                </div>
+                            </div>
+                            <div class="icon">
+                                <div class="image">
+                                    <img src="./images/news/link.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="already_input_count">已经输入<span id="already_input_number">0</span>/2000个字符
+                            </div>
+                            <div class="icon">
+                                <div class="image">
+                                    <img src="./images/news/send.png" alt="">
+                                </div>
+                            </div>
+                            <div class="sendbutton" id="sendbutton">发送</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 预览图片 -->
+                <div class="photo_box">
+                    <img src="" alt="" id="photo_box_img">
+                </div>
+            </div>
+            <!-- 个人动态页面 -->
+            <div class="person_box_right right_show_box" id="person_box_right">
+                <!-- <div class="r_newsbox"> -->
+                <!-- 个人信息 -->
+                <!-- <div class="r_newsbox_personalinfo">
+                        <div class="logo">
+                            <img src="./images/user.png" alt="">
+                        </div>
+                        <div class="name_box">
+                            <div class="name">
+                                我的名字123
+                            </div>
+                            <div class="time">
+                                2022年10月13日 18:30123
+                            </div>
+                        </div>
+                        <div class="more">
+                            <img src="./images/personalSpace/more.png" alt="">
+                        </div>
+                    </div> -->
+                <!-- 动态内容 -->
+                <!-- <div class="r_newsbox_contain">
+                        <div class="r_newsbox_text">123</div> -->
+                <!-- 判断是否有图片 -->
+                <!-- <div class="r_newsbox_pic"> -->
+                <!-- 循环遍历image -->
+                <!-- <div class="image">
+                                <img src="./images/75606a92e633bdef86108fcb747d692.jpg" alt="">
+                            </div>
+                        </div>
+                    </div> -->
+                <!-- 点赞评论和权限不用渲染 -->
+                <!-- <div class="r_newsbox_set"> -->
+                <!-- <span class="r_comment_button" id="r_comment_button">展开评论</span> -->
+                <!-- <div class="belike icon">
+                            <div class="image">
+                                <img src="./images/personalSpace/cansee.png" alt="">
+                            </div>
+                        </div>
+                        <div class="news icon">
+                            <div class="image">
+                                <img src="./images/personalSpace/e_new.png" alt="">
+                            </div>
+                        </div>
+                        <div class="set icon">
+                            <div class="image">
+                                <img src="./images/personalSpace/belike.png" alt="">
+                            </div>
+                        </div>
+                    </div> -->
+                <!-- 用户评论 -->
+                <!-- <div class="r_newsbox_comm_contain" id="r_newsbox_comm_contain"> -->
+                <!-- 评论 -->
+                <!-- <div class="box">
+                            <div class="r_newsbox_comment_box">
+                                <div class="comment_logo">
+                                    <img src="./images/user.png" alt="">
+                                </div>
+                                <div class="comment_info">
+                                    <div class="text">
+                                        <span>我的评论123</span>
+                                        <span>:</span>
+                                        <span>123</span>
+                                    </div>
+                                    <div class="time">
+                                        213
+                                    </div>
+                                </div>
+                            </div> -->
+                <!-- 判断是否有子评论 -->
+                <!-- <div class="comment_comment_box"> -->
+                <!-- 循环遍历子评论 -->
+                <!-- <div class="comment_comment">
+                                    <div class="logo">
+                                        <img src="./images/user.png" alt="">
+                                    </div>
+                                    <div class="text">我的回复：123454644879</div>
+                                    <div class="time">2021-21-23</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> -->
+                <!-- 发表评论 -->
+                <!-- <form action="" class="r_newsboe_form">
+                        <input type="text" class="r_newsboe_input" value="评论"
+                            onfocus="if(value=='评论') {value='';}this.style.color='#000';"
+                            onblur="if (value=='') {value='评论';this.style.color='#999';}">
+                        <button class="r_newsboe_send">
+                            <img src="./images/personalSpace/send.png" alt="">
+                        </button>
+                    </form> -->
+                <!-- 分割线 -->
+                <!-- <div class="r_newsbox_line"></div> -->
+                <!-- </div> -->
+            </div>
+            <!-- 绘本 -->
+            <div class="person_box_right right_show_box person_box_right2" id="person_box_right2"
+                style="display: none;">
+                <!-- <div class="title">
+                    绘本阅览记录
+                </div> -->
+                <!-- <div class="line1" id="per_book_line1">
+                    <div class="book_box">
+                        <div class="image">
+                            <img src="./images/shelf_cover1.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            你今天学习了吗
+                        </div>
+                    </div>
+                    <div class="book_box">
+                        <div class="image">
+                            <img src="./images/shelf_cover1.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            12314564132
+                        </div>
+                    </div>
+                    <div class="book_box">
+                        <div class="image">
+                            <img src="./images/shelf_cover1.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            12314564132
+                        </div>
+                    </div>
+                    <div class="book_box">
+                        <div class="image">
+                            <img src="./images/shelf_cover1.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            12314564132
+                        </div>
+                    </div>
+                </div> -->
+                <div class="title">
+                    我的绘本
+                </div>
+                <div class="line1" id="per_book_line2">
+                    <!-- <div class="book_box">
+                        <div class="image">
+                            <img src="./images/shelf_cover1.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            你今天学习了吗
+                        </div>
+                    </div>
+                    <div class="book_box">
+                        <div class="image">
+                            <img src="./images/shelf_cover1.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            12314564132
+                        </div>
+                    </div>
+                    <div class="book_box">
+                        <div class="image">
+                            <img src="./images/shelf_cover1.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            12314564132
+                        </div>
+                    </div>
+                    <div class="book_box">
+                        <div class="image">
+                            <img src="./images/shelf_cover1.jpg" alt="">
+                        </div>
+                        <div class="text">
+                            12314564132
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div class="line2"></div> -->
+            </div>
+            <!-- 心理数据可视化 -->
+            <!-- <div class="person_box_right right_show_box" id="person_box_right2" style="display: none;"></div> -->
+            <!-- 我的IP小人 -->
+            <div class="person_box_right right_show_box person_ip_box" id="person_box_right2" style="display: none;">
+                <!-- 整个ip小人的框 -->
+                <div class="minifigure">
+                    <!-- 头 黄框框的头框架-->
+                    <div class="head">
+                        <!--包括头上和下的框 -->
+                        <!-- 脸 -->
+                        <div class="faces-wrap">
+                            <div class="faces">
+                                <div class="face classic">
+                                    <!-- <div class="eye right"></div>
+                                    <div class="eye left"></div>
+                                    <div class="mouth"></div> -->
+                                    <div class="image">
+                                        <img src="./images/ip/ipimg1.png" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="face smile">
+                                    <div class="image">
+                                        <img src="./images/ip/ipimg2.png" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="face large-smile">
+                                    <div class="image">
+                                        <img src="./images/ip/ipimg3.png" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="face worried">
+                                    <div class="image">
+                                        <img src="./images/ip/ipimg4.png" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="face frown">
+                                    <div class="image">
+                                        <img src="./images/ip/ipimg5.png" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="face surprised">
+                                    <div class="image">
+                                        <img src="./images/ip/ipimg6.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 中间的身体 -->
+                    <div class="upper-body">
+                        <div class="torso"></div>
+                        <div class="arm right">
+                            <div class="hand right"></div>
+                        </div>
+                        <div class="arm left">
+                            <div class="hand left"></div>
+                        </div>
+                    </div>
+                    <!-- 下面的身体 -->
+                    <div class="lower-body">
+                        <div class="waist"></div>
+                        <div class="crotch"></div>
+                        <div class="leg right"></div>
+                        <div class="leg left"></div>
+                    </div>
+                </div>
+                <!-- 选项的框 -->
+                <div class="controls">
+                    <h2 class="title">Controls</h2>
+
+                    <button class="button explode">保存</button>
+                    <button class="button randomize">随机切换</button>
+
+                    <div class="head-expression">
+                        <div>头部</div>
+
+                        <div class="form-element">
+                            <label for="expression">表情</label>
+                            <input id="expression" class="expression-range expression" name="expression" type="range"
+                                min="0" max="500" step="100" value="0">
+                        </div>
+                    </div>
+
+                    <div class="upper-color">
+                        <div>身体</div>
+
+                        <div class="form-element">
+                            <label for="upper-hue">红</label>
+                            <input id="upper-hue" class="color-range upper-hue" name="upper-hue" type="range" min="0"
+                                max="255" value="0">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="upper-saturation">绿</label>
+                            <input id="upper-saturation" class="color-range upper-saturation" name="upper-saturation"
+                                type="range" min="0" max="255" value="0">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="upper-lightness">蓝</label>
+                            <input id="upper-lightness" class="color-range upper-lightness" name="upper-lightness"
+                                type="range" min="0" max="255" value="90">
+                        </div>
+                    </div>
+
+                    <div class="lower-color">
+                        <div>下肢</div>
+
+                        <div class="form-element">
+                            <label for="lower-hue">红</label>
+                            <input id="lower-hue" class="color-range lower-hue" name="lower-hue" type="range" min="0"
+                                max="255" value="0">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="lower-saturation">绿</label>
+                            <input id="lower-saturation" class="color-range lower-saturation" name="lower-saturation"
+                                type="range" min="0" max="255" value="0">
+                        </div>
+
+                        <div class="form-element">
+                            <label for="lower-lightness">蓝</label>
+                            <input id="lower-lightness" class="color-range lower-lightness" name="lower-lightness"
+                                type="range" min="0" max="255" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 我的信息 -->
+            <div class="person_box_right person_box_right3 right_show_box" id="person_box_right3"
+                style="display: none;">
+                <div class="container">
+                    <div class="title">
+                        <div class="image">
+                            <img src="./images/personalSpace/personinfo.png" alt="">
+                        </div>
+                        <span>编辑信息</span>
+                    </div>
+                    <div class="form_wrap">
+                        <form action="">
+                            <div class="el_form_item">
+                                <label class="el_form_item_label" id="per_username">用户名：</label>
+                                <div class="el_form_item_content">
+                                    <div class="el_form_input">
+                                        <input type="text" id="el_form_input_username" value="用户名">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="el_form_item">
+                                <label class="el_form_item_label">手机号：</label>
+                                <div class="el_form_item_content">
+                                    <span id="per_id">1235645</span>
+                                </div>
+                            </div>
+                            <div class="el_form_item">
+                                <label class="el_form_item_label" id="per_text">个性签名：</label>
+                                <div class="el_form_item_content">
+                                    <div class="el_form_textarea">
+                                        <textarea name="" id="el_form_input_textarea" cols="30" rows="10"
+                                            placeholder="设置您的个性签名"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="el_form_item el_form_item_sex">
+                                <label class="el_form_item_label">性别：</label>
+                                <div class="el_form_item_content">
+                                    <div class="el_form_item_sex_group">
+                                        <label class="el_sex_button">
+                                            <input type="radio" class="el_radio_button_radio" value="男">
+                                            <span class="button_radio_inner">男</span>
+                                        </label>
+                                        <label class="el_sex_button">
+                                            <input type="radio" class="el_radio_button_radio" value="女">
+                                            <span class="button_radio_inner">女</span>
+                                        </label>
+                                        <label class="el_sex_button">
+                                            <input type="radio" class="el_radio_button_radio" value="保密">
+                                            <span class="button_radio_inner">保密</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="el_form_item">
+                                <div class="el_form_item_content">
+                                    <div class="none_box"></div>
+                                    <div class="el_form_button">
+                                        <button type="button" id="change_perInfo_button">
+                                            <span>保存</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- 修改成功弹窗 -->
+        <div class="change_seccess_box" id="change_seccess_box">
+            <div class="change_success" id="change_success">
+                保存成功
+            </div>
+        </div>
+        <!-- 动态发布成功弹窗 -->
+
+        <!-- 修改个人信息弹窗 -->
+        <!-- <div class="change_popup_wrap">
+            <div class="change_popup">
+                <div class="title">
+                    <div class="image">
+                        <img src="./images/personalSpace/personinfo.png" alt="">
+                    </div>
+                    <span>编辑信息</span>
+                </div>
+                <form action="">
+                    <div class="left">
+                        <label for="username">用户名：</label>
+                        <label for="">ID：</label>
+                        <label for="usertalk_input">个性签名：</label>
+                        <label for="">性别</label>
+                    </div>
+                    <div class="right">
+                        <input type="text" id="username">
+                        <div class="userid">
+                            <span>123456</span>
+                            <textarea name="" id="usertalk_input" cols="30" rows="10"></textarea>
+                            <input type="radio" value="">男<input type="radio">女
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> -->
+    </div>
+    <div class="go_last_href" id="go_last_href">
+        <svg t="1668656061926" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="8343" width="128" height="128">
+            <path
+                d="M512 0a512 512 0 1 0 512 512A512 512 0 0 0 512 0z m330.666667 729.173333a38.4 38.4 0 0 1-76.8 0v-56.32a213.333333 213.333333 0 0 0-213.333334-213.333333H310.613333l107.946667 107.946667a38.4 38.4 0 0 1-54.613333 54.613333l-170.666667-170.666667a38.4 38.4 0 0 1 0-54.613333l176.213333-178.346667a38.4 38.4 0 0 1 54.186667 54.186667L314.88 381.866667h236.8a290.986667 290.986667 0 0 1 290.986667 290.986666z"
+                fill="#5E5C5C" p-id="8344"></path>
+        </svg>
+    </div>
+    <div class="map-wrapper">
+        <img src="./images/map.png" alt="">
+        <a href="javascript:;" class="cancel-map">
+            <img src="./images/cancel-map.png" alt="">
+        </a>
+        <!-- 建筑物链接容器 -->
+        <div class="location-wrapper">
+            <a href="psychology3.html" class="location"></a>
+            <a href="radio.html" class="location"></a>
+            <a href="picbook.html" class="location"></a>
+            <a href="card.html" class="location"></a>
+            <a href="share.html" class="location"></a>
+            <a href="stars.html" class="location"></a>
+            <a href="newLogin.html" class="location"></a>
+            <a href="personalSpace.html" class="location"></a>
+        </div>
+    </div>
+
+    <!-- 联系我们弹窗 -->
+    <div class="addbook_popup_notification_wrap" id="message_popup">
+        <!-- 里面白框 -->
+        <div class="addbook_popup_notification">
+            <div id="message_wrap">
+                <div id="form-wrap">
+                    <form class="message_from" id="message_from">
+                        <p>联系我们</p>
+                        <!-- <p>BEST</p> -->
+                        <label for="name">名字:</label>
+                        <input type="text" name="message_name" value="" id="message_name" />
+
+                        <label for="email">联系方式:</label>
+                        <input type="text" name="message_email" value="" id="message_email" />
+
+
+                        <label for="email">发送消息：</label>
+                        <textarea name="message" id="message_textarea" value="Your Message"></textarea>
+
+                        <label for="email">类型：</label>
+                        <span id="select_result">申请主播</span>
+                        <span class="click_type" id="click_type">
+                            <svg t="1668193889040" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="2625" width="128" height="128">
+                                <path
+                                    d="M787.2 380.8c-9.6-9.6-22.4-12.8-35.2-12.8l-480 3.2c-12.8 0-25.6 3.2-35.2 12.8-19.2 19.2-19.2 48 0 67.2l240 240c3.2 3.2 9.6 6.4 12.8 9.6l3.2 3.2c16 6.4 38.4 3.2 51.2-9.6l240-243.2c22.4-22.4 19.2-51.2 3.2-70.4z"
+                                    fill="#707070" p-id="2626"></path>
+                            </svg>
+                        </span>
+                        <div class="submit">
+                            <button type="button" name="submit" id="message_submit" href="javascript:void(0)">提交
+                        </div>
+                        <!-- <input type="text" name="message_email" value="" id="email" /> -->
+                        <div class="select_message" id="select_message" style="display: none;">
+                            <div class="item select_message_item">申请成为主播</div>
+                            <div class="item select_message_item">申请成为画手</div>
+                            <div class="item select_message_item">申请心理咨询师</div>
+                            <div class="item select_message_item">其他</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./JavaScript/map.js"></script>
+    <script src="./JavaScript/global.js"></script>
+    <script src="./JavaScript/ajax.js"></script>
+    <script src="./JavaScript/cookie.js"></script>
+    <!-- 我的信息 -->
+    <script src="./JavaScript/per_personinfo.js"></script>
+    <!-- 个人动态 -->
+    <script src="./JavaScript/per_pensonal.js"></script>
+    <!-- 事件函数 -->
+    <script src="./JavaScript/time.js"></script>
+    <!-- 我的IP小人 -->
+    <script src="./JavaScript/ip.js"></script>
+
+    <script>
+        // 页面内部跳转
+        let select_item = document.getElementsByClassName('select_item');
+        let right_show_box = document.getElementsByClassName('right_show_box');
+        for (let index = 0; index < select_item.length; index++) {
+            select_item[index].onclick = () => {
+                rightbox_none();
+                right_show_box[index].style.display = 'block';
+                select_item[index].classList.add('judge')
+                right_show_box[index].style.opacity = '0.8';
+                setTimeout(() => {
+                    right_show_box[index].style.opacity = '1';
+                }, 200)
+                if (index == 0) {
+                    show_per_text_fun();
+                }
+                if (index == 1) {
+                    // 渲染我的绘本封面
+                    show_per_book_fun();
+                    right_show_box[1].style.boxSizing = 'content-box';
+                }
+                if (index == 3) {
+                    getperson_info_fun();
+                }
+                if (index == 2) {
+                    right_show_box[2].style.display = 'flex';
+                }
+            };
+        }
+
+        function rightbox_none() {
+            for (let j = 0; j < select_item.length; j++) {
+                right_show_box[j].style.display = 'none';
+                right_show_box[j].style.opacity = '0';
+                select_item[j].classList.remove('judge')
+            }
+        }
+
+        let per_book_line1 = document.getElementById('per_book_line1');
+        let per_book_line2 = document.getElementById('per_book_line2');
+
+        function show_per_book_fun() {
+            // 第一次用户浏览记录
+            // sealAjax({
+            //     url: "http://106.55.197.233:666/cityofstar/pictureBook/getPickedPictureBookList",
+            //     type: "get",
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data'
+            //     }
+            // }).then(res => {
+            //     console.log(res.data);
+            //     book_line_cover1 = res.data;
+            //     var show_str = '';
+            //     for (let index = 0; index < 4; index++) {
+            //         show_str += `
+            //         <div class="book_box">
+            //             <div class="image">
+            //                 <img src="${head + book_line_cover1[index].bookCover}" alt="">
+            //             </div>
+            //             <div class="text">
+            //                 ${book_line_cover1[index].pictureBookName}
+            //             </div>
+            //         </div>
+            //         `;
+            //     }
+            //     // per_book_line1.innerHTML = show_str;
+            // })
+
+            sealAjax({
+                url: "http://106.55.197.233:666/cityofstar/pictureBook/getPictureBookList",
+                type: "get",
+                data: {
+                    userId: getCookie('userId')
+                },
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(res => {
+                book_line_cover2 = res.data;
+                console.log(book_line_cover2);
+                var show_str = '';
+                for (let index = 0; index < book_line_cover2.length; index++) {
+                    show_str += `
+                    <div class="book_box">
+                        <div class="image">
+                            <img src="${head + book_line_cover2[index].bookCover}" alt="">
+                        </div>
+                        <div class="text">
+                            ${book_line_cover2[index].pictureBookName}
+                        </div>
+                    </div>
+                    `;
+                }
+                per_book_line2.innerHTML = show_str;
+            });
+        }
+        // 返回上一级
+        document.getElementById('go_last_href').addEventListener('click', () => {
+            window.history.back(-1);
+        })
+        
+        // 退出登录
+        document.getElementById('login_out').addEventListener('click', () => {
+            sealAjax({
+                // http://localhost:8080/cityofstar/user/logout?userId=15
+                url: 'http://106.55.197.233:666/cityofstar/user/logout',
+                data: {
+                    userId: getCookie('userId')
+                }
+            }).then(res => {
+                window.location.href = 'index.html';
+            })
+        })
+    </script>
+</body>
+
+</html>

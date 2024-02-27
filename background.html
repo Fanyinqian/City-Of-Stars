@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        header {
+            /* position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: auto; */
+            float: left;
+            height: 100%;
+            padding-top: 20px;
+            width: 220px;
+            color: #2c303a;
+            /* background: #f1efec; */
+            /* background-color: rgb(216, 216, 252); */
+            /* background-image: linear-gradient(170deg, #e5eafd 20vh, #8c8edc 30vh, #89b3d9 40vh, #7fd8d4 50vh, #F2F4FF 200vh); */
+
+            /* background-color: #8EC5FC;
+            background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%); */
+
+            /* background-image: linear-gradient(170deg, #a195df, #dbdbe7); */
+
+            background-color: #ffdee9c7;
+            background-image: linear-gradient(0deg, #FFDEE9 0%, #8ec5fccb 100%);
+        }
+
+        .page_header nav {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+
+        }
+
+        .page_header .logo {
+            display: block;
+            margin: 0 15px;
+            margin-left: 15px;
+            font-size: 1.4rem;
+        }
+
+        .admin_menu {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            margin-top: 35px;
+        }
+
+        .meau_heading h3 {
+            letter-spacing: .15em;
+            font-size: 12px;
+            margin-top: 12px;
+            color: #7889a4;
+        }
+
+        .admin_menu li>* {
+            width: 100%;
+            padding: 12px 15px;
+            color: #2c303a;
+        }
+
+        .admin_menu a {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .admin_menu a svg {
+            width: 20px;
+            height: 20px;
+            fill: #2c303a;
+            margin-right: 10px;
+        }
+
+        .admin_menu li a {
+            transition: .7s;
+        }
+
+        .admin_menu li a:hover {
+            background-color: rgb(249, 250, 254);
+        }
+
+        .admin_menu li a.hover {
+            background-color: rgb(249, 250, 254);
+        }
+
+        .picbook .row {
+            width: 100%;
+        }
+
+        .dataTables_scrollHead {
+            overflow: hidden;
+            position: relative;
+            border: 0px;
+            width: 100%;
+        }
+
+        .dataTables_scrollBody {
+            position: relative;
+            overflow-y: auto;
+            width: 100%;
+            height: 800px;
+        }
+
+        .dataTables_scrollHead_inner {
+            box-sizing: content-box;
+            width: 1450.67px;
+            padding-right: 17px;
+            background: #ffffff;
+        }
+
+        .dataTables_scrollHead_inner table {
+            border-bottom-width: 0;
+            border-collapse: separate !important;
+            width: 100%;
+        }
+
+        .dataTables_scrollHead_inner table thead {
+            width: 100%;
+        }
+
+        .dataTables_scrollHead_inner table thead tr {
+            display: flex;
+            width: 100%;
+        }
+
+        .dataTables_scrollHead_inner table thead tr th {
+            background: #ebeef5;
+            padding: 8px;
+            line-height: 1.42857143;
+            border-bottom-width: 1px;
+            border: 1px solid #C0C4CC;
+        }
+
+        /* id */
+        .dataTables_scrollHead_inner table thead tr th:nth-child(1) {
+            width: 50px;
+        }
+
+        /* 用户名 */
+        .dataTables_scrollHead_inner table thead tr th:nth-child(2) {
+            width: 150px;
+        }
+
+        /* 绘本名称 */
+        .dataTables_scrollHead_inner table thead tr th:nth-child(3) {
+            width: 150px;
+        }
+
+        .active .dataTables_scrollHead_inner table thead tr th:nth-child(3) {
+            flex: 2;
+        }
+
+        /* 绘本封面 */
+        .dataTables_scrollHead_inner table thead tr th:nth-child(4) {
+            width: 200px;
+        }
+
+        /* 星星小人图片 */
+        .active .dataTables_scrollHead_inner table thead tr th:nth-child(4) {
+            width: 200px;
+        }
+
+        /* 举报动态内容 */
+        .report .dataTables_scrollHead_inner table thead tr th:nth-child(4) {
+            flex: 1;
+
+        }
+
+        .dataTables_scrollHead_inner table thead tr th:nth-child(5) {
+            flex: 1;
+        }
+
+        .active .dataTables_scrollHead_inner table thead tr th:nth-child(5) {
+            flex: 1;
+        }
+
+        .active .dataTables_scrollHead_inner table thead tr th:nth-child(6) {
+            flex: 1;
+        }
+
+        .active .dataTables_scrollHead_inner table thead tr th:nth-child(7) {
+            width: 120px;
+            flex: 0.7;
+        }
+
+        .dataTables_scrollHead_inner table thead tr th:nth-child(6) {
+            width: 180px;
+        }
+
+        .dataTables_scrollHead_inner table thead tr th:nth-child(7) {
+            width: 120px;
+        }
+
+        /* 星星小人故事征集 */
+
+        /* body { */
+        /* width: 100%; */
+        /* overflow: hidden; */
+        /* } */
+
+        section {
+            /* position: relative; */
+            /* left: 220px; */
+            /* width: calc(100%-220px);
+            width: -moz-calc(100%-220px);
+            width: -webkit-calc(100%-220px); */
+            padding: 15px;
+            background-color: #f9fafe;
+            /* flex: 1; */
+            color: #171616;
+            margin-left: 220px;
+        }
+
+        .dataTables_scrollBody_inner tbody {
+            width: 100%;
+        }
+
+        .dataTables_scrollBody_inner tbody tr {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .active .dataTables_scrollBody_inner tbody tr td {
+            height: 200px;
+        }
+
+        .linkus .dataTables_scrollBody_inner tbody tr td {
+            height: 150px;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td {
+            /* line-height: 16px; */
+            height: 250px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: normal;
+            word-break: break-all;
+            border: 1px solid #C0C4CC;
+            padding: 8px;
+            position: relative;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td img {
+            height: 100%;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td .images {
+            height: 100%;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-wrap: wrap;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td .images img {
+            margin-left: 10px;
+            margin-bottom: 10px;
+            width: 177px;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td:nth-child(1) {
+            width: 50px;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td:nth-child(2) {
+            width: 150px;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td:nth-child(3) {
+            width: 150px;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td:nth-child(4) {
+            width: 200px;
+        }
+
+        .report .dataTables_scrollBody_inner tbody tr td:nth-child(4) {
+            flex: 1;
+            align-items: flex-start;
+            justify-content: flex-start;
+            overflow-y: scroll;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td:nth-child(5) {
+            flex: 1;
+            overflow-y: scroll;
+        }
+
+        .report .dataTables_scrollBody_inner tbody tr td:nth-child(5) {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td:nth-child(6) {
+            width: 180px;
+        }
+
+        .dataTables_scrollBody_inner tbody tr td:nth-child(7) {
+            width: 120px;
+        }
+
+        .active .dataTables_scrollBody_inner tbody tr td:nth-child(3) {
+            flex: 2;
+            overflow-y: scroll;
+        }
+
+        .active .dataTables_scrollBody_inner tbody tr td:nth-child(4) {
+            width: 200px;
+
+        }
+
+        .active .dataTables_scrollBody_inner tbody tr td:nth-child(5) {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .active .dataTables_scrollBody_inner tbody tr td:nth-child(6) {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .active .dataTables_scrollBody_inner tbody tr td:nth-child(5) img {
+            height: 200px;
+        }
+
+        .active .dataTables_scrollBody_inner tbody tr td:nth-child(6) img {
+            height: 200px;
+        }
+
+        .active .dataTables_scrollBody_inner tbody tr td:nth-child(7) {
+            width: 120px;
+            flex: 0.7;
+        }
+
+        button {
+            flex: 0 0 auto;
+            /* margin-left: auto; */
+            width: 92px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 4px;
+            padding: 0;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background: #9ea7f7;
+            color: #fff;
+        }
+
+        .positionbox {
+            height: 30px;
+            margin-left: 3px;
+            margin-bottom: 5px;
+        }
+
+        .positionbox span {
+            line-height: 30px;
+            font-size: 16px;
+        }
+
+        .report .dataTables_scrollBody_inner tbody tr td {
+            height: 100px;
+        }
+
+        .report_tbody .button {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+
+        .big_box {
+            /* display: flex; */
+            /* flex-wrap: nowrap; */
+            height: 100vh;
+            /* width: 100vh; */
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .picbook .button {
+            flex-wrap: wrap;
+            align-content: center
+        }
+
+        .picbook .button button {
+            margin-top: 15px;
+        }
+
+        .report_tbody .button button {
+            margin-top: 5px;
+        }
+
+        .report_tbody .button {
+            flex-wrap: nowrap;
+        }
+
+        .active .button {
+            display: flex;
+            /* flex-wrap: nowrap; */
+        }
+
+        .active .button button {
+            margin-left: 5px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        /* 滚动条滑块 */
+        ::-webkit-scrollbar-thumb {
+            /* border: 2px solid rgb(76, 77, 152); */
+            border-radius: 10px;
+            /* background: rgb(76, 77, 152); */
+            background: rgb(176, 176, 179);
+        }
+
+        .activity_textarea_theme {
+            outline: none;
+            border: 1px solid #BDBDBD;
+            border-radius: 5px;
+            resize: none;
+            outline: none;
+            width: 180px;
+            height: 180px;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        .activity_input {
+            position: absolute;
+            background-color: rgb(245, 27, 27);
+            left: 20px;
+            width: 250px;
+            height: 130px;
+            opacity: 0;
+        }
+
+        /* <!-- 修改成功弹窗 --> */
+        .change_seccess_box {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            z-index: 10000;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: none;
+        }
+
+        .change_success {
+            background-color: rgba(48, 48, 48, 0.708);
+            /* width: 100px; */
+            padding: 0 10px;
+            height: 45px;
+            position: relative;
+            margin: auto;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+        }
+
+        .change_success.change {
+            animation: ani_change_success 1s ease-out;
+
+        }
+
+        @keyframes ani_change_success {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big_box">
+        <header class="page_header">
+            <nav>
+                <a class="logo">
+                    City Of Stars
+                </a>
+                <ul class="admin_menu">
+                    <li class="meau_heading">
+                        <h3>Admin</h3>
+                    </li>
+                    <li class="admin_menu_li">
+                        <a href="javascript:void(0);" class="admin_a">
+                            <svg id="pages" viewBox="0 0 16 16">
+                                <rect x="4" width="12" height="12" transform="translate(20 12) rotate(-180)"></rect>
+                                <polygon points="2 14 2 2 0 2 0 14 0 16 2 16 14 16 14 14 2 14"></polygon>
+                            </svg>
+                            <span>精选绘本</span>
+                        </a>
+                    </li>
+                    <li class="admin_menu_li">
+                        <a href="javascript:void(0);" class="admin_a">
+                            <svg t="1667697132983" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="4594" width="200" height="200">
+                                <path
+                                    d="M512 62.93333333C264.42666667 62.93333333 62.93333333 264.42666667 62.93333333 512s201.49333333 449.06666667 449.06666667 449.06666667 449.06666667-201.49333333 449.06666667-449.06666667S759.57333333 62.93333333 512 62.93333333z m292.16 370.24L645.65333333 556.48l52.8 193.81333333c2.02666667 7.57333333-0.74666667 15.57333333-7.14666666 20.05333334-3.30666667 2.34666667-7.14666667 3.52-10.98666667 3.52-3.62666667 0-7.25333333-1.06666667-10.34666667-3.09333334L512 665.49333333l-157.97333333 105.38666667c-6.50666667 4.37333333-14.93333333 4.16-21.33333334-0.42666667-6.29333333-4.58666667-9.17333333-12.58666667-7.14666666-20.05333333l52.8-193.81333333-158.50666667-123.41333334c-6.29333333-4.90666667-8.85333333-13.33333333-6.18666667-20.8 2.56-7.57333333 9.70666667-12.69333333 17.70666667-12.69333333H424.53333333l70.08-175.36c5.65333333-14.18666667 29.01333333-14.18666667 34.77333334 0L599.46666667 399.68h193.17333333c8 0 15.14666667 5.12 17.70666667 12.69333333 2.66666667 7.57333333 0.10666667 15.89333333-6.18666667 20.8z"
+                                    fill="#696969" p-id="4595"></path>
+                            </svg>
+                            <span>星星小人故事征集</span>
+                        </a>
+                    </li>
+                    <li class="admin_menu_li">
+                        <a href="javascript:void(0);" class="admin_a">
+                            <svg t="1667697097341" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="3620" width="200" height="200">
+                                <path
+                                    d="M951.751111 832.284444l-194.56-364.657777-175.217778-328.817778c-30.151111-56.888889-109.795556-56.888889-140.515555 0L266.24 467.626667l-194.56 364.657777c-22.755556 42.666667 5.688889 95.573333 51.2 95.573334h778.24c44.942222 0 73.386667-52.906667 50.631111-95.573334zM512 752.071111c-17.635556 0-31.857778-14.222222-31.857778-31.857778 0-17.635556 14.222222-31.857778 31.857778-31.857777s31.857778 14.222222 31.857778 31.857777c0 17.635556-14.222222 31.857778-31.857778 31.857778z m31.857778-128c0 17.635556-14.222222 31.857778-31.857778 31.857778-17.635556 0-31.857778-14.222222-31.857778-31.857778V387.982222c0-17.635556 14.222222-31.857778 31.857778-31.857778 17.635556 0 31.857778 14.222222 31.857778 31.857778v236.088889z"
+                                    fill="#000000" p-id="3621"></path>
+                            </svg>
+                            <span>举报</span>
+                        </a>
+                    </li>
+                    <li class="admin_menu_li">
+                        <a href="javascript:void(0);" class="admin_a">
+                            <svg t="1668129800420" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="2024" width="128" height="128">
+                                <path
+                                    d="M878.933333 731.946667h-59.306666V514.56c0-128.853333-78.506667-239.786667-190.293334-287.36V202.88C629.333333 138.026667 576.64 85.333333 511.786667 85.333333c-64.853333 0-117.546667 52.693333-117.546667 117.546667v21.12c-116.266667 45.44-199.04 158.293333-199.04 290.56v217.386667H145.066667c-23.466667 0-42.666667 19.2-42.666667 42.666666s19.2 42.666667 42.666667 42.666667h733.866666c23.466667 0 42.666667-19.2 42.666667-42.666667s-19.2-42.666667-42.666667-42.666666zM479.786667 202.88c0-17.706667 14.506667-32.213333 32.213333-32.213333s32.213333 14.506667 32.213333 32.213333v1.92c-11.946667-1.493333-24.106667-2.346667-36.48-2.346667-9.386667 0-18.56 0.64-27.733333 1.493334v-1.066667z m-199.253334 311.466667c0-125.013333 101.76-226.773333 226.773334-226.773334 125.013333 0 226.773333 101.76 226.773333 226.773334V731.733333H280.533333V514.346667zM655.786667 853.333333H370.773333c-23.466667 0-42.666667 19.2-42.666666 42.666667s19.2 42.666667 42.666666 42.666667h285.226667c23.466667 0 42.666667-19.2 42.666667-42.666667s-19.2-42.666667-42.88-42.666667z"
+                                    p-id="2025" fill="#515151"></path>
+                                <path
+                                    d="M454.826667 332.16c-42.88 9.813333-122.453333 59.306667-117.546667 176.853333 0.853333 23.04 19.84 40.96 42.666667 40.96h1.706666c23.466667-1.066667 41.813333-20.906667 40.96-44.373333-2.986667-71.893333 42.453333-87.68 51.84-90.24a42.730667 42.730667 0 1 0-19.626666-83.2z"
+                                    p-id="2026" fill="#515151"></path>
+                            </svg>
+                            <span>系统通知</span>
+                        </a>
+                    </li>
+                    <li class="admin_menu_li">
+                        <a href="javascript:void(0);" class="admin_a">
+                            <svg t="1667697376899" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="6174" width="200" height="200">
+                                <path
+                                    d="M512 1024c281.6 0 512-230.4 512-512S793.6 0 512 0 0 230.4 0 512s230.4 512 512 512z m-173.511111-204.8c-36.977778 0-68.266667-31.288889-68.266667-68.266667V341.333333c0-36.977778 31.288889-68.266667 68.266667-68.266666 11.377778 0 22.755556 11.377778 22.755555 22.755555v31.288889c-25.6 5.688889-45.511111 14.222222-45.511111 39.822222v347.022223c0 31.288889 25.6 56.888889 56.888889 56.888888h298.666667c31.288889 0 56.888889-25.6 56.888889-56.888888V369.777778c0-28.444444-19.911111-36.977778-45.511111-39.822222v-31.288889c0-11.377778 11.377778-22.755556 22.755555-22.755556 36.977778 0 68.266667 31.288889 68.266667 68.266667v409.6c0 36.977778-31.288889 68.266667-68.266667 68.266666l-366.933333-2.844444z m204.8-182.044444h136.533333c11.377778 0 22.755556 11.377778 22.755556 22.755555s-11.377778 22.755556-22.755556 22.755556h-136.533333c-11.377778 0-22.755556-11.377778-22.755556-22.755556s8.533333-22.755556 22.755556-22.755555z m0-182.044445h136.533333c11.377778 0 22.755556 11.377778 22.755556 22.755556s-11.377778 22.755556-22.755556 22.755555h-136.533333c-11.377778 0-22.755556-11.377778-22.755556-22.755555s8.533333-22.755556 22.755556-22.755556z m-136.533333-136.533333v-22.755556c0-11.377778 11.377778-22.755556 22.755555-22.755555h22.755556c0-36.977778 31.288889-68.266667 68.266666-68.266667s68.266667 31.288889 68.266667 68.266667h22.755556c11.377778 0 22.755556 11.377778 22.755555 22.755555v22.755556h-227.555555z m113.777777-79.644445c-19.911111 0-34.133333 14.222222-34.133333 34.133334h68.266667c0-19.911111-17.066667-34.133333-34.133334-34.133334z m-176.355555 219.022223c2.844444-2.844444 11.377778-2.844444 14.222222 0l36.977778 36.977777 82.488889-82.488889c5.688889-5.688889 14.222222-5.688889 17.066666 0 5.688889 5.688889 5.688889 11.377778 0 17.066667l-88.177777 88.177778c-2.844444 2.844444-5.688889 2.844444-8.533334 2.844444-2.844444 0-5.688889 0-8.533333-2.844444l-45.511111-45.511111c-2.844444-2.844444-2.844444-8.533333 0-14.222222z m128 244.622222c-5.688889 5.688889-14.222222 5.688889-17.066667 0l-36.977778-36.977778-36.977777 36.977778c-5.688889 5.688889-14.222222 5.688889-17.066667 0s-5.688889-14.222222 0-17.066667l36.977778-36.977778-34.133334-34.133333c-5.688889-5.688889-5.688889-14.222222 0-17.066667 5.688889-5.688889 11.377778-5.688889 17.066667 0l34.133333 34.133334 34.133334-34.133334c5.688889-5.688889 14.222222-5.688889 17.066666 0 5.688889 5.688889 5.688889 11.377778 0 17.066667l-34.133333 34.133333 36.977778 36.977778c2.844444 2.844444 2.844444 11.377778 0 17.066667z"
+                                    fill="#666666" p-id="6175"></path>
+                            </svg>
+                            <span>心理测试题管理</span>
+                        </a>
+                    </li>
+                    <li class="admin_menu_li">
+                        <a href="javascript:void(0);" class="admin_a">
+                            <svg t="1667697426647" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="7225" width="200" height="200">
+                                <path
+                                    d="M512 0a512 512 0 1 0 512 512A512 512 0 0 0 512 0z m290.133333 602.773333a79.573333 79.573333 0 0 1-97.493333 56.32h-1.6a123.626667 123.626667 0 0 1-125.226667 59.306667 33.493333 33.493333 0 1 1 0-16.853333A108.373333 108.373333 0 0 0 688.32 650.666667c-12.053333-13.973333 14.293333-37.866667 23.466667-72s-1.813333-68.266667 15.786666-74.666667a202.666667 202.666667 0 0 0 2.346667-29.44A200.853333 200.853333 0 1 0 330.666667 503.573333c24 1.6 10.666667 38.186667 20.373333 74.666667 11.413333 42.666667 49.6 69.12 7.146667 80.426667A79.573333 79.573333 0 0 1 309.333333 507.626667a222.186667 222.186667 0 1 1 439.146667-1.386667 79.466667 79.466667 0 0 1 53.653333 96.533333z"
+                                    fill="#707070" p-id="7226"></path>
+                            </svg>
+                            <span>联系我们</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <!-- 绘本 -->
+            <div class="picbook wrap_item">
+                <div class="contain">
+                    <div class="positionbox">
+                        <span>精选绘本</span>
+                    </div>
+                    <div class="row">
+                        <div class="row_box">
+                            <div class="dataTables_scrollHead">
+                                <div class="dataTables_scrollHead_inner">
+                                    <table>
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    ID
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    用户名
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    绘本名称
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    绘本封面
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    绘本内容
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    申请原因
+                                                </th>
+                                                <!-- <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                申请时间
+                                            </th> -->
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    是否通过
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="dataTables_scrollHead dataTables_scrollBody">
+                                <div class="dataTables_scrollHead_inner dataTables_scrollBody_inner"
+                                    style="padding: 0;">
+                                    <table>
+                                        <tbody id="picbook_tbody">
+                                            <!-- <tr role="row">
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    1
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    星星小人
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    绘本名称
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <img src="./images/picbook_cover1.jpg" alt="">
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <div class="images">
+                                                        <img src="./images/picbook_cover1.jpg" alt="">
+                                                        <img src="./images/picbook_cover2.jpg" alt="">
+                                                        <img src="./images/picbook_cover3.jpg" alt="">
+                                                        <img src="./images/picbook_cover4.jpg" alt="">
+                                                    </div>
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    申请原因
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <button>通过</button>
+                                                </td>
+                                            </tr> -->
+                                            <!-- <tr role="row">
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    1
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    星星小人
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    绘本名称
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <img src="./images/picbook_cover1.jpg" alt="">
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <div class="images">
+                                                        <img src="./images/picbook_cover1.jpg" alt="">
+                                                        <img src="./images/picbook_cover2.jpg" alt="">
+                                                        <img src="./images/picbook_cover3.jpg" alt="">
+                                                        <img src="./images/picbook_cover4.jpg" alt="">
+                                                    </div>
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    申请原因
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <button>通过</button>
+                                                </td>
+                                            </tr> -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 活动 -->
+            <!-- 活动--星星小人故事征集 -->
+            <div class="active wrap_item picbook" style="display: none;">
+                <div class="contain">
+                    <div class="positionbox">
+                        <span>活动--星星小人故事征集</span>
+                    </div>
+                    <div class="row">
+                        <div class="row_box">
+                            <div class="dataTables_scrollHead">
+                                <div class="dataTables_scrollHead_inner" style="padding: 0;">
+                                    <table>
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    序号
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    用户名
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    故事内容
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    上传标题
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    上传星星小人1
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    上传星星小人2
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    是否通过
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="dataTables_scrollHead dataTables_scrollBody">
+                                <div class="dataTables_scrollHead_inner dataTables_scrollBody_inner">
+                                    <table>
+                                        <tbody id="active_tbody" class="active_tbody">
+                                            <!-- <tr role="row">
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    1
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    星星小人
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    人
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <textarea name="" id="" class="activity_textarea_theme"></textarea>
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <div class="activity_input_click">
+                                                        <svg t="1668427481194" class="icon" viewBox="0 0 1029 1024"
+                                                            version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                            p-id="16232" width="128" height="128">
+                                                            <path
+                                                                d="M661.23 1003.042H119.672c-64.034 0-116.053-51.883-116.053-115.712V115.917C3.618 52.224 55.638 0.068 119.671 0.068H893.27c63.898 0 115.985 52.02 115.985 115.849v539.99c0 21.23-17.34 38.775-38.707 38.775s-38.912-17.34-38.912-38.776v-539.99c0-21.23-17.34-38.638-38.57-38.638H119.67c-21.299 0-38.912 17.408-38.912 38.639v771.14c0 21.231 17.613 38.639 38.912 38.639h541.492c21.162 0 38.707 17.203 38.707 38.639 0.068 21.3-17.545 38.707-38.64 38.707z"
+                                                                fill="#707070" p-id="16233"></path>
+                                                            <path
+                                                                d="M42.325 771.755c-9.762 0-19.729-4.028-27.238-11.606-14.95-14.95-14.95-39.458 0-54.408l192.785-192.034c35.157-35.158 89.156-44.169 133.803-21.777L551.39 596.65c14.814 7.578 32.768 4.643 44.373-7.167l347.614-346.317c14.95-15.019 39.458-15.019 54.682 0 15.223 14.882 15.087 39.39 0 54.545l-347.75 346.317c-35.09 35.089-88.816 43.759-133.667 21.367L306.86 561.084c-14.95-7.578-32.7-4.506-44.374 7.168L69.7 760.012c-7.51 7.578-17.34 11.743-27.375 11.743zM351.71 385.775c-63.898 0-116.053-51.746-116.053-115.712 0-63.898 51.882-115.712 116.053-115.712 63.76 0 116.053 51.883 116.053 115.712 0 63.898-52.36 115.712-116.053 115.712z m0-154.146c-21.163 0-38.776 17.271-38.776 38.502 0 21.368 17.477 38.64 38.776 38.64 21.163 0 38.639-17.272 38.639-38.64 0-21.23-17.34-38.502-38.64-38.502zM834.833 1024c-21.367 0-38.844-17.203-38.844-38.775V753.869c0-21.095 17.204-38.64 38.844-38.64 21.163 0 38.776 17.34 38.776 38.64v231.356c-0.069 21.572-17.545 38.775-38.776 38.775z"
+                                                                fill="#707070" p-id="16234"></path>
+                                                            <path
+                                                                d="M989.389 868.284c-9.49 0-18.978-3.345-26.76-10.377l-127.864-120.15-128.478 120.15c-15.36 14.404-39.8 13.858-54.409-1.57-14.677-15.633-13.994-39.868 1.707-54.682L788.89 674.611c11.127-13.721 27.58-21.436 45.533-21.436 17.818 0 34.27 7.988 45.261 21.436l135.441 127.044c15.702 14.814 16.52 38.912 1.775 54.682-6.758 7.782-17.066 11.947-27.511 11.947z"
+                                                                fill="#707070" p-id="16235"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <input type="file" class="activity_input activity_input_pic"
+                                                        id="activity_input">
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <div class="activity_input_click_hover">
+                                                        <svg t="1668427481194" class="icon" viewBox="0 0 1029 1024"
+                                                            version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                            p-id="16232" width="128" height="128">
+                                                            <path
+                                                                d="M661.23 1003.042H119.672c-64.034 0-116.053-51.883-116.053-115.712V115.917C3.618 52.224 55.638 0.068 119.671 0.068H893.27c63.898 0 115.985 52.02 115.985 115.849v539.99c0 21.23-17.34 38.775-38.707 38.775s-38.912-17.34-38.912-38.776v-539.99c0-21.23-17.34-38.638-38.57-38.638H119.67c-21.299 0-38.912 17.408-38.912 38.639v771.14c0 21.231 17.613 38.639 38.912 38.639h541.492c21.162 0 38.707 17.203 38.707 38.639 0.068 21.3-17.545 38.707-38.64 38.707z"
+                                                                fill="#707070" p-id="16233"></path>
+                                                            <path
+                                                                d="M42.325 771.755c-9.762 0-19.729-4.028-27.238-11.606-14.95-14.95-14.95-39.458 0-54.408l192.785-192.034c35.157-35.158 89.156-44.169 133.803-21.777L551.39 596.65c14.814 7.578 32.768 4.643 44.373-7.167l347.614-346.317c14.95-15.019 39.458-15.019 54.682 0 15.223 14.882 15.087 39.39 0 54.545l-347.75 346.317c-35.09 35.089-88.816 43.759-133.667 21.367L306.86 561.084c-14.95-7.578-32.7-4.506-44.374 7.168L69.7 760.012c-7.51 7.578-17.34 11.743-27.375 11.743zM351.71 385.775c-63.898 0-116.053-51.746-116.053-115.712 0-63.898 51.882-115.712 116.053-115.712 63.76 0 116.053 51.883 116.053 115.712 0 63.898-52.36 115.712-116.053 115.712z m0-154.146c-21.163 0-38.776 17.271-38.776 38.502 0 21.368 17.477 38.64 38.776 38.64 21.163 0 38.639-17.272 38.639-38.64 0-21.23-17.34-38.502-38.64-38.502zM834.833 1024c-21.367 0-38.844-17.203-38.844-38.775V753.869c0-21.095 17.204-38.64 38.844-38.64 21.163 0 38.776 17.34 38.776 38.64v231.356c-0.069 21.572-17.545 38.775-38.776 38.775z"
+                                                                fill="#707070" p-id="16234"></path>
+                                                            <path
+                                                                d="M989.389 868.284c-9.49 0-18.978-3.345-26.76-10.377l-127.864-120.15-128.478 120.15c-15.36 14.404-39.8 13.858-54.409-1.57-14.677-15.633-13.994-39.868 1.707-54.682L788.89 674.611c11.127-13.721 27.58-21.436 45.533-21.436 17.818 0 34.27 7.988 45.261 21.436l135.441 127.044c15.702 14.814 16.52 38.912 1.775 54.682-6.758 7.782-17.066 11.947-27.511 11.947z"
+                                                                fill="#707070" p-id="16235"></path>
+                                                        </svg>                                                   
+                                                    </div>
+                                                    <input type="file" class="activity_input activity_input_pichover"
+                                                        id="activity_input_hover">
+                                                </td>
+                                                <td class="sorting_disabled button" rowspan="1" colspan="1">
+                                                    <button class="act_button_sure">通过</button>
+                                                    <button class="act_button_cancel">不通过</button>
+                                                </td>
+                                            </tr> -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- 举报 -->
+            <div class="report wrap_item picbook" style="display: none;">
+                <div class="contain">
+                    <div class="positionbox">
+                        <span>举报</span>
+                    </div>
+                    <div class="row">
+                        <div class="row_box">
+                            <div class="dataTables_scrollHead">
+                                <div class="dataTables_scrollHead_inner" style="padding: 0;">
+                                    <table>
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    序号
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    申请用户
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    被举报用户
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    动态内容
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    举报原因
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    是否通过
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="dataTables_scrollHead dataTables_scrollBody">
+                                <div class="dataTables_scrollHead_inner dataTables_scrollBody_inner">
+                                    <table>
+                                        <tbody id="report_tbody" class="report_tbody">
+                                            <!-- <tr role="row">
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    1
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    星星小人
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    人
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    原因
+                                                </td>
+                                                <td class="sorting_disabled button" rowspan="1" colspan="1">
+                                                    <button>通过</button>
+                                                    <button>不通过</button>
+                                                </td>
+                                            </tr> -->
+                                            <!-- <tr role="row">
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    1
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    星星小人
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    人
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容动态内容
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    原因
+                                                </td>
+                                                <td class="sorting_disabled button" rowspan="1" colspan="1">
+                                                    <button class="rep_button_sure">通过</button>
+                                                    <button class="rep_button_cancel">不通过</button>
+                                                </td>
+                                            </tr> -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 系统通知 -->
+            <div class="contact wrap_item" style="display: none;">
+                <div class="contain">
+                    <div class="positionbox">
+                        <span>系统通知</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 心理测试题管理 -->
+            <div class="contact wrap_item" style="display: none;">
+                <div class="contain">
+                    <div class="positionbox">
+                        <span>心理测试题管理</span>
+                    </div>
+                    <div class="row">
+                        <div class="row_box">
+                            <div class="dataTables_scrollHead">
+                                <div class="dataTables_scrollHead_inner" style="padding: 0;">
+                                    <table>
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    序号
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    测试题类型
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    测试题名称
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    题目数量
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    增加题目
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    是否发放
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="dataTables_scrollHead dataTables_scrollBody">
+                                <div class="dataTables_scrollHead_inner dataTables_scrollBody_inner">
+                                    <table>
+                                        <tbody id="report_tbody" class="report_tbody">
+                                            <tr role="row">
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    1
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    焦虑
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    焦虑自评量表
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    7
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    在过去两个星期，你感到紧张、不安或烦躁的频率是？
+                                                </td>
+                                                <td class="sorting_disabled button" rowspan="1" colspan="1">
+                                                    <button>通过</button>
+                                                    <button>不通过</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 联系我们 -->
+            <div class="linkus wrap_item" style="display: none;">
+                <div class="contain">
+                    <div class="positionbox">
+                        <span>联系我们</span>
+                    </div>
+                    <div class="row">
+                        <div class="row_box">
+                            <div class="dataTables_scrollHead">
+                                <div class="dataTables_scrollHead_inner" style="padding: 0;">
+                                    <table>
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    序号
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    申请用户
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    联系方式
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    类型
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    发送内容
+                                                </th>
+                                                <th class="sorting_disabled" rowspan="1" colspan="1">
+                                                    是否通过
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="dataTables_scrollHead dataTables_scrollBody">
+                                <div class="dataTables_scrollHead_inner dataTables_scrollBody_inner">
+                                    <table>
+                                        <tbody id="report_tbody" class="report_tbody">
+                                            <tr role="row">
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    1
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    星星小人
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    人
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    申请主播
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    我是一个性格开朗，爱好广泛的男孩。从小我就有一个愿望，长大后一定要做一名优秀的播音主持人，随着岁月的流逝，我也慢慢的长大了，成熟了，而当一名优秀主持人的愿望却愈加强烈，对播音主持这一工作也愈加的痴爱。在求学的12年中，我在学好文化课的同时，又不断的从知识的海洋中广泛汲取营养，去充实自己，增强自己的能力，提高自己的认识，以更好的把握自己的未来，实现自己的理想。就像歌者用曼妙的歌声去表达自己的感情，就像舞者用轻盈的舞步去阐释自己的信念，而我将用我的声音去传递我对播音主持的炽爱。
+                                                </td>
+                                                <td class="sorting_disabled button" rowspan="1" colspan="1">
+                                                    <button class="rep_button_sure">通过</button>
+                                                    <button class="rep_button_cancel">不通过</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 修改成功弹窗 -->
+            <div class="change_seccess_box" id="change_seccess_box">
+                <div class="change_success" id="change_success">
+                    保存成功11111
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="./JavaScript/ajax.js"></script>
+    <script src="./JavaScript/cookie.js"></script>
+    <script>
+        let head = "http://106.55.197.233:666/upload/";
+        let admin_menu_li = document.getElementsByClassName('admin_menu_li');
+        let wrap_item = document.getElementsByClassName('wrap_item');
+        let admin_a = document.getElementsByClassName('admin_a');
+        admin_a[0].classList.add('hover');
+        for (let i = 0; i < wrap_item.length; i++) {
+            admin_menu_li[i].addEventListener('click', () => {
+                for (let j = 0; j < admin_a.length; j++) {
+                    admin_a[j].classList.remove('hover');
+                }
+                admin_a[i].classList.add('hover')
+                wrap_item_init();
+                wrap_item[i].style.display = 'block';
+                if (i == 0) {
+                    // 查询绘本
+                    show_picbook();
+                }
+                if (i == 1) {
+                    // 查询活动
+                    show_activity();
+                }
+                if (i == 2) {
+                    // 查询举报
+                    show_report();
+                }
+                console.log(123);
+            })
+        }
+
+        function wrap_item_init() {
+            for (let j = 0; j < wrap_item.length; j++) {
+                wrap_item[j].style.display = 'none';
+            }
+        }
+        // 查询被举报动态
+
+        show_picbook();
+        let report_tbody = document.getElementById('report_tbody');
+        let reportId = {};
+        let toreportId = {};
+        let reportStoryId = {};
+        let toreportUsername = {};
+        let toreportStory = {}
+        let picbookId = {}
+        let picuserID = {}
+        let picbookname = {}
+        // 查询被举报动态
+        function show_report() {
+            sealAjax({
+                url: "http://106.55.197.233:666/cityofstar/backstage/getRepStory",
+                type: "post",
+                data: {
+                    page: 1,
+                    size: 9999
+                }
+            }).then(res => {
+                console.log(res.data);
+                let report_tr = "";
+                let report_data = res.data;
+                for (let i = 0; i < report_data.length; i++) {
+                    // 举报人id
+                    reportId["reportId" + i] = report_data[i].reportedUserId;
+                    // 被举报人if
+                    toreportId["toreportId" + i] = report_data[i].queryStory.userId;
+                    // 举报故事id
+                    reportStoryId["reportStoryId" + i] = report_data[i].queryStory.storyId;
+                    // 被举报用户名
+                    toreportUsername["toreportUsername" + i] = report_data[i].queryStory.userName;
+                    // 被举报内容
+                    toreportStory["toreportStory" + i] = report_data[i].queryStory.storyContext;
+                    report_tr += `
+                    <tr role="row" class="report_tr_remove">
+                                            <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                ${Math.round(i) + 1}
+                                            </td>
+                                            <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                ${report_data[i].reportUsername}
+                                            </td>
+                                            <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                ${report_data[i].queryStory.userName}
+                                            </td>
+                                            <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                ${report_data[i].queryStory.storyContext}
+                                            </td>
+                                            <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                ${report_data[i].reportReason}
+                                            </td>
+                                            <td class="sorting_disabled button" rowspan="1" colspan="1">
+                                                <button class="rep_button_sure">通过</button>
+                                                <button class="rep_button_cancel">不通过</button>
+                                            </td>
+                                        </tr>
+                    `;
+
+                }
+                report_tbody.innerHTML = report_tr;
+                // 通过事件
+                let rep_button_sure = document.getElementsByClassName('rep_button_sure');
+                let report_tr_remove = document.getElementsByClassName('report_tr_remove');
+                for (let i = 0; i < rep_button_sure.length; i++) {
+                    rep_button_sure[i].addEventListener('click', () => {
+                        console.log("通过举报", i);
+                        // 给被举报的人发信息
+                        message_send_fun(`您的动态："${toreportStory["toreportStory" + i]}"已被举报成功，该动态已被删除`,
+                            toreportId["toreportId" + i])
+                        // 给举报的人发信息
+                        message_send_fun(
+                            `您举报的用户名为："${toreportId["toreportId" + i]}"的动态："${toreportStory["toreportStory" + i]}"已被举报成功，该动态已被删除`,
+                            reportId["reportId" + i])
+                        // 删除举报框里面的信息
+                        sealAjax({
+                            url: "http://106.55.197.233:666/cityofstar/backstage/passReport",
+                            data: {
+                                reportedUserId: reportId["reportId" + i],
+                                storyId: reportStoryId["reportStoryId" + i]
+                            }
+                        }).then(res => {
+                            console.log("删除举报框里面的信息");
+                            if (res.code == 200) {
+                                // 删除被举报用户的对应的动态// 删除对应动态
+                                delete_story(reportStoryId["reportStoryId" + i])
+                                popup_something('举报通过，已删除对应动态，已发送相关通知');
+                                show_report();
+                            }
+                        })
+                    })
+                }
+                let rep_button_cancel = document.getElementsByClassName('rep_button_cancel');
+                // 不通过
+                for (let i = 0; i < rep_button_cancel.length; i++) {
+                    rep_button_cancel[i].addEventListener('click', () => {
+                        console.log("不通过举报", i);
+                        // 删除举报框里面的信息
+                        // delete_report_story(reportId["reportId" + i], reportStoryId["reportStoryId" +
+                        //     i]);
+                        sealAjax({
+                            url: "http://106.55.197.233:666/cityofstar/backstage/passReport",
+                            data: {
+                                reportedUserId: reportId["reportId" + i],
+                                storyId: reportStoryId["reportStoryId" + i]
+                            }
+                        }).then(res => {
+                            console.log("不通过删除举报框里面的信息");
+                            if (res.code == 200) {
+                                show_report();
+                                popup_something('举报不通过，已发送相关通知');
+                            }
+                        })
+                        // 给举报的人发信息
+                        message_send_fun(
+                            `您举报的用户名为："${toreportId["toreportId" + i]}"的动态："${toreportStory["toreportStory" + i]}"未举报成功`,
+                            reportId["reportId" + i])
+                    })
+                }
+            })
+        }
+
+        // 系统给用户发信息
+        function message_send_fun(mess, rece) {
+            sealAjax({
+                url: "http://106.55.197.233:666/cityofstar/message/sendSystemMessage",
+                type: "post",
+                data: {
+                    message: mess,
+                    receiveUserId: rece
+                }
+            }).then(res => {
+                console.log("系统给用户发送信息");
+            })
+        }
+        // 删除被举报用户的对应的动态
+        function delete_story(story_id) {
+            // http: //localhost:8080/cityofstar/story/delete?storyId=38
+            sealAjax({
+                url: "http://106.55.197.233:666/cityofstar/story/delete",
+                data: {
+                    storyId: story_id
+                }
+            }).then(res => {
+                console.log("删除举报成功的动态");
+            })
+        }
+        // 删除举报框里面的信息
+        function delete_report_story(reportedUser_Id, story_Id) {
+            // http://localhost:8080/cityofstar/backstage/passReport?reportedUserId=1&storyId=133
+            sealAjax({
+                url: "http://106.55.197.233:666/cityofstar/backstage/passReport",
+                data: {
+                    reportedUserId: reportedUser_Id,
+                    storyId: story_Id
+                }
+            }).then(res => {
+                console.log("删除举报框里面的信息");
+            })
+        }
+
+
+        // 查询精选绘本
+
+        function show_picbook() {
+            sealAjax({
+                url: "http://106.55.197.233:666/cityofstar/backstage/getSubmit",
+                data: {
+                    page: 1,
+                    size: 10
+                }
+            }).then(res => {
+                console.log(res.data);
+                // 渲染
+                let picbook_str = '';
+                let picbook_require = res.data;
+                let picbook_tbody = document.getElementById('picbook_tbody');
+                for (let i = 0; i < picbook_require.length; i++) {
+                    picbookId['picbookId' + i] = picbook_require[i].pictureBookId
+                    picuserID['picuserID' + i] = picbook_require[i].userId;
+                    picbookname['picbookname' + i] = picbook_require[i].pictureBookName;
+                    picbook_str += `
+                    <tr role="row">
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    ${Math.round(i) + 1}
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    ${picbook_require[i].username}
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    ${picbook_require[i].pictureBookName}
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <img src="${head + picbook_require[i].pictureBookCover}" alt="">
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <div class="images">
+                                                        `
+                    for (let j = 0; j < picbook_require[i].pictureBookImgList.length; j++) {
+                        picbook_str += `
+                                                        <img src="${head + picbook_require[i].pictureBookImgList[j]}" alt="">
+                                                        `
+                    }
+                    picbook_str += `
+                                                    </div>
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    ${picbook_require[i].reason}
+                                                </td>
+                                                <td class="sorting_disabled button" rowspan="1" colspan="1">
+                                                    <button class="pic_button_sure">通过</button>
+                                                    <button class="pic_button_cancel">不通过</button>
+                                                </td>
+                                            </tr>                     
+                    `;
+
+                }
+                picbook_tbody.innerHTML = picbook_str;
+
+                // 绑定事件
+                let pic_button_sure = document.getElementsByClassName('pic_button_sure');
+                // 确定成为精选绘本
+                for (let i = 0; i < pic_button_sure.length; i++) {
+                    pic_button_sure[i].addEventListener('click', () => {
+                        // 调用添加精选绘本接口
+                        addPicbook_fun(picbookId['picbookId' + i]);
+                        // 给改用户发送成功添加精选信息
+                        message_send_fun(`你所申请精选的绘本"${picbookname['picbookname' + i]}"已通过申请`, picuserID[
+                            'picuserID' + i])
+                    })
+                }
+                // 不通过
+                let pic_button_cancel = document.getElementsByClassName('pic_button_cancel');
+                for (let i = 0; i < pic_button_cancel.length; i++) {
+                    pic_button_cancel[i].addEventListener('click', () => {
+                        // 调用不同个精选绘本接口
+                        cancelPicbook_fun(picbookId['picbookId' + i]);
+                        // 给改用户发送成功添加精选信息
+                        message_send_fun(`非常遗憾，你所申请精选的绘本"${picbookname['picbookname' + i]}"未通过申请`,
+                            picuserID[
+                            'picuserID' + i])
+
+                    })
+                }
+            })
+        }
+
+        function addPicbook_fun(pictureBook_id) {
+            sealAjax({
+                // http://localhost:8080/cityofstar/pictureBook/addPickedPictureBook?pictureBookId=24
+                url: "http://106.55.197.233:666/cityofstar/pictureBook/addPickedPictureBook",
+                data: {
+                    pictureBookId: pictureBook_id
+                }
+            }).then(res => {
+                if (res.code == 200) {
+                    console.log("添加精选绘本成功");
+                    popup_something('精选绘本通过成功');
+                    show_picbook();
+                }
+            })
+        }
+        // 不通过
+        function cancelPicbook_fun(pictureBook_id) {
+            sealAjax({
+                url: "http://106.55.197.233:666/cityofstar/backstage/passFailed",
+                data: {
+                    pictureBookId: pictureBook_id
+                }
+            }).then(res => {
+                if (res.code == 200) {
+                    console.log("不通过精选绘本申请");
+                    popup_something('精选绘本未通过成功');
+                    show_picbook();
+                }
+            })
+        }
+
+        // 查询星星故事小人征集
+        let active_tbody = document.getElementById('active_tbody');
+
+        let starStoryId = {}
+        // 查询活动
+        function show_activity() {
+
+            sealAjax({
+                url: "http://106.55.197.233:666/cityofstar/backstage/getSubmitStory",
+                data: {
+                    page: 1,
+                    size: 9999
+                }
+            }).then(res => {
+                let activity_data = res.data;
+                let activity_str = '';
+                console.log(activity_data);
+                for (let i = 0; i < activity_data.length; i++) {
+                    starStoryId["starStoryId" + i] = activity_data[i].storyId;
+                    activity_str += `
+                    <tr role="row">
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    ${Math.round(i) + 1}
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    ${activity_data[i].username}
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    ${activity_data[i].storyContext}
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <textarea name="" id="" class="activity_textarea_theme"></textarea>
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <div class="activity_input_click">
+                                                        <svg t="1668427481194" class="icon" viewBox="0 0 1029 1024"
+                                                            version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                            p-id="16232" width="128" height="128">
+                                                            <path
+                                                                d="M661.23 1003.042H119.672c-64.034 0-116.053-51.883-116.053-115.712V115.917C3.618 52.224 55.638 0.068 119.671 0.068H893.27c63.898 0 115.985 52.02 115.985 115.849v539.99c0 21.23-17.34 38.775-38.707 38.775s-38.912-17.34-38.912-38.776v-539.99c0-21.23-17.34-38.638-38.57-38.638H119.67c-21.299 0-38.912 17.408-38.912 38.639v771.14c0 21.231 17.613 38.639 38.912 38.639h541.492c21.162 0 38.707 17.203 38.707 38.639 0.068 21.3-17.545 38.707-38.64 38.707z"
+                                                                fill="#707070" p-id="16233"></path>
+                                                            <path
+                                                                d="M42.325 771.755c-9.762 0-19.729-4.028-27.238-11.606-14.95-14.95-14.95-39.458 0-54.408l192.785-192.034c35.157-35.158 89.156-44.169 133.803-21.777L551.39 596.65c14.814 7.578 32.768 4.643 44.373-7.167l347.614-346.317c14.95-15.019 39.458-15.019 54.682 0 15.223 14.882 15.087 39.39 0 54.545l-347.75 346.317c-35.09 35.089-88.816 43.759-133.667 21.367L306.86 561.084c-14.95-7.578-32.7-4.506-44.374 7.168L69.7 760.012c-7.51 7.578-17.34 11.743-27.375 11.743zM351.71 385.775c-63.898 0-116.053-51.746-116.053-115.712 0-63.898 51.882-115.712 116.053-115.712 63.76 0 116.053 51.883 116.053 115.712 0 63.898-52.36 115.712-116.053 115.712z m0-154.146c-21.163 0-38.776 17.271-38.776 38.502 0 21.368 17.477 38.64 38.776 38.64 21.163 0 38.639-17.272 38.639-38.64 0-21.23-17.34-38.502-38.64-38.502zM834.833 1024c-21.367 0-38.844-17.203-38.844-38.775V753.869c0-21.095 17.204-38.64 38.844-38.64 21.163 0 38.776 17.34 38.776 38.64v231.356c-0.069 21.572-17.545 38.775-38.776 38.775z"
+                                                                fill="#707070" p-id="16234"></path>
+                                                            <path
+                                                                d="M989.389 868.284c-9.49 0-18.978-3.345-26.76-10.377l-127.864-120.15-128.478 120.15c-15.36 14.404-39.8 13.858-54.409-1.57-14.677-15.633-13.994-39.868 1.707-54.682L788.89 674.611c11.127-13.721 27.58-21.436 45.533-21.436 17.818 0 34.27 7.988 45.261 21.436l135.441 127.044c15.702 14.814 16.52 38.912 1.775 54.682-6.758 7.782-17.066 11.947-27.511 11.947z"
+                                                                fill="#707070" p-id="16235"></path>
+                                                        </svg>                                                       
+                                                    </div>
+                                                    <input type="file" class="activity_input activity_input_pic"
+                                                        id="activity_input">
+                                                </td>
+                                                <td class="sorting_disabled" rowspan="1" colspan="1">
+                                                    <div class="activity_input_click_hover">
+                                                        <svg t="1668427481194" class="icon" viewBox="0 0 1029 1024"
+                                                            version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                            p-id="16232" width="128" height="128">
+                                                            <path
+                                                                d="M661.23 1003.042H119.672c-64.034 0-116.053-51.883-116.053-115.712V115.917C3.618 52.224 55.638 0.068 119.671 0.068H893.27c63.898 0 115.985 52.02 115.985 115.849v539.99c0 21.23-17.34 38.775-38.707 38.775s-38.912-17.34-38.912-38.776v-539.99c0-21.23-17.34-38.638-38.57-38.638H119.67c-21.299 0-38.912 17.408-38.912 38.639v771.14c0 21.231 17.613 38.639 38.912 38.639h541.492c21.162 0 38.707 17.203 38.707 38.639 0.068 21.3-17.545 38.707-38.64 38.707z"
+                                                                fill="#707070" p-id="16233"></path>
+                                                            <path
+                                                                d="M42.325 771.755c-9.762 0-19.729-4.028-27.238-11.606-14.95-14.95-14.95-39.458 0-54.408l192.785-192.034c35.157-35.158 89.156-44.169 133.803-21.777L551.39 596.65c14.814 7.578 32.768 4.643 44.373-7.167l347.614-346.317c14.95-15.019 39.458-15.019 54.682 0 15.223 14.882 15.087 39.39 0 54.545l-347.75 346.317c-35.09 35.089-88.816 43.759-133.667 21.367L306.86 561.084c-14.95-7.578-32.7-4.506-44.374 7.168L69.7 760.012c-7.51 7.578-17.34 11.743-27.375 11.743zM351.71 385.775c-63.898 0-116.053-51.746-116.053-115.712 0-63.898 51.882-115.712 116.053-115.712 63.76 0 116.053 51.883 116.053 115.712 0 63.898-52.36 115.712-116.053 115.712z m0-154.146c-21.163 0-38.776 17.271-38.776 38.502 0 21.368 17.477 38.64 38.776 38.64 21.163 0 38.639-17.272 38.639-38.64 0-21.23-17.34-38.502-38.64-38.502zM834.833 1024c-21.367 0-38.844-17.203-38.844-38.775V753.869c0-21.095 17.204-38.64 38.844-38.64 21.163 0 38.776 17.34 38.776 38.64v231.356c-0.069 21.572-17.545 38.775-38.776 38.775z"
+                                                                fill="#707070" p-id="16234"></path>
+                                                            <path
+                                                                d="M989.389 868.284c-9.49 0-18.978-3.345-26.76-10.377l-127.864-120.15-128.478 120.15c-15.36 14.404-39.8 13.858-54.409-1.57-14.677-15.633-13.994-39.868 1.707-54.682L788.89 674.611c11.127-13.721 27.58-21.436 45.533-21.436 17.818 0 34.27 7.988 45.261 21.436l135.441 127.044c15.702 14.814 16.52 38.912 1.775 54.682-6.758 7.782-17.066 11.947-27.511 11.947z"
+                                                                fill="#707070" p-id="16235"></path>
+                                                        </svg>
+                                                        <!-- <img src="./images/anchor-3.png" alt=""> -->
+                                                    </div>
+                                                    <input type="file" class="activity_input activity_input_pichover"
+                                                        id="activity_input_hover">
+                                                </td>
+                                                <td class="sorting_disabled button" rowspan="1" colspan="1">
+                                                    <button class="act_button_sure">通过</button>
+                                                    <button class="act_button_cancel">不通过</button>
+                                                </td>
+                                            </tr>
+                    `;
+                }
+                active_tbody.innerHTML = activity_str;
+                add_star_fun()
+            })
+        }
+
+        function add_star_fun() {
+            let activity_input_click = document.getElementsByClassName('activity_input_click');
+            let activity_input_click_hover = document.getElementsByClassName('activity_input_click_hover');
+            let activity_input_pic = document.getElementsByClassName('activity_input_pic');
+            let activity_input_pichover = document.getElementsByClassName('activity_input_pichover');
+            let picfile = {}
+            // activity_input_pic
+            let picfilehover = {}
+            for (let i = 0; i < activity_input_click.length; i++) {
+                activity_input_pic[i].addEventListener('change', () => {
+                    picfile['file' + i] = activity_input_pic[i].files[0];
+                    console.log(picfile['file' + i]);
+                    activity_input_click[i].innerHTML =
+                        `<img src="${URL.createObjectURL(picfile['file' + i])}" alt="">`
+                })
+            }
+            for (let i = 0; i < activity_input_click_hover.length; i++) {
+                activity_input_pichover[i].addEventListener('change', () => {
+                    picfilehover['picfilehover' + i] = activity_input_pichover[i].files[0];
+                    console.log(picfilehover['picfilehover' + i]);
+                    activity_input_click_hover[i].innerHTML =
+                        `<img src="${URL.createObjectURL(picfilehover['picfilehover' + i])}" alt="">`
+                })
+            }
+            let act_button_sure = document.getElementsByClassName('act_button_sure');
+
+            let change_success = document.getElementById('change_success');
+            let change_seccess_box = document.getElementById('change_seccess_box');
+            let activity_textarea_theme = document.getElementsByClassName('activity_textarea_theme');
+            // 点击通过
+            for (let i = 0; i < act_button_sure.length; i++) {
+                act_button_sure[i].addEventListener('click', () => {
+                    // popup_something('已通过')
+                    let text = activity_textarea_theme[i].value;
+                    if (text == '') {
+                        popup_something('未填写标题');
+                        return;
+                    }
+                    let file = picfile['file' + i];
+                    if (file == undefined) {
+                        popup_something('未上传星星小人1');
+                        return;
+                    }
+                    let filehover = picfilehover['picfilehover' + i];
+                    if (filehover == undefined) {
+                        popup_something('未上传星星小人2');
+                        return;
+                    }
+                    // 获取文件上传对象
+                    var star_story = new FormData();
+                    // 图片
+                    star_story.append('storyId', starStoryId["starStoryId" + i]);
+                    star_story.append('storyTitle', text);
+                    star_story.append('storyImg', file);
+                    star_story.append('hoverImg', filehover);
+
+                    let star_xhr = new XMLHttpRequest();
+                    star_xhr.open('post',
+                        'http://106.55.197.233:666/cityofstar/star/add')
+                    star_xhr.send(star_story);
+                    star_xhr.onreadystatechange = () => {
+                        if (star_xhr.readyState === 4) {
+                            if (star_xhr.status === 200) {
+                                const {
+                                    code,
+                                    data,
+                                    msg
+                                } = JSON.parse(star_xhr.responseText);
+                                console.log("添加星星故事成功");
+                                popup_something('星星小人已添加');
+                                // 刷新
+                                show_activity();
+                            }
+                        }
+                    }
+                })
+            }
+
+
+            let act_button_cancel = document.getElementsByClassName('act_button_cancel');
+            // console.log(act_button_delete);
+            // 点击不通过
+            for (let i = 0; i < act_button_cancel.length; i++) {
+                // http://localhost:8080/cityofstar/backstage/passStar?storyId=11
+                act_button_cancel[i].addEventListener('click', () => {
+                    console.log("点击不通过");
+                    sealAjax({
+                        url: "http://106.55.197.233:666/cityofstar/backstage/passStar",
+                        data: {
+                            storyId: starStoryId["starStoryId" + i]
+                        }
+                    }).then(res => {
+                        if (res.code == 200) {
+                            // 刷新
+                            show_activity();
+                        }
+
+                    })
+                })
+            }
+        }
+        function popup_something(text) {
+            change_success.innerHTML = text;
+            change_seccess_box.style.display = 'flex';
+            change_success.classList.add('change')
+            setTimeout(() => {
+                change_success.classList.remove('change')
+                change_seccess_box.style.display = 'none';
+            }, 1000)
+        }
+
+        // 渲染测试题
+        // http://39.98.231.51:34567/cityofstar/testPaper/getOneTypePaperTestList
+        // sealAjax({
+        //     url: "http://106.55.197.233:666/cityofstar/backstage/getSubmit",
+        //     type: "post",
+        //     data: {
+        //         testType: "焦虑"
+        //     }
+        // }).then(res => {
+        //     console.log(res.data);
+        // })
+    </script>
+</body>
+
+</html>

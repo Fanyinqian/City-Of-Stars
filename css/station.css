@@ -1,0 +1,445 @@
+body {
+    overflow-x: hidden;
+    background-image: linear-gradient(#9ca3e8 10vh, #8db2d6 30vh, #e5e6d5);
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    width: 980px;
+    background-color: #F2F4FF;
+    margin: 70px auto 0;
+}
+
+/* 我的电台部分 */
+.my-station-wrapper {
+    padding: 47px 39px 40px 39px;
+    border-right: 1px solid #d9d9d9;
+}
+
+.station-img {
+    float: left;
+    width: 206px;
+    height: 206px;
+    border: 1px solid #d9d9d9;
+}
+
+.station-img img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin: 3px auto;
+}
+
+.station-name svg {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.station-info {
+    float: right;
+    width: 410px;
+    height: 183px;
+    /* background-color: #9ca3e8; */
+    margin-left: 23px;
+}
+
+
+.station-name {
+    display: flex;
+    height: 30px;
+    line-height: 35px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.author-info {
+    margin-bottom: 13px;
+}
+
+.author-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.author-info span {
+    position: relative;
+    top: -15px;
+    left: 5px;
+    font-size: 12px;
+    color: #0c73c2;
+}
+
+.author-info svg {
+    position: relative;
+    left: 5px;
+    top: -10px;
+    width: 20px;
+    height: 20px;
+    margin-left: 3px;
+}
+
+.concern-wrapper {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.like {
+    display: flex;
+    width: 123px;
+    height: 36px;
+    font-size: 15px;
+    line-height: 36px;
+    color: #a2a2a2;
+    /* background-color: #9ca3e8; */
+    border-radius: 20px;
+}
+
+/* 电台标签 */
+.station-tag{
+    position: relative;
+    width: 300px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    color: #666;
+    left: -91px;
+}
+
+.station-tag svg{
+    position: absolute;
+    top: 7px;
+    left: -23px;
+    width: 20px;
+    height: 20px;
+}
+
+.like svg {
+    width: 36px;
+    height: 36px;
+    margin: 0 8px;
+}
+
+.like svg.select {
+    display: none;
+}
+
+/* 鼠标移入的时候，关注图标变红 */
+.like:hover {
+    background-color: rgba(255, 255, 255, 0.884);
+    color: #2b1065;
+}
+
+.like:hover svg.default>path {
+    fill: #FC455D;
+}
+
+.intro {
+    position: relative;
+    top: -4px;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    line-height: 18px;
+    color: #666;
+    font-size: 12px;
+}
+
+.intro svg {
+    position: relative;
+    top: 5px;
+    left: 6px;
+    width: 28px;
+    height: 28px;
+    margin-right: 7px;
+}
+
+.station-body {
+    width: 100%;
+    padding: 20px 10px 0;
+}
+
+/* 解决高度塌陷问题 */
+.clearfix::before,
+.clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.station-body h2 {
+    font-size: 22px;
+}
+
+.station-body ul {
+    width: 100%;
+    background-color: #F2F4FF;
+    /* background-color: #fff; */
+    border: 1px solid #d9d9d9;
+    height: 100%;
+    margin-top: 10px;
+}
+
+.station-body ul>li {
+    height: 55px;
+    display: flex;
+}
+
+.station-body ul>li:nth-child(even) {
+    /* background-color: #F4F4F4; */
+    background-color: rgba(222, 218, 218, 0.183);
+}
+
+.station-body ul>li:hover {
+    background-color: #e1e1e1;
+}
+
+.rank-play {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-image: linear-gradient(109.6deg, rgba(218, 185, 252, 1) 11.2%, rgba(125, 89, 252, 1) 91.1%);
+    box-shadow: 5px 5px 5px rgb(0 0 0 / 20%);
+    cursor: pointer;
+    margin-top: 12px;
+    margin-left: 20px;
+}
+
+.rank-play svg {
+    position: relative;
+    left: 4px;
+    top: 3px;
+    width: 19px;
+    height: 19px;
+}
+
+.program-name {
+    width: 182px;
+    margin-left: 24px;
+    height: 55px;
+    line-height: 55px;
+    font-size: 14px;
+    color: #333;
+}
+
+.station-body svg.default {
+    width: 24px;
+    height: 32px;
+    margin-left: 113px;
+    margin-top: 10px;
+}
+
+.station-body span {
+    display: block;
+    line-height: 55px;
+    font-size: 14px;
+    color: #999;
+}
+
+/* 日期 && 时长*/
+.date,
+.duration {
+    height: 55px;
+    line-height: 55px;
+    margin-left: 40px;
+    font-size: 13px;
+    color: #999;
+}
+
+/* 其他电台 */
+.other-station-wrapper {
+    width: 260px;
+    height: 1000px;
+}
+
+.saying {
+    position: relative;
+    width: 100%;
+    height: 330px;
+    text-align: center;
+   line-height: 280px;
+}
+
+.saying img{
+    pointer-events: none;
+    position: absolute;
+    width: 650px;
+    height: 700px;
+    top: -233px;
+    left: -209px;
+}
+
+ul.vocal-list {
+    padding: 10px 0 0 10px;
+}
+
+ul.vocal-list>li {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    color: #999;
+}
+
+/* 语音条 */
+.vocal-bar {
+    width: 120px;
+    height: 30.5px;
+    background-color: rgb(147, 237, 104);
+    border-radius: 5px;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.vocal-bar::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 8px 6px 0;
+    border-color: transparent rgb(147, 237, 104) transparent transparent;
+    position: absolute;
+    top: 8.5px;
+    left: -7px;
+}
+
+.vocal-bar svg {
+    width: 22px;
+    height: 22px;
+    margin-top: 4px;
+    margin-left: 5px;
+}
+
+.record-wrapper {
+    display: flex;
+    width: 100%;
+    padding-top: 10px;
+    height: 112px;
+    overflow: hidden;
+}
+
+.record,.delete,.finish {
+    width: 72px;
+    height: 66px;
+    box-shadow: 0px 9px 0px rgba(219, 31, 5, 1), 0px 9px 25px rgba(0, 0, 0, .7);
+    position: relative;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(219, 87, 51, 1);
+    font-family: "Microsoft YaHei", 微软雅黑, 宋体;
+    font-weight: 700;
+    font-size: 3em;
+    display: block;
+    padding: 4px;
+    border-radius: 15px;
+    transition: all .1s ease;
+    margin-left: 20px;
+    transform: scale(.85);
+}
+
+.delete{
+    margin-left: 25px;
+    background-color: #4d96df;
+    box-shadow: 0px 9px 0px #0c73c2, 0px 9px 25px rgba(0, 0, 0, .7);
+}
+
+.record:active,.delete:active,.finish:active{
+    box-shadow: 0px 3px 0px rgba(219, 31, 5, 1), 0px 3px 6px rgba(0, 0, 0, .9);
+    position: relative;
+    top: 6px;
+}
+
+.delete:active{
+    box-shadow: 0px 3px 0px #0c73c2, 0px 3px 6px rgba(0, 0, 0, .9);
+}
+
+
+
+.record svg,.delete svg,.finish svg {
+    margin-left: 11px;
+    margin-top: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.finish{
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.delete-icon{
+    opacity: 0;
+    transition: all .3s;
+    position:absolute;
+    right: 64px;
+    top: 33px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+/* 弹窗样式 */
+.popup{
+    position: fixed;
+    top: 20%;
+    left: 25%;
+    width: 700px;
+    height: 500px;
+    /* background-color: #fff; */
+    text-align: center;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: all 0.3s;
+    background-image: url(../images/popup-1.png);
+    background-size: 100%;
+    pointer-events: none;
+}
+
+.pop-inner{
+    position: absolute;
+    top: 165px;
+    left: 175px;
+    width: 400px;
+    height: 180px;
+    /* background-color: #4d96df; */
+}
+
+.pop-inner p{
+    font-size: 30px;
+}
+
+.pop-inner span{
+    display: inline-block;
+    position: relative;
+    left: 23px;
+    top: -40px;
+    letter-spacing: 1px;
+    font-size: 17px;
+}
+
+.back{
+    position: fixed;
+    top: 100px;
+    right:100px;
+    width: 75px;
+    height: 75px;
+    border-radius: 10px;
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(171,102,255,1) 0%, rgba(116,182,247,1) 90% );
+}
+
+.back svg{
+    width: 75px;
+    height: 80px;
+}
+
+
+
+
+
+
